@@ -34,6 +34,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
+import cp.utils.Methods;
+
 //import app.main.R;
 
 
@@ -93,7 +95,14 @@ public class MainActv extends Activity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		
-//		Methods.confirm_quit(this, keyCode);
+		// Log
+		String msg_Log = "onKeyDown()";
+		Log.d("MainActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		
+		Methods.confirm_quit(this, keyCode);
 		
 		return super.onKeyDown(keyCode, event);
 	}
