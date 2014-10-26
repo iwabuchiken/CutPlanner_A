@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.provider.MediaStore;
@@ -408,4 +409,65 @@ public class CONS {
 		};
 
 	}
+	
+	public static class Canvas {
+		
+		////////////////////////////////
+
+		// commons
+
+		////////////////////////////////
+		public static int lineWidth		= 10;
+		
+		////////////////////////////////
+
+		// box A
+
+		////////////////////////////////
+		public static long Ax1;
+		public static long Ay1;
+		
+		public static long AH;
+		public static long AW;
+
+		public static float[] pointsA;
+		
+		public static int lineWidth_A	= lineWidth;
+		
+		////////////////////////////////
+
+		// box B
+
+		////////////////////////////////
+		public static long Bx1;
+		public static long By1;
+		
+		public static long BH;
+		public static long BW;
+		
+		public static float[] pointsB;
+		
+		public static int lineWidth_B	= lineWidth;
+		
+		////////////////////////////////
+
+		// paints
+
+		////////////////////////////////
+		public static Paint p1;
+		
+		public static Paint p_A;
+		public static Paint p_B;
+		
+		////////////////////////////////
+
+		// flags
+
+		////////////////////////////////
+		public static boolean DrawA		= false;
+		
+		public static boolean DrawB		= false;
+		
+	}
+	
 }//public class CONS

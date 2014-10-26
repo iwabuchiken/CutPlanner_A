@@ -17,6 +17,9 @@
    		<string name="generic_message_quit">Quit the app?</string>
     	<string name="generic_notice">注目</string>
     	<string name="generic_confirm_delete_file">Delete file, too</string>
+    	
+    	<string name="generic_Clear">Clear</string>
+    	<string name="generic_Go">Go</string>
     
     
 </resources>
