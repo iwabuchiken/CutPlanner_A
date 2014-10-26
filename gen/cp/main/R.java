@@ -32,13 +32,20 @@ public final class R {
         public static final int proj_icon_64x64=0x7f020001;
     }
     public static final class id {
+        public static final int actv_main_cv_bt_clear=0x7f070003;
+        public static final int actv_main_cv_bt_go=0x7f070002;
+        public static final int actv_main_cv_canvas=0x7f070004;
         public static final int actv_main_tv_main=0x7f070000;
+        public static final int ll_main=0x7f070001;
     }
     public static final class layout {
         public static final int actv_main=0x7f030000;
+        public static final int actv_main_cv=0x7f030001;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
+        public static final int generic_Clear=0x7f05000e;
+        public static final int generic_Go=0x7f05000f;
         public static final int generic_bt_back=0x7f050003;
         public static final int generic_bt_cancel=0x7f050002;
         /**  Generic items 

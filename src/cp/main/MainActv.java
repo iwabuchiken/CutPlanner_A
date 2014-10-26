@@ -16,6 +16,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -34,6 +36,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
+import cp.utils.CONS;
 import cp.utils.Methods;
 
 //import app.main.R;
@@ -63,7 +66,8 @@ public class MainActv extends Activity {
 			----------------------------*/
 		
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.actv_main);
+        setContentView(R.layout.actv_main_cv);
+//        setContentView(R.layout.actv_main);
         
         /*----------------------------
 		 * 2-2. Set title
@@ -188,33 +192,49 @@ public class MainActv extends Activity {
 
 	@Override
 	protected void onStart() {
-		/*----------------------------
-		 * 1. Refresh DB
-			----------------------------*/
-//		refresh_db();
-//		SharedPreferences prefs_main =
-//							this.getSharedPreferences(this.getString(R.string.prefs_shared_prefs_name), 0);
-//		
-////		// Log
-////		Log.d("MainActv.java" + "["
-////				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-////				+ "]", "prefs_main: db_refresh => " + prefs_main.getBoolean(this.getString(R.string.prefs_db_refresh_key), false));
-//		
-//		if(prefs_main.getBoolean(this.getString(R.string.prefs_db_refresh_key), false)) {
-//			
-//			Methods.start_refreshDB(this);
-//			
-//		} else {//if(prefs_main.getBoolean(this.getString(R.string.prefs_db_refresh_key), false))
-//			
-////			// Log
-////			Log.d("MainActv.java" + "["
-////					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-////					+ "]", "Prefs: db_refresh => " + false);
-//			
-//		}//if(prefs_main.getBoolean(this.getString(R.string.prefs_db_refresh_key), false))
 		
 		super.onStart();
+		
+		_test_DrawLine();
+		
 	}//protected void onStart()
+
+	private void 
+	_test_DrawLine() {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+
+		// paint
+
+		////////////////////////////////
+		Paint paint = new Paint();
+		paint.setColor(Color.BLUE);
+//		paint.setColor(0xFF4444FF);
+//		paint.setStyle(Paint.Style.FILL);
+		paint.setStrokeWidth(30);
+		
+		////////////////////////////////
+
+		// get: view
+
+		////////////////////////////////
+		cp.views.CV cv = (cp.views.CV) findViewById(R.id.actv_main_cv_canvas);
+//		
+//		cv.drawLine(10, 10, 100, 100, paint);
+//		
+		// box: A
+		CONS.Canvas.DrawA = true;
+		
+		cv.draw_Boxes_A(this);
+		
+//		CONS.Canvas.DrawA = false;
+		
+		// box: B
+		CONS.Canvas.DrawB = true;
+		cv.draw_Boxes_B(this);
+		
+	}
 
 	
 
