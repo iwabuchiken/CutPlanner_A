@@ -36,8 +36,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
+import cp.listeners.view.V_OTL;
 import cp.utils.CONS;
 import cp.utils.Methods;
+import cp.utils.Tags;
 
 //import app.main.R;
 
@@ -196,6 +198,17 @@ public class MainActv extends Activity {
 		super.onStart();
 		
 		_test_DrawLine();
+		
+		////////////////////////////////
+
+		// listener
+
+		////////////////////////////////
+		View cv = (View) findViewById(R.id.actv_main_cv_canvas);
+		
+		cv.setTag(Tags.ViewTags.CANVAS_MAIN);
+		
+		cv.setOnTouchListener(new V_OTL(this));
 		
 	}//protected void onStart()
 
