@@ -209,4 +209,11 @@ public class Tags {
 		// PlayActv
 		PLAYACTV_TITLE,
 	}
+	
+	public static enum ViewTags {
+		
+		CANVAS_MAIN,
+		
+	}
+	
 }//public class Tags
