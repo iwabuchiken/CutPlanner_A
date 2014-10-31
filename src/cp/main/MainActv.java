@@ -40,6 +40,7 @@ import cp.listeners.view.V_OTL;
 import cp.utils.CONS;
 import cp.utils.Methods;
 import cp.utils.Tags;
+import cp.views.CV;
 
 //import app.main.R;
 
@@ -208,7 +209,8 @@ public class MainActv extends Activity {
 		
 		cv.setTag(Tags.ViewTags.CANVAS_MAIN);
 		
-		cv.setOnTouchListener(new V_OTL(this));
+		cv.setOnTouchListener(new V_OTL(this, (CV) cv));
+//		cv.setOnTouchListener(new V_OTL(this));
 		
 	}//protected void onStart()
 

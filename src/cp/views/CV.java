@@ -105,6 +105,20 @@ public class CV extends View {
 			
 		}
 		
+		////////////////////////////////
+
+		// draw: Cicle: A
+
+		////////////////////////////////
+		if (CONS.Canvas.Draw_Circle_A == true) {
+			
+			canvas.drawCircle(
+						CONS.Canvas.Cir_A_X, 
+						CONS.Canvas.Cir_A_Y, 
+						CONS.Canvas.Cir_A_Radius, 
+						CONS.Canvas.p_Cir_A);
+			
+		}
 		
 //		this.draw_Boxes_A((Activity) con);
 //		this.draw_Boxes_B((Activity) con);
@@ -271,6 +285,120 @@ public class CV extends View {
 				+ "]", msg_Log);
 		
 	}//draw_Boxes
+	
+	public void
+	draw_Boxes_A
+	(Activity actv, int x, int y) {
+		////////////////////////////////
+		
+		// set: paint
+		
+		////////////////////////////////
+		CONS.Canvas.p_A = new Paint();
+		
+		CONS.Canvas.p_A.setColor(Color.BLUE);
+		CONS.Canvas.p_A.setStrokeWidth(CONS.Canvas.lineWidth_A);
+		
+		////////////////////////////////
+		
+		// set: values: A
+		
+		////////////////////////////////
+		CONS.Canvas.Ax1	= x;
+		CONS.Canvas.Ay1	= y;
+		
+		CONS.Canvas.AW	= 100;
+		CONS.Canvas.AH	= 100;
+		
+		CONS.Canvas.pointsA = new float[]{
+				
+				// line 1
+				CONS.Canvas.Ax1,
+				CONS.Canvas.Ay1,
+				
+				CONS.Canvas.Ax1 + CONS.Canvas.AW,
+				CONS.Canvas.Ay1,
+				
+				// line 2
+				CONS.Canvas.Ax1 + CONS.Canvas.AW,
+				CONS.Canvas.Ay1,
+				
+				CONS.Canvas.Ax1 + CONS.Canvas.AW,
+				CONS.Canvas.Ay1 + CONS.Canvas.AH,
+				
+				// line 3
+				CONS.Canvas.Ax1 + CONS.Canvas.AW,
+				CONS.Canvas.Ay1 + CONS.Canvas.AH,
+				
+				CONS.Canvas.Ax1,
+				CONS.Canvas.Ay1 + CONS.Canvas.AH,
+				
+				// line 4
+				CONS.Canvas.Ax1,
+				CONS.Canvas.Ay1 + CONS.Canvas.AH,
+				
+				CONS.Canvas.Ax1,
+				CONS.Canvas.Ay1,
+				
+		};
+		
+//		////////////////////////////////};
+		
+		this.invalidate();
+		
+		// Log
+		String msg_Log = "draw_Boxes => done";
+		Log.d("CV.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+	}//draw_Boxes
+	
+	public void
+	draw_Circle_A
+	(Activity actv, int x, int y) {
+		////////////////////////////////
+		
+		// set: paint
+		
+		////////////////////////////////
+		CONS.Canvas.p_Cir_A = new Paint();
+		
+		CONS.Canvas.p_A.setColor(Color.BLUE);
+		CONS.Canvas.p_A.setStrokeWidth(CONS.Canvas.LineWidth_Cir_A);
+		
+		////////////////////////////////
+		
+		// set: values: A
+		
+		////////////////////////////////
+		CONS.Canvas.Cir_A_X	= x;
+		CONS.Canvas.Cir_A_Y	= y;
+		
+		CONS.Canvas.Cir_A_Radius	= 100;
+
+		////////////////////////////////
+
+		// flag
+
+		////////////////////////////////
+		CONS.Canvas.Draw_Circle_A = true;
+		
+		////////////////////////////////
+
+		// draw
+
+		////////////////////////////////
+		this.invalidate();
+		
+		// Log
+		String msg_Log = "draw_Circle_A => done";
+		Log.d("CV.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+	}//draw_Circle_A
+	
 	
 	public void
 	draw_Boxes_B

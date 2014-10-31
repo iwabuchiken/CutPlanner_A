@@ -3,6 +3,7 @@ package cp.listeners.view;
 import java.util.Locale;
 
 import cp.utils.Tags;
+import cp.views.CV;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
@@ -23,10 +24,19 @@ public class V_OTL implements OnTouchListener {
 	private Dialog d2;
 	private Dialog d3;
 	private Dialog d4;
+	private CV cv;
 	
 	public V_OTL(Activity actv) {
 		//
 		this.actv = actv;
+	}
+
+	public V_OTL(Activity actv, CV cv) {
+		// TODO Auto-generated constructor stub
+		
+		this.actv	= actv;
+		this.cv		= cv;
+		
 	}
 
 	//	@Override
@@ -148,19 +158,34 @@ public class V_OTL implements OnTouchListener {
 		switch (event.getActionMasked()) {
 		
 		case MotionEvent.ACTION_DOWN://--------------------
+
+			// Log
+			String msg_Log = "view => " + v.getClass().getName();
+			Log.d("V_OTL.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
 			
 			x = event.getX();
 			y = event.getY();
 			
-			// Log
-			String msg_Log = String.format(
-					Locale.JAPAN,
-					"[DOWN] x = %f / y = %f", x, y);
+//			// Log
+//			msg_Log = String.format(
+////					String msg_Log = String.format(
+//					Locale.JAPAN,
+//					"[DOWN] x = %f / y = %f", x, y);
+//			
+//			Log.d("V_OTL.java"
+//					+ "["
+//					+ Thread.currentThread().getStackTrace()[2]
+//							.getLineNumber() + "]", msg_Log);
 			
-			Log.d("V_OTL.java"
-					+ "["
-					+ Thread.currentThread().getStackTrace()[2]
-							.getLineNumber() + "]", msg_Log);
+			////////////////////////////////
+
+			// draw: box
+
+			////////////////////////////////
+			this.cv.draw_Circle_A(actv, (int)x, (int)y);
+//			this.cv.draw_Boxes_A(actv, (int)x, (int)y);
 			
 				switch (tag_name) {
 					
@@ -210,16 +235,24 @@ public class V_OTL implements OnTouchListener {
 			x = event.getX();
 			y = event.getY();
 			
-			// Log
-			msg_Log = String.format(
-					Locale.JAPAN,
-					"[MOVE] x = %f / y = %f", x, y);
-			
-			Log.d("V_OTL.java"
-					+ "["
-					+ Thread.currentThread().getStackTrace()[2]
-							.getLineNumber() + "]", msg_Log);
-			
+//			// Log
+//			msg_Log = String.format(
+//					Locale.JAPAN,
+//					"[MOVE] x = %f / y = %f", x, y);
+//			
+//			Log.d("V_OTL.java"
+//					+ "["
+//					+ Thread.currentThread().getStackTrace()[2]
+//							.getLineNumber() + "]", msg_Log);
+
+			////////////////////////////////
+
+			// draw: box
+
+			////////////////////////////////
+//			this.cv.draw_Boxes_A(actv, (int)x, (int)y);
+			this.cv.draw_Circle_A(actv, (int)x, (int)y);
+
 				switch (tag_name) {
 				
 				//			case DLG_FILTER_SHOWLIST_RESET:
