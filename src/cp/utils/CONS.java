@@ -461,6 +461,14 @@ public class CONS {
 		
 		public static int LineWidth_Cir_A	= lineWidth;
 		
+		public static float Cir_A_Radius_dflt = 100;
+		
+		public static float Cir_A_X_prev;
+		public static float Cir_A_Y_prev;
+		
+		public static float Cir_A_DOWN_X;
+		public static float Cir_A_DOWN_Y;
+		
 		////////////////////////////////
 
 		// paints

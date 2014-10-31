@@ -875,5 +875,18 @@ public class Methods {
 		return len;
 	}//private static long getFileLength(String fileFullPath)
 
+
+	public static double 
+	get_CircleA_Change
+	(Activity actv, 
+		float cir_A_X_prev, float cir_A_Y_prev, float x, float y) {
+		// TODO Auto-generated method stub
+		
+		return Math.sqrt(
+					Math.pow(x - cir_A_X_prev, 2) 
+					+ Math.pow(y - cir_A_Y_prev, 2));
+		
+	}//get_CircleA_Change
+
 }//public class Methods
 

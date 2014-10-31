@@ -375,7 +375,7 @@ public class CV extends View {
 		CONS.Canvas.Cir_A_X	= x;
 		CONS.Canvas.Cir_A_Y	= y;
 		
-		CONS.Canvas.Cir_A_Radius	= 100;
+//		CONS.Canvas.Cir_A_Radius	= CONS.Canvas.Cir_A_Radius_dflt;
 
 		////////////////////////////////
 
@@ -391,11 +391,11 @@ public class CV extends View {
 		////////////////////////////////
 		this.invalidate();
 		
-		// Log
-		String msg_Log = "draw_Circle_A => done";
-		Log.d("CV.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", msg_Log);
+//		// Log
+//		String msg_Log = "draw_Circle_A => done";
+//		Log.d("CV.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
 		
 	}//draw_Circle_A
 	
