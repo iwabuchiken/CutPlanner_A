@@ -450,6 +450,26 @@ public class CONS {
 		public static int lineWidth_B	= lineWidth;
 		
 		////////////////////////////////
+		
+		// circle: A
+		
+		////////////////////////////////
+		public static float Cir_A_X;
+		public static float Cir_A_Y;
+		
+		public static float Cir_A_Radius;
+		
+		public static int LineWidth_Cir_A	= lineWidth;
+		
+		public static float Cir_A_Radius_dflt = 100;
+		
+		public static float Cir_A_X_prev;
+		public static float Cir_A_Y_prev;
+		
+		public static float Cir_A_DOWN_X;
+		public static float Cir_A_DOWN_Y;
+		
+		////////////////////////////////
 
 		// paints
 
@@ -459,6 +479,8 @@ public class CONS {
 		public static Paint p_A;
 		public static Paint p_B;
 		
+		public static Paint p_Cir_A;
+		
 		////////////////////////////////
 
 		// flags
@@ -467,6 +489,8 @@ public class CONS {
 		public static boolean DrawA		= false;
 		
 		public static boolean DrawB		= false;
+		
+		public static boolean Draw_Circle_A		= false;
 		
 	}
 	

@@ -40,6 +40,7 @@ import cp.listeners.view.V_OTL;
 import cp.utils.CONS;
 import cp.utils.Methods;
 import cp.utils.Tags;
+import cp.views.CV;
 
 //import app.main.R;
 
@@ -197,7 +198,9 @@ public class MainActv extends Activity {
 		
 		super.onStart();
 		
-		_test_DrawLine();
+//		_test_DrawLine();
+		
+		this._Setup();
 		
 		////////////////////////////////
 
@@ -208,7 +211,8 @@ public class MainActv extends Activity {
 		
 		cv.setTag(Tags.ViewTags.CANVAS_MAIN);
 		
-		cv.setOnTouchListener(new V_OTL(this));
+		cv.setOnTouchListener(new V_OTL(this, (CV) cv));
+//		cv.setOnTouchListener(new V_OTL(this));
 		
 	}//protected void onStart()
 
@@ -249,6 +253,63 @@ public class MainActv extends Activity {
 		
 	}
 
+	private void 
+	_Setup() {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+		
+		// paint
+		
+		////////////////////////////////
+		Paint paint = new Paint();
+		paint.setColor(Color.BLUE);
+//		paint.setColor(0xFF4444FF);
+//		paint.setStyle(Paint.Style.FILL);
+		paint.setStrokeWidth(30);
+		
+		////////////////////////////////
+		
+		// get: view
+		
+		////////////////////////////////
+		cp.views.CV cv = (cp.views.CV) findViewById(R.id.actv_main_cv_canvas);
+//		
+//		cv.drawLine(10, 10, 100, 100, paint);
+//		
+		// box: A
+		CONS.Canvas.DrawA = true;
+		
+		cv.draw_Boxes_A(this);
+		
+//		CONS.Canvas.DrawA = false;
+		
+		// box: B
+		CONS.Canvas.DrawB = true;
+		cv.draw_Boxes_B(this);
+		
+		////////////////////////////////
+
+		// circle: A
+
+		////////////////////////////////
+		CONS.Canvas.Draw_Circle_A = true;
+		
+		CONS.Canvas.Cir_A_X = 200;
+		CONS.Canvas.Cir_A_Y = 400;
+		
+		CONS.Canvas.Cir_A_X_prev = 200;
+		CONS.Canvas.Cir_A_Y_prev = 400;
+		
+		CONS.Canvas.Cir_A_Radius	= CONS.Canvas.Cir_A_Radius_dflt;
+		
+		cv.draw_Circle_A(
+					this, 
+					(int)CONS.Canvas.Cir_A_X, 
+					(int)CONS.Canvas.Cir_A_Y);
+		
+	}//_Setup
+	
 	
 
 }//public class MainActv extends Activity
