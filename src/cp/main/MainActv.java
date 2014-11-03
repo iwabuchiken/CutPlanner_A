@@ -307,6 +307,21 @@ public class MainActv extends Activity {
 					this, 
 					(int)CONS.Canvas.Cir_A_X, 
 					(int)CONS.Canvas.Cir_A_Y);
+
+		////////////////////////////////
+
+		// rect: A
+
+		////////////////////////////////
+//		CONS.Canvas.Draw_Rect_A = true;
+		
+		CONS.Canvas.Rect_A_X1 = 200;
+		CONS.Canvas.Rect_A_Y1 = 400;
+		
+		CONS.Canvas.Rect_A_W = 200;
+		CONS.Canvas.Rect_A_H = 150;
+		
+		cv.draw_Rect_A(this);
 		
 	}//_Setup
 	

@@ -120,6 +120,23 @@ public class CV extends View {
 			
 		}
 		
+		////////////////////////////////
+		
+		// draw: Rect: A
+		
+		////////////////////////////////
+		if (CONS.Canvas.Draw_Rect_A == true) {
+			
+			canvas.drawRect(
+					CONS.Canvas.Rect_A_X1, 
+					CONS.Canvas.Rect_A_Y1, 
+					CONS.Canvas.Rect_A_X1 + CONS.Canvas.Rect_A_W, 
+					CONS.Canvas.Rect_A_Y1 + CONS.Canvas.Rect_A_H,
+					CONS.Canvas.p_Rect_A
+					);
+			
+		}
+		
 //		this.draw_Boxes_A((Activity) con);
 //		this.draw_Boxes_B((Activity) con);
 		
@@ -398,6 +415,45 @@ public class CV extends View {
 //				+ "]", msg_Log);
 		
 	}//draw_Circle_A
+	
+	public void
+	draw_Rect_A
+	(Activity actv) {
+		////////////////////////////////
+		
+		// set: paint
+		
+		////////////////////////////////
+		CONS.Canvas.p_Rect_A = new Paint();
+		
+		CONS.Canvas.p_Rect_A.setColor(Color.BLUE);
+		CONS.Canvas.p_Rect_A.setStrokeWidth(CONS.Canvas.LineWidth_Rect_A);
+		
+		////////////////////////////////
+		
+		// set: values: A
+		
+		////////////////////////////////
+//		CONS.Canvas.Cir_A_X	= x;
+//		CONS.Canvas.Cir_A_Y	= y;
+		
+//		CONS.Canvas.Cir_A_Radius	= CONS.Canvas.Cir_A_Radius_dflt;
+		
+		////////////////////////////////
+		
+		// flag
+		
+		////////////////////////////////
+		CONS.Canvas.Draw_Rect_A = true;
+		
+		////////////////////////////////
+		
+		// draw
+		
+		////////////////////////////////
+		this.invalidate();
+		
+	}//draw_Rect_A
 	
 	
 	public void
