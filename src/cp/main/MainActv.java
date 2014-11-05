@@ -323,6 +323,22 @@ public class MainActv extends Activity {
 		
 		cv.draw_Rect_A(this);
 		
+		////////////////////////////////
+		
+		// rect: B
+		
+		////////////////////////////////
+//		CONS.Canvas.Draw_Rect_A = true;
+		
+		CONS.Canvas.Rect_B_W = 200;
+		CONS.Canvas.Rect_B_H = 150;
+		
+		CONS.Canvas.Rect_B_X1 = 200;
+		CONS.Canvas.Rect_B_Y1 = CONS.Canvas.Rect_A_Y1 - CONS.Canvas.Rect_B_H;
+//		CONS.Canvas.Rect_B_Y1 = 200;
+		
+		cv.draw_Rect_B(this);
+		
 	}//_Setup
 	
 	

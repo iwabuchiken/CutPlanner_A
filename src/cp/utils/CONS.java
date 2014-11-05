@@ -489,6 +489,31 @@ public class CONS {
 		public static float Rect_A_Y1_prev;
 		
 		////////////////////////////////
+		
+		// rect: B
+		
+		////////////////////////////////
+		public static float Rect_B_X1;
+		public static float Rect_B_Y1;
+		
+		public static float Rect_B_X2;
+		public static float Rect_B_Y2;
+		
+		public static float Rect_B_W;
+		public static float Rect_B_H;
+		
+		public static int LineWidth_Rect_B	= lineWidth;
+		
+		public static float Rect_B_X1_prev;
+		public static float Rect_B_Y1_prev;
+		
+		// paint
+		public static Paint p_Rect_B;
+		
+		// flag
+		public static boolean Draw_Rect_B		= false;
+		
+		////////////////////////////////
 
 		// paints
 
