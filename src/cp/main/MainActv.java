@@ -207,14 +207,35 @@ public class MainActv extends Activity {
 		// listener
 
 		////////////////////////////////
+		
+		_Setup__SetListener();
+		
+//		View cv = (View) findViewById(R.id.actv_main_cv_canvas);
+//		
+//		cv.setTag(Tags.ViewTags.CANVAS_MAIN);
+//		
+//		cv.setOnTouchListener(new V_OTL(this, (CV) cv));
+////		cv.setOnTouchListener(new V_OTL(this));
+		
+	}//protected void onStart()
+
+	private void 
+	_Setup__SetListener() {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+
+		// listener
+
+		////////////////////////////////
 		View cv = (View) findViewById(R.id.actv_main_cv_canvas);
 		
 		cv.setTag(Tags.ViewTags.CANVAS_MAIN);
 		
 		cv.setOnTouchListener(new V_OTL(this, (CV) cv));
 //		cv.setOnTouchListener(new V_OTL(this));
-		
-	}//protected void onStart()
+
+	}//_Setup__SetListener
 
 	private void 
 	_test_DrawLine() {
@@ -307,6 +328,37 @@ public class MainActv extends Activity {
 					this, 
 					(int)CONS.Canvas.Cir_A_X, 
 					(int)CONS.Canvas.Cir_A_Y);
+
+		////////////////////////////////
+
+		// rect: A
+
+		////////////////////////////////
+//		CONS.Canvas.Draw_Rect_A = true;
+		
+		CONS.Canvas.Rect_A_X1 = 200;
+		CONS.Canvas.Rect_A_Y1 = 400;
+		
+		CONS.Canvas.Rect_A_W = 200;
+		CONS.Canvas.Rect_A_H = 150;
+		
+		cv.draw_Rect_A(this);
+		
+		////////////////////////////////
+		
+		// rect: B
+		
+		////////////////////////////////
+//		CONS.Canvas.Draw_Rect_A = true;
+		
+		CONS.Canvas.Rect_B_W = 200;
+		CONS.Canvas.Rect_B_H = 150;
+		
+		CONS.Canvas.Rect_B_X1 = 200;
+		CONS.Canvas.Rect_B_Y1 = CONS.Canvas.Rect_A_Y1 - CONS.Canvas.Rect_B_H;
+//		CONS.Canvas.Rect_B_Y1 = 200;
+		
+		cv.draw_Rect_B(this);
 		
 	}//_Setup
 	

@@ -470,6 +470,50 @@ public class CONS {
 		public static float Cir_A_DOWN_Y;
 		
 		////////////////////////////////
+		
+		// rect: A
+		
+		////////////////////////////////
+		public static float Rect_A_X1;
+		public static float Rect_A_Y1;
+		
+		public static float Rect_A_X2;
+		public static float Rect_A_Y2;
+		
+		public static float Rect_A_W;
+		public static float Rect_A_H;
+		
+		public static int LineWidth_Rect_A	= lineWidth;
+		
+		public static float Rect_A_X1_prev;
+		public static float Rect_A_Y1_prev;
+		
+		////////////////////////////////
+		
+		// rect: B
+		
+		////////////////////////////////
+		public static float Rect_B_X1;
+		public static float Rect_B_Y1;
+		
+		public static float Rect_B_X2;
+		public static float Rect_B_Y2;
+		
+		public static float Rect_B_W;
+		public static float Rect_B_H;
+		
+		public static int LineWidth_Rect_B	= lineWidth;
+		
+		public static float Rect_B_X1_prev;
+		public static float Rect_B_Y1_prev;
+		
+		// paint
+		public static Paint p_Rect_B;
+		
+		// flag
+		public static boolean Draw_Rect_B		= false;
+		
+		////////////////////////////////
 
 		// paints
 
@@ -481,6 +525,8 @@ public class CONS {
 		
 		public static Paint p_Cir_A;
 		
+		public static Paint p_Rect_A;
+		
 		////////////////////////////////
 
 		// flags
@@ -491,6 +537,8 @@ public class CONS {
 		public static boolean DrawB		= false;
 		
 		public static boolean Draw_Circle_A		= false;
+		
+		public static boolean Draw_Rect_A		= false;
 		
 	}
 	

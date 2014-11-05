@@ -888,5 +888,53 @@ public class Methods {
 		
 	}//get_CircleA_Change
 
+
+	/******************************
+		@return
+			0	=> Rect A
+			1	=> Rect B
+	 ******************************/
+	public static int 
+	identify
+	(Activity actv, float x, float y) {
+		// TODO Auto-generated method stub
+		
+		String msg_Log;
+		
+		int x_i = (int) x;
+		int y_i = (int) y;
+		
+		////////////////////////////////
+
+		// judge
+
+		////////////////////////////////
+		if (x_i >= CONS.Canvas.Rect_A_X1
+				&& x_i <= CONS.Canvas.Rect_A_X1 + CONS.Canvas.Rect_A_W
+			&& y_i >= CONS.Canvas.Rect_A_Y1
+				&& y_i <= CONS.Canvas.Rect_A_Y1 + CONS.Canvas.Rect_A_H) {
+			
+			// Log
+			msg_Log = "is in => Rect A";
+			Log.i("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			return 0;
+			
+		} else {
+			
+			// Log
+			msg_Log = "not in => Rect A";
+			Log.i("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			return -1;
+			
+		}
+		
+	}//identify
+
 }//public class Methods
 
