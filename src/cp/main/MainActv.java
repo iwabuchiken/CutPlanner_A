@@ -207,14 +207,35 @@ public class MainActv extends Activity {
 		// listener
 
 		////////////////////////////////
+		
+		_Setup__SetListener();
+		
+//		View cv = (View) findViewById(R.id.actv_main_cv_canvas);
+//		
+//		cv.setTag(Tags.ViewTags.CANVAS_MAIN);
+//		
+//		cv.setOnTouchListener(new V_OTL(this, (CV) cv));
+////		cv.setOnTouchListener(new V_OTL(this));
+		
+	}//protected void onStart()
+
+	private void 
+	_Setup__SetListener() {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+
+		// listener
+
+		////////////////////////////////
 		View cv = (View) findViewById(R.id.actv_main_cv_canvas);
 		
 		cv.setTag(Tags.ViewTags.CANVAS_MAIN);
 		
 		cv.setOnTouchListener(new V_OTL(this, (CV) cv));
 //		cv.setOnTouchListener(new V_OTL(this));
-		
-	}//protected void onStart()
+
+	}//_Setup__SetListener
 
 	private void 
 	_test_DrawLine() {

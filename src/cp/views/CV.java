@@ -80,11 +80,13 @@ public class CV extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		
-		// Log
-		String msg_Log = "onDraw";
-		Log.d("CV.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", msg_Log);
+		String msg_Log;
+		
+//		// Log
+//		String msg_Log = "onDraw";
+//		Log.d("CV.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
 		
 		////////////////////////////////
 

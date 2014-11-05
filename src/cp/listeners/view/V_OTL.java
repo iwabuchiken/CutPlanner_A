@@ -69,6 +69,8 @@ public class V_OTL implements OnTouchListener {
 						+ Thread.currentThread().getStackTrace()[2]
 								.getLineNumber() + "]", msg_Log);
 				
+//				int res = Methods.identify(actv, x, y);
+				
 //				switch (tag_name) {
 //					
 //				
@@ -170,6 +172,13 @@ public class V_OTL implements OnTouchListener {
 			x = event.getX();
 			y = event.getY();
 
+			////////////////////////////////
+
+			// identify
+
+			////////////////////////////////
+			int res = Methods.identify(actv, x, y);
+			
 			////////////////////////////////
 
 			// draw: box
