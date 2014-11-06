@@ -891,8 +891,8 @@ public class Methods {
 
 	/******************************
 		@return
-			0	=> Rect A
-			1	=> Rect B
+			0	=> Rect A<br>
+			1	=> Rect B<br>
 	 ******************************/
 	public static int 
 	identify
@@ -920,6 +920,13 @@ public class Methods {
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", msg_Log);
 			
+			////////////////////////////////
+
+			// set: enum
+
+			////////////////////////////////
+			CONS.Canvas.currentObj = CONS.Canvas.ChosenObj.Rect_A;
+			
 			return 0;
 			
 		} else {
@@ -929,6 +936,14 @@ public class Methods {
 			Log.i("Methods.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", msg_Log);
+			
+			////////////////////////////////
+			
+			// set: enum
+			
+			////////////////////////////////
+			CONS.Canvas.currentObj = CONS.Canvas.ChosenObj.Others;
+			
 			
 			return -1;
 			

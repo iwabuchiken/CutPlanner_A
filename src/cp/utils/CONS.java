@@ -419,6 +419,16 @@ public class CONS {
 		////////////////////////////////
 		public static int lineWidth		= 10;
 		
+		public static enum ChosenObj {
+			
+			Rect_A, Rect_B,
+			
+			Others,
+			
+		}
+		
+		public static ChosenObj currentObj;
+		
 		////////////////////////////////
 
 		// box A
@@ -488,6 +498,12 @@ public class CONS {
 		public static float Rect_A_X1_prev;
 		public static float Rect_A_Y1_prev;
 		
+		// paint
+		public static Paint p_Rect_A;
+		
+		// flag
+		public static boolean Draw_Rect_A		= false;
+		
 		////////////////////////////////
 		
 		// rect: B
@@ -525,7 +541,7 @@ public class CONS {
 		
 		public static Paint p_Cir_A;
 		
-		public static Paint p_Rect_A;
+//		public static Paint p_Rect_A;
 		
 		////////////////////////////////
 
@@ -538,7 +554,7 @@ public class CONS {
 		
 		public static boolean Draw_Circle_A		= false;
 		
-		public static boolean Draw_Rect_A		= false;
+//		public static boolean Draw_Rect_A		= false;
 		
 	}
 	

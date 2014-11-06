@@ -150,7 +150,8 @@ public class V_OTL implements OnTouchListener {
 
 	//	@Override
 //	public boolean onTouchEvent(MotionEvent event) {
-	public boolean onTouch(View v, MotionEvent event) {
+	public boolean 
+	onTouch(View v, MotionEvent event) {
 		
 		Tags.ViewTags tag_name = (Tags.ViewTags) v.getTag();
 		
@@ -284,19 +285,56 @@ public class V_OTL implements OnTouchListener {
 	
 		////////////////////////////////
 
+		// dispatch
+
+		////////////////////////////////
+		switch(CONS.Canvas.currentObj) {
+		
+		case Rect_A:
+			
+			_case_ACTION_MOVE__Rect_A(x, y);
+			
+			break;
+			
+		default:
+			
+			_case_ACTION_MOVE__Cir_A(x, y);
+			
+			break;
+		
+		}
+		
+//		////////////////////////////////
+//
+//		// get distance
+//
+//		////////////////////////////////
+//		
+//		float dif_X = x - CONS.Canvas.Cir_A_X_prev;
+//		float dif_Y = y - CONS.Canvas.Cir_A_Y_prev;
+//		
+//		CONS.Canvas.Cir_A_X_prev = x;
+//		CONS.Canvas.Cir_A_Y_prev = y;
+//		
+//		this.cv.draw_Circle_A(
+//					actv, 
+//					(int)(CONS.Canvas.Cir_A_X + dif_X), 
+//					(int)(CONS.Canvas.Cir_A_Y + dif_Y) 
+//					);
+		
+	}//_case_ACTION_MOVE
+	
+
+	private void 
+	_case_ACTION_MOVE__Cir_A
+	(float x, float y) {
+		// TODO Auto-generated method stub
+	
+		////////////////////////////////
+
 		// get distance
 
 		////////////////////////////////
-//		String msg_Log = String.format(
-//				Locale.JAPAN,
-//				"DIF_X = %f / DIF_Y = %f", 
-//				(x - CONS.Canvas.Cir_A_DOWN_X),
-//				(y - CONS.Canvas.Cir_A_DOWN_Y)
-//				);
-//		
-//		Log.d("V_OTL.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", msg_Log);
 		
 		float dif_X = x - CONS.Canvas.Cir_A_X_prev;
 		float dif_Y = y - CONS.Canvas.Cir_A_Y_prev;
@@ -304,24 +342,37 @@ public class V_OTL implements OnTouchListener {
 		CONS.Canvas.Cir_A_X_prev = x;
 		CONS.Canvas.Cir_A_Y_prev = y;
 		
-//		float dif_X = x - CONS.Canvas.Cir_A_DOWN_X;
-//		float dif_Y = y - CONS.Canvas.Cir_A_DOWN_Y;
-		
-//		double change = Methods.get_CircleA_Change(
-//							actv,
-//							CONS.Canvas.Cir_A_X_prev,
-//							CONS.Canvas.Cir_A_Y_prev,
-//							x, y
-//							);
-		
 		this.cv.draw_Circle_A(
 					actv, 
 					(int)(CONS.Canvas.Cir_A_X + dif_X), 
 					(int)(CONS.Canvas.Cir_A_Y + dif_Y) 
 					);
-//		this.cv.draw_Circle_A(actv, (int)x, (int)y);
+
+	}//_case_ACTION_MOVE__Cir_A
+	
+	private void 
+	_case_ACTION_MOVE__Rect_A
+	(float x, float y) {
+		// TODO Auto-generated method stub
 		
-	}//_case_ACTION_MOVE
+		////////////////////////////////
+		
+		// get distance
+		
+		////////////////////////////////
+		
+//		float dif_X = x - CONS.Canvas.Cir_A_X_prev;
+//		float dif_Y = y - CONS.Canvas.Cir_A_Y_prev;
+		
+//		CONS.Canvas.Cir_A_X_prev = x;
+//		CONS.Canvas.Cir_A_Y_prev = y;
+		
+		CONS.Canvas.Rect_A_X1 = x;
+		CONS.Canvas.Rect_A_Y1 = y;
+		
+		this.cv.draw_Rect_A(actv);
+		
+	}//_case_ACTION_MOVE__Cir_A
 	
 
 	private void 
@@ -329,6 +380,34 @@ public class V_OTL implements OnTouchListener {
 	(float x, float y) {
 		// TODO Auto-generated method stub
 
+		////////////////////////////////
+
+		// dispatch
+
+		////////////////////////////////
+		switch(CONS.Canvas.currentObj) {
+		
+		case Rect_A:
+			
+			this._case_ACTION_DOWN__Rect_A(x, y);
+			
+			break;
+			
+		default:
+			
+			_case_ACTION_DOWN__CirA(x, y);
+			
+			break;
+		
+		}
+		
+	}//_case_ACTION_DOWN
+
+	private void 
+	_case_ACTION_DOWN__CirA
+	(float x, float y) {
+		// TODO Auto-generated method stub
+		
 		////////////////////////////////
 
 		// record: positon
@@ -375,9 +454,14 @@ public class V_OTL implements OnTouchListener {
 			this.cv.draw_Circle_A(actv, (int)x, (int)y);
 			
 		}
+
+	}//_case_ACTION_DOWN__CirA
+	
+	private void 
+	_case_ACTION_DOWN__Rect_A
+	(float x, float y) {
+		// TODO Auto-generated method stub
 		
-		
-		
-	}//_case_ACTION_DOWN
+	}//_case_ACTION_DOWN__CirA
 	
 }//public class DB_OTL implements OnTouchListener
