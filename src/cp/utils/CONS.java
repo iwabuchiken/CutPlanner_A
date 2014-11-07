@@ -503,6 +503,14 @@ public class CONS {
 		
 		// flag
 		public static boolean Draw_Rect_A		= false;
+
+		// prev position
+		public static float Rect_A_X_prev;
+		public static float Rect_A_Y_prev;
+
+		// distance to the base point
+		public static float Rect_A_X_dist_from_base;
+		public static float Rect_A_Y_dist_from_base;
 		
 		////////////////////////////////
 		

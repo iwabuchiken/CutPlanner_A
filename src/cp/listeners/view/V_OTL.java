@@ -354,21 +354,34 @@ public class V_OTL implements OnTouchListener {
 	_case_ACTION_MOVE__Rect_A
 	(float x, float y) {
 		// TODO Auto-generated method stub
+
+		CONS.Canvas.Rect_A_X1 = x - CONS.Canvas.Rect_A_X_dist_from_base;
+		CONS.Canvas.Rect_A_Y1 = y - CONS.Canvas.Rect_A_Y_dist_from_base;
 		
-		////////////////////////////////
-		
-		// get distance
-		
-		////////////////////////////////
-		
-//		float dif_X = x - CONS.Canvas.Cir_A_X_prev;
-//		float dif_Y = y - CONS.Canvas.Cir_A_Y_prev;
-		
-//		CONS.Canvas.Cir_A_X_prev = x;
-//		CONS.Canvas.Cir_A_Y_prev = y;
-		
-		CONS.Canvas.Rect_A_X1 = x;
-		CONS.Canvas.Rect_A_Y1 = y;
+//		////////////////////////////////
+//		
+//		// get diff
+//		
+//		////////////////////////////////
+//		float dx = x - CONS.Canvas.Rect_A_X_prev;
+//		float dy = y - CONS.Canvas.Rect_A_Y_prev;
+//		
+//		// Log
+//		String msg_Log = String.format(
+//				Locale.JAPAN,
+//				"dx = %f / dy = %f", dx, dy);
+//
+//		Log.d("V_OTL.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
+//		
+//		CONS.Canvas.Rect_A_X1 += dx;
+//		CONS.Canvas.Rect_A_Y1 += dy;
+////		CONS.Canvas.Rect_A_X1 = x;
+////		CONS.Canvas.Rect_A_Y1 = y;
+//		
+//		CONS.Canvas.Rect_A_X1_prev = x;
+//		CONS.Canvas.Rect_A_Y1_prev = y;
 		
 		this.cv.draw_Rect_A(actv);
 		
@@ -461,6 +474,25 @@ public class V_OTL implements OnTouchListener {
 	_case_ACTION_DOWN__Rect_A
 	(float x, float y) {
 		// TODO Auto-generated method stub
+
+		////////////////////////////////
+
+		// record: positon
+
+		////////////////////////////////
+		CONS.Canvas.Rect_A_X_prev = x;
+		CONS.Canvas.Rect_A_Y_prev = y;
+
+		////////////////////////////////
+
+		// get: dist from base
+
+		////////////////////////////////
+		CONS.Canvas.Rect_A_X_dist_from_base = 
+						x - CONS.Canvas.Rect_A_X1;
+		
+		CONS.Canvas.Rect_A_Y_dist_from_base = 
+						y - CONS.Canvas.Rect_A_Y1;
 		
 	}//_case_ACTION_DOWN__CirA
 	

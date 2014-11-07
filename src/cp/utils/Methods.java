@@ -890,6 +890,7 @@ public class Methods {
 
 
 	/******************************
+	 * set => CONS.Canvas.currentObj
 		@return
 			0	=> Rect A<br>
 			1	=> Rect B<br>
