@@ -109,21 +109,28 @@ public class CONS {
 		// Paths and names
 
 		////////////////////////////////
-		public static String dbName = "cm7.db";
+		public static String dbName = "cp.db";
 		
 		public static String dPath_dbFile;
 //		public static String dPath_dbFile = "/data/data/cm7.main/databases";
 		
-		public static String dPath_dbFile_backup = "/mnt/sdcard-ext/cm7_backup";
+		public final static String dPath_Data_Root = "/mnt/sdcard-ext/cp_data";
 		
-//		public static String dPath_dbFile = 
-//							Methods.get_DirPath(new MainActv().getFilesDir().getPath());
+		public static String dPath_dbFile_Backup = dPath_Data_Root + "/cp_backup";
 		
-		public static String fname_DB_Backup_Trunk = "cm7_backup";
+		public final static String dPath_Data = dPath_Data_Root + "/data";
+		
+		public final static String dPath_Log = dPath_Data_Root + "/log";
+				
+		public final static String dPath_Image = dPath_Data_Root + "/image";
+		
+		public static String fname_DB_Backup_Trunk = "cp_backup";
 		
 		public static String fname_DB_Backup_ext = ".bk";
 		
-		public static String dname_TapeATalk_Sdcard = "tapeatalk_records";
+		public static String fname_Image_trunk = "image_";
+		
+		public static String fname_Image_ext = ".jpg";
 		
 		////////////////////////////////
 		

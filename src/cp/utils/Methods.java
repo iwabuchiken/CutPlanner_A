@@ -30,6 +30,7 @@ import org.apache.commons.lang.StringUtils;
 
 import cp.listeners.dialog.DL;
 import cp.main.R;
+import cp.views.CV;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -42,12 +43,17 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -410,7 +416,7 @@ public class Methods {
 		
 		String db_Dst_Folder = StringUtils.join(
 					new String[]{
-							CONS.DB.dPath_dbFile_backup,
+							CONS.DB.dPath_dbFile_Backup,
 							CONS.DB.fname_DB_Backup_Trunk},
 //							CONS.dpath_db_backup,
 //							CONS.fname_db_backup_trunk},
@@ -440,7 +446,7 @@ public class Methods {
 		/****************************
 		 * 2-2. Folder exists?
 			****************************/
-		File db_Backup = new File(CONS.DB.dPath_dbFile_backup);
+		File db_Backup = new File(CONS.DB.dPath_dbFile_Backup);
 //		File db_backup = new File(CONS.dpath_db_backup);
 		
 		if (!db_Backup.exists()) {
@@ -476,7 +482,7 @@ public class Methods {
 		/*********************************
 		 * 2-3. Dst folder => Files within the limit?
 		 *********************************/
-		File[] files_dst_folder = new File(CONS.DB.dPath_dbFile_backup).listFiles();
+		File[] files_dst_folder = new File(CONS.DB.dPath_dbFile_Backup).listFiles();
 //		File[] files_dst_folder = new File(CONS.dpath_db_backup).listFiles();
 		
 		int num_of_files = files_dst_folder.length;
@@ -952,5 +958,303 @@ public class Methods {
 		
 	}//identify
 
+
+	public static void 
+	save_Canvas
+	(Activity actv) {
+		// TODO Auto-generated method stub
+		
+		if (CV.can != null) {
+			
+			// Log
+			String msg_Log = "CV.can.getHeight() => " + CV.can.getHeight();
+			Log.i("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			Bitmap bmpBase = 
+					Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
+//			Bitmap.createBitmap(image_width, image_height, Bitmap.Config.ARGB_8888);
+			
+			CV.can.setBitmap(bmpBase);
+			
+			String dpath_Data = "/mnt/sdcard-ext/cp/data";
+			
+			File dir_Data = new File(dpath_Data);
+			
+			if (!dir_Data.exists()) {
+				
+				boolean res = dir_Data.mkdirs();
+				
+				if (res == true) {
+					
+					// Log
+					msg_Log = "dir created => " + dpath_Data;
+					Log.d("Methods.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber() + "]", msg_Log);
+					
+				} else {
+
+					// Log
+					msg_Log = "dir not created => " + dpath_Data;;
+					Log.d("Methods.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber() + "]", msg_Log);
+					
+					return;
+					
+				}
+				
+			} else {
+				
+				// Log
+				msg_Log = "dir exists => " + dpath_Data;
+				Log.d("Methods.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg_Log);
+
+			}
+			
+			////////////////////////////////
+
+			// test
+
+			////////////////////////////////
+			View cv = (View) actv.findViewById(R.id.actv_main_cv_canvas);
+			
+			//REF http://stackoverflow.com/questions/18550754/i-want-to-save-my-canvas-drawing-to-a-bitmap-image answered Aug 31 '13 at 18:10
+			Bitmap bmp = cv.getDrawingCache();
+			
+			if (bmp == null) {
+				
+				// Log
+				msg_Log = "bmp => null";
+				Log.e("Methods.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg_Log);
+				
+				return;
+				
+			}
+			////////////////////////////////
+
+			// output
+
+			////////////////////////////////
+			String fname = dpath_Data + "/image_"
+						+ Methods.get_TimeLabel(Methods.getMillSeconds_now())
+						+ ".jpg";
+			
+			try {
+				
+				FileOutputStream fos = new FileOutputStream(fname);
+				
+				//REF http://stackoverflow.com/questions/2174875/image-on-canvas-to-jpeg-file answered Mar 7 '12 at 11:14
+//				bmpBase.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+				bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+				
+				fos.flush();
+				fos.close();
+				fos = null;
+				
+				// Log
+				msg_Log = "FileOutputStream => done";
+				Log.d("Methods.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg_Log);
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
+					
+					
+		} else {
+			
+			// Log
+			String msg_Log = "CV.can => null";
+			Log.i("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+
+		}
+		
+	}//save_Canvas
+
+	public static void 
+	save_Canvas_2
+	(Activity actv) {
+		// TODO Auto-generated method stub
+
+		String msg_Log;
+		
+		String dpath_Data = CONS.DB.dPath_Image;
+//		String dpath_Data = "/mnt/sdcard-ext/cp/data";
+		
+		File dir_Data = new File(dpath_Data);
+		
+		if (!dir_Data.exists()) {
+			
+			boolean res = dir_Data.mkdirs();
+			
+			if (res == true) {
+				
+				// Log
+				msg_Log = "dir created => " + dpath_Data;
+				Log.d("Methods.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg_Log);
+				
+			} else {
+				
+				// Log
+				msg_Log = "dir not created => " + dpath_Data;;
+				Log.d("Methods.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg_Log);
+				
+				return;
+				
+			}
+			
+		} else {
+			
+			// Log
+			msg_Log = "dir exists => " + dpath_Data;
+			Log.d("Methods.java"
+					+ "["
+					+ Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", msg_Log);
+			
+		}
+		
+		////////////////////////////////
+		
+		// test
+		
+		////////////////////////////////
+		View cv = (View) actv.findViewById(R.id.actv_main_cv_canvas);
+
+		// Log
+//		msg_Log = "cv.getHeight() => " + cv.getHeight();
+		msg_Log = String.format(
+					Locale.JAPAN,
+					"w = %d / h = %d",
+					cv.getWidth(),
+					cv.getHeight()
+					);
+					
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		Bitmap bmp =  Bitmap.createBitmap (400, 500, Bitmap.Config.ARGB_8888);
+
+		Canvas canvas = new Canvas(bmp);
+
+		canvas.drawColor(Color.WHITE);
+		
+		cv.draw(canvas);
+		
+		// Log
+		msg_Log = "canvas => drawn";
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		////////////////////////////////
+
+		// test: dimensions
+
+		////////////////////////////////
+//		Methods.get_ViewDimensions(actv);
+		
+		////////////////////////////////
+		
+		// output
+		
+		////////////////////////////////
+		String fname = StringUtils.join(
+				new String[]{
+					
+						CONS.DB.dPath_Image,
+						CONS.DB.fname_Image_trunk 
+							+ Methods.get_TimeLabel(Methods.getMillSeconds_now())
+							+ CONS.DB.fname_Image_ext
+				}, 
+				File.separator
+		);
+//				dpath_Data + "/image_"
+//				+ Methods.get_TimeLabel(Methods.getMillSeconds_now())
+//				+ ".jpg";
+		
+		try {
+			
+			FileOutputStream fos = new FileOutputStream(fname);
+			
+			//REF http://stackoverflow.com/questions/2174875/image-on-canvas-to-jpeg-file answered Mar 7 '12 at 11:14
+//				bmpBase.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+			bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+			
+			fos.flush();
+			fos.close();
+			fos = null;
+			
+			// Log
+			msg_Log = "FileOutputStream => done";
+			Log.d("Methods.java"
+					+ "["
+					+ Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", msg_Log);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}//save_Canvas
+
+	//REF http://www.sherif.mobi/2013/01/how-to-get-widthheight-of-view.html
+	public static void
+	get_ViewDimensions(Activity actv) {
+		
+		final View cv = (View) actv.findViewById(R.id.actv_main_cv_canvas);		
+		
+		cv.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+
+			@Override
+			public void onGlobalLayout() {
+				// TODO Auto-generated method stub
+				
+				int w = cv.getWidth();
+				int h = cv.getHeight();
+				
+				// Log
+				String msg_Log = String.format(Locale.JAPAN, "w = %d, h = %d", w, h);
+				Log.d("Methods.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg_Log);
+			}
+			
+		});
+		
+	}
+	
 }//public class Methods
 

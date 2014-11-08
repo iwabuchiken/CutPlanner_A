@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,7 +27,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -36,6 +39,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
+import cp.listeners.button.BO_CL;
+import cp.listeners.button.BO_TL;
 import cp.listeners.view.V_OTL;
 import cp.utils.CONS;
 import cp.utils.Methods;
@@ -228,13 +233,59 @@ public class MainActv extends Activity {
 		// listener
 
 		////////////////////////////////
-		View cv = (View) findViewById(R.id.actv_main_cv_canvas);
+		final View cv = (View) findViewById(R.id.actv_main_cv_canvas);
 		
 		cv.setTag(Tags.ViewTags.CANVAS_MAIN);
 		
 		cv.setOnTouchListener(new V_OTL(this, (CV) cv));
 //		cv.setOnTouchListener(new V_OTL(this));
 
+//		cv.setDrawingCacheEnabled(true);
+
+		//REF http://www.sherif.mobi/2013/01/how-to-get-widthheight-of-view.html
+//		cv.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+//
+//			@Override
+//			public void onGlobalLayout() {
+//				// TODO Auto-generated method stub
+//				
+//				int w = cv.getWidth();
+//				int h = cv.getHeight();
+//				
+//				// Log
+//				String msg_Log = String.format(Locale.JAPAN, "w = %d, h = %d", w, h);
+//				Log.d("MainActv.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber() + "]", msg_Log);
+//			}
+//			
+//		});
+
+		////////////////////////////////
+
+		// button: go
+
+		////////////////////////////////
+		Button bt_Go = (Button) findViewById(R.id.actv_main_cv_bt_go);
+		
+		bt_Go.setTag(Tags.ButtonTags.ACTV_MAIN_BT_GO);
+		
+		bt_Go.setOnTouchListener(new BO_TL(this));
+		bt_Go.setOnClickListener(new BO_CL(this));
+		
+		////////////////////////////////
+		
+		// button: clear
+		
+		////////////////////////////////
+		Button bt_Clear = (Button) findViewById(R.id.actv_main_cv_bt_clear);
+		
+		bt_Clear.setTag(Tags.ButtonTags.ACTV_MAIN_BT_CLEAR);
+		
+		bt_Clear.setOnTouchListener(new BO_TL(this));
+		bt_Clear.setOnClickListener(new BO_CL(this));
+		
 	}//_Setup__SetListener
 
 	private void 

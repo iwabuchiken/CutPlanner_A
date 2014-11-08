@@ -148,7 +148,12 @@ public class Tags {
 		actv_bm_ib_back,
 		
 		// actv_hist.xml
-		actv_hist_ib_back, actv_hist_ib_bottom, actv_hist_ib_top,
+		actv_hist_ib_back, 
+		actv_hist_ib_bottom, 
+		actv_hist_ib_top, 
+		
+		ACTV_MAIN_BT_GO, 
+		ACTV_MAIN_BT_CLEAR,
 
 		
 		

@@ -30,6 +30,8 @@ public class CV extends View {
 
 	Paint paint_2;
 	float x1, y1, x2, y2;
+
+	public static Canvas can;
 	
 	////////////////////////////////
 	
@@ -81,6 +83,12 @@ public class CV extends View {
 	protected void onDraw(Canvas canvas) {
 		
 		String msg_Log;
+		
+		if (CV.can == null) {
+			
+			CV.can = canvas;
+			
+		}
 		
 //		// Log
 //		String msg_Log = "onDraw";
