@@ -96,56 +96,86 @@ public class CV extends View {
 //				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 //				+ "]", msg_Log);
 		
+//		////////////////////////////////
+//
+//		// draw: boxes
+//
+//		////////////////////////////////
+//		if (CONS.Canvas.DrawA == true) {
+//			
+//			//REF http://developer.android.com/reference/android/graphics/Canvas.html#drawLines(float[], android.graphics.Paint)
+//			canvas.drawLines(CONS.Canvas.pointsA, CONS.Canvas.p_A);
+////			canvas.drawLines(CONS.Canvas.pointsA, this.paint_2);
+//			
+//		}
+//		
+//		if (CONS.Canvas.DrawB == true) {
+//			
+//			canvas.drawLines(CONS.Canvas.pointsB, CONS.Canvas.p_B);
+//			
+//		}
+		
 		////////////////////////////////
 
-		// draw: boxes
+		// draw: order
 
 		////////////////////////////////
-		if (CONS.Canvas.DrawA == true) {
+		CONS.Canvas.Layer tmp_Layer;
+		
+		for (int i = CONS.Canvas.list_Layer.size() - 1; i >= 0 ; i--) {
+//			for (int i = 0; i < CONS.Canvas.list_Layer.size(); i++) {
 			
-			//REF http://developer.android.com/reference/android/graphics/Canvas.html#drawLines(float[], android.graphics.Paint)
-			canvas.drawLines(CONS.Canvas.pointsA, CONS.Canvas.p_A);
-//			canvas.drawLines(CONS.Canvas.pointsA, this.paint_2);
+			tmp_Layer = CONS.Canvas.list_Layer.get(i);
+			
+			switch(tmp_Layer) {
+			
+			case Cir_A:
+				
+				_onDraw__CirA(canvas);
+				
+				break;
+			
+			case Rect_A:
+				
+				_onDraw__RectA(canvas);
+				
+				break;
+				
+			}
 			
 		}
 		
-		if (CONS.Canvas.DrawB == true) {
-			
-			canvas.drawLines(CONS.Canvas.pointsB, CONS.Canvas.p_B);
-			
-		}
+//		////////////////////////////////
+//
+//		// draw: Cicle: A
+//
+//		////////////////////////////////
+//		if (CONS.Canvas.Draw_Circle_A == true) {
+//			
+//			canvas.drawCircle(
+//						CONS.Canvas.Cir_A_X, 
+//						CONS.Canvas.Cir_A_Y, 
+//						CONS.Canvas.Cir_A_Radius, 
+//						CONS.Canvas.p_Cir_A);
+//			
+//		}
 		
-		////////////////////////////////
-
-		// draw: Cicle: A
-
-		////////////////////////////////
-		if (CONS.Canvas.Draw_Circle_A == true) {
-			
-			canvas.drawCircle(
-						CONS.Canvas.Cir_A_X, 
-						CONS.Canvas.Cir_A_Y, 
-						CONS.Canvas.Cir_A_Radius, 
-						CONS.Canvas.p_Cir_A);
-			
-		}
-		
-		////////////////////////////////
-		
-		// draw: Rect: A
-		
-		////////////////////////////////
-		if (CONS.Canvas.Draw_Rect_A == true) {
-			
-			canvas.drawRect(
-					CONS.Canvas.Rect_A_X1, 
-					CONS.Canvas.Rect_A_Y1, 
-					CONS.Canvas.Rect_A_X1 + CONS.Canvas.Rect_A_W, 
-					CONS.Canvas.Rect_A_Y1 + CONS.Canvas.Rect_A_H,
-					CONS.Canvas.p_Rect_A
-					);
-			
-		}
+//		////////////////////////////////
+//		
+//		// draw: Rect: A
+//		
+//		////////////////////////////////
+//		if (CONS.Canvas.Draw_Rect_A == true) {
+//			
+//			canvas.drawRect(
+//					CONS.Canvas.Rect_A_X1, 
+//					CONS.Canvas.Rect_A_Y1, 
+//					CONS.Canvas.Rect_A_X1 + CONS.Canvas.Rect_A_W, 
+//					CONS.Canvas.Rect_A_Y1 + CONS.Canvas.Rect_A_H,
+//					CONS.Canvas.p_Rect_A
+//					);
+//			
+//		}
 		
 		////////////////////////////////
 		
@@ -174,6 +204,50 @@ public class CV extends View {
 //		canvas.drawLines(CONS.Canvas.pointsB, this.paint_2);
 		
 //		canvas.drawText("あいうえお", 10, 400, paint);
+		
+	}
+
+	private void 
+	_onDraw__RectA(Canvas canvas) {
+		// TODO Auto-generated method stub
+	
+		////////////////////////////////
+		
+		// draw: Rect: A
+		
+		////////////////////////////////
+		if (CONS.Canvas.Draw_Rect_A == true) {
+			
+			canvas.drawRect(
+					CONS.Canvas.Rect_A_X1, 
+					CONS.Canvas.Rect_A_Y1, 
+					CONS.Canvas.Rect_A_X1 + CONS.Canvas.Rect_A_W, 
+					CONS.Canvas.Rect_A_Y1 + CONS.Canvas.Rect_A_H,
+					CONS.Canvas.p_Rect_A
+					);
+			
+		}
+
+	}
+	
+
+	private void 
+	_onDraw__CirA(Canvas canvas) {
+		
+		////////////////////////////////
+
+		// draw: Cicle: A
+
+		////////////////////////////////
+		if (CONS.Canvas.Draw_Circle_A == true) {
+			
+			canvas.drawCircle(
+						CONS.Canvas.Cir_A_X, 
+						CONS.Canvas.Cir_A_Y, 
+						CONS.Canvas.Cir_A_Radius, 
+						CONS.Canvas.p_Cir_A);
+			
+		}
 		
 	}
 

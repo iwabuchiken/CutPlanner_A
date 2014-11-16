@@ -238,10 +238,13 @@ public class MainActv extends Activity {
 			
 			CONS.Canvas.list_Layer = new ArrayList<CONS.Canvas.Layer>();
 			
+			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Cir_A);
+			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Rect_A);
+			
 		}
 		
-		CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Cir_A);
-		CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Rect_A);
+//		CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Cir_A);
+//		CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Rect_A);
 		
 		// Log
 		String msg_Log = "layer setup => done";
