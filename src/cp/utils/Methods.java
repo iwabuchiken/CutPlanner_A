@@ -916,6 +916,11 @@ public class Methods {
 		// judge
 
 		////////////////////////////////
+		////////////////////////////////
+
+		// obj => Rect_A
+
+		////////////////////////////////
 		if (x_i >= CONS.Canvas.Rect_A_X1
 				&& x_i <= CONS.Canvas.Rect_A_X1 + CONS.Canvas.Rect_A_W
 			&& y_i >= CONS.Canvas.Rect_A_Y1
@@ -934,9 +939,39 @@ public class Methods {
 			////////////////////////////////
 			CONS.Canvas.currentObj = CONS.Canvas.ChosenObj.Rect_A;
 			
+			////////////////////////////////
+
+			// update: layer
+
+			////////////////////////////////
+			CONS.Canvas.list_Layer.remove(CONS.Canvas.Layer.Rect_A);
+			
+			CONS.Canvas.list_Layer.add(0, CONS.Canvas.Layer.Rect_A);
+			
+			// Log
+			for (int i = 0; i < CONS.Canvas.list_Layer.size(); i++) {
+				
+				msg_Log = String.format(
+						Locale.JAPAN,
+						"layer %d => %s", 
+						i,
+						CONS.Canvas.list_Layer.get(i).toString()
+					);
+				
+				Log.d("Methods.java" + "["
+						+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+						+ "]", msg_Log);
+				
+			}
+			
 			return 0;
 			
 		} else {
+			////////////////////////////////
+
+			// obj => not Rect_A
+
+			////////////////////////////////
 			
 			// Log
 			msg_Log = "not in => Rect A";
@@ -951,7 +986,31 @@ public class Methods {
 			////////////////////////////////
 			CONS.Canvas.currentObj = CONS.Canvas.ChosenObj.Others;
 			
+			////////////////////////////////
+
+			// update: layer
+
+			////////////////////////////////
+			CONS.Canvas.list_Layer.remove(CONS.Canvas.Layer.Rect_A);
 			
+			CONS.Canvas.list_Layer.add(1, CONS.Canvas.Layer.Rect_A);
+
+			// Log
+			for (int i = 0; i < CONS.Canvas.list_Layer.size(); i++) {
+				
+				msg_Log = String.format(
+						Locale.JAPAN,
+						"layer %d => %s", 
+						i,
+						CONS.Canvas.list_Layer.get(i).toString()
+					);
+				
+				Log.d("Methods.java" + "["
+						+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+						+ "]", msg_Log);
+				
+			}
+
 			return -1;
 			
 		}

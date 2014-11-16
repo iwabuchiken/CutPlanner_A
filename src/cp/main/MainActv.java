@@ -209,6 +209,13 @@ public class MainActv extends Activity {
 		
 		////////////////////////////////
 
+		// setup: layer
+
+		////////////////////////////////
+		_Setup__Layer();
+		
+		////////////////////////////////
+
 		// listener
 
 		////////////////////////////////
@@ -223,6 +230,26 @@ public class MainActv extends Activity {
 ////		cv.setOnTouchListener(new V_OTL(this));
 		
 	}//protected void onStart()
+
+	private void 
+	_Setup__Layer() {
+		
+		if (CONS.Canvas.list_Layer == null) {
+			
+			CONS.Canvas.list_Layer = new ArrayList<CONS.Canvas.Layer>();
+			
+		}
+		
+		CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Cir_A);
+		CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Rect_A);
+		
+		// Log
+		String msg_Log = "layer setup => done";
+		Log.d("MainActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+	}
 
 	private void 
 	_Setup__SetListener() {

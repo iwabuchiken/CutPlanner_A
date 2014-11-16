@@ -435,6 +435,14 @@ public class CONS {
 		}
 		
 		public static ChosenObj currentObj;
+
+		public static List<Layer> list_Layer = null;
+		
+		public static enum Layer {
+			
+			Cir_A, Rect_A
+			
+		}
 		
 		////////////////////////////////
 
