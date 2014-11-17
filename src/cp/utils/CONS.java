@@ -545,7 +545,11 @@ public class CONS {
 		
 		public static float Rect_B_X1_prev;
 		public static float Rect_B_Y1_prev;
-		
+
+		// distance to the base point
+		public static float Rect_B_X_dist_from_base;
+		public static float Rect_B_Y_dist_from_base;
+
 		// paint
 		public static Paint p_Rect_B;
 		

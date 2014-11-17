@@ -298,7 +298,7 @@ public class V_OTL implements OnTouchListener {
 			
 		case Rect_B:
 			
-//			_case_ACTION_MOVE__Rect_A(x, y);
+			_case_ACTION_MOVE__Rect_B(x, y);
 			
 			break;
 			
@@ -397,7 +397,19 @@ public class V_OTL implements OnTouchListener {
 		
 		this.cv.draw_Rect_A(actv);
 		
-	}//_case_ACTION_MOVE__Cir_A
+	}//_case_ACTION_MOVE__Rect_A
+	
+	private void 
+	_case_ACTION_MOVE__Rect_B
+	(float x, float y) {
+		// TODO Auto-generated method stub
+		
+		CONS.Canvas.Rect_B_X1 = x - CONS.Canvas.Rect_B_X_dist_from_base;
+		CONS.Canvas.Rect_B_Y1 = y - CONS.Canvas.Rect_B_Y_dist_from_base;
+		
+		this.cv.draw_Rect_B(actv);
+		
+	}//_case_ACTION_MOVE__Cir_B
 	
 
 	private void 
@@ -426,11 +438,13 @@ public class V_OTL implements OnTouchListener {
 			
 		case Rect_B:
 			
-			// Log
-			String msg_Log = "case => Rect_B";
-			Log.d("V_OTL.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", msg_Log);
+			this._case_BCTION_DOWN__Rect_B(x, y);
+			
+//			// Log
+//			String msg_Log = "case => Rect_B";
+//			Log.d("V_OTL.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", msg_Log);
 //			this._case_ACTION_DOWN__CirA(x, y);
 			
 			break;
@@ -527,6 +541,32 @@ public class V_OTL implements OnTouchListener {
 		
 		CONS.Canvas.Rect_A_Y_dist_from_base = 
 						y - CONS.Canvas.Rect_A_Y1;
+		
+	}//_case_ACTION_DOWN__CirA
+	
+	private void 
+	_case_BCTION_DOWN__Rect_B
+	(float x, float y) {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+		
+		// record: positon
+		
+		////////////////////////////////
+		CONS.Canvas.Rect_B_X1_prev = x;
+		CONS.Canvas.Rect_B_Y1_prev = y;
+		
+		////////////////////////////////
+		
+		// get: dist from base
+		
+		////////////////////////////////
+		CONS.Canvas.Rect_B_X_dist_from_base = 
+				x - CONS.Canvas.Rect_B_X1;
+		
+		CONS.Canvas.Rect_B_Y_dist_from_base = 
+				y - CONS.Canvas.Rect_B_Y1;
 		
 	}//_case_ACTION_DOWN__CirA
 	

@@ -135,26 +135,32 @@ public class CV extends View {
 				
 				break;
 				
+			case Rect_B:
+				
+				_onDraw__RectB(canvas);
+				
+				break;
+				
 			}
 			
 		}
 		
-		////////////////////////////////
-		
-		// draw: Rect: B
-		
-		////////////////////////////////
-		if (CONS.Canvas.Draw_Rect_B == true) {
-			
-			canvas.drawRect(
-					CONS.Canvas.Rect_B_X1, 
-					CONS.Canvas.Rect_B_Y1, 
-					CONS.Canvas.Rect_B_X1 + CONS.Canvas.Rect_B_W, 
-					CONS.Canvas.Rect_B_Y1 + CONS.Canvas.Rect_B_H,
-					CONS.Canvas.p_Rect_B
-					);
-			
-		}
+//		////////////////////////////////
+//		
+//		// draw: Rect: B
+//		
+//		////////////////////////////////
+//		if (CONS.Canvas.Draw_Rect_B == true) {
+//			
+//			canvas.drawRect(
+//					CONS.Canvas.Rect_B_X1, 
+//					CONS.Canvas.Rect_B_Y1, 
+//					CONS.Canvas.Rect_B_X1 + CONS.Canvas.Rect_B_W, 
+//					CONS.Canvas.Rect_B_Y1 + CONS.Canvas.Rect_B_H,
+//					CONS.Canvas.p_Rect_B
+//					);
+//			
+//		}
 		
 //		this.draw_Boxes_A((Activity) con);
 //		this.draw_Boxes_B((Activity) con);
@@ -190,6 +196,29 @@ public class CV extends View {
 			
 		}
 
+	}
+	
+	private void 
+	_onDraw__RectB(Canvas canvas) {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+		
+		// draw: Rect: B
+		
+		////////////////////////////////
+		if (CONS.Canvas.Draw_Rect_B == true) {
+			
+			canvas.drawRect(
+					CONS.Canvas.Rect_B_X1, 
+					CONS.Canvas.Rect_B_Y1, 
+					CONS.Canvas.Rect_B_X1 + CONS.Canvas.Rect_B_W, 
+					CONS.Canvas.Rect_B_Y1 + CONS.Canvas.Rect_B_H,
+					CONS.Canvas.p_Rect_B
+					);
+			
+		}
+		
 	}
 	
 
