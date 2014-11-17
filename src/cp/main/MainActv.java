@@ -240,6 +240,7 @@ public class MainActv extends Activity {
 			
 			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Cir_A);
 			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Rect_A);
+			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Rect_B);
 			
 		}
 		
@@ -379,16 +380,16 @@ public class MainActv extends Activity {
 //		
 //		cv.drawLine(10, 10, 100, 100, paint);
 //		
-		// box: A
-		CONS.Canvas.DrawA = true;
-		
-		cv.draw_Boxes_A(this);
-		
-//		CONS.Canvas.DrawA = false;
-		
-		// box: B
-		CONS.Canvas.DrawB = true;
-		cv.draw_Boxes_B(this);
+//		// box: A
+//		CONS.Canvas.DrawA = true;
+//		
+//		cv.draw_Boxes_A(this);
+//		
+////		CONS.Canvas.DrawA = false;
+//		
+//		// box: B
+//		CONS.Canvas.DrawB = true;
+//		cv.draw_Boxes_B(this);
 		
 		////////////////////////////////
 

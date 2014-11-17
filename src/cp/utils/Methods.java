@@ -46,6 +46,7 @@ import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -900,6 +901,8 @@ public class Methods {
 		@return
 			0	=> Rect A<br>
 			1	=> Rect B<br>
+			2	=> Cir A<br>
+			-1	=> Other<br>
 	 ******************************/
 	public static int 
 	identify
@@ -916,6 +919,11 @@ public class Methods {
 		// judge
 
 		////////////////////////////////
+		float dist_Cir_A = Methods.get_Distance_2D(
+				actv, 
+				new Point(x_i, y_i),
+				new Point((int)CONS.Canvas.Cir_A_X, (int)CONS.Canvas.Cir_A_Y));
+		
 		////////////////////////////////
 
 		// obj => Rect_A
@@ -932,91 +940,315 @@ public class Methods {
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", msg_Log);
 			
-			////////////////////////////////
-
-			// set: enum
-
-			////////////////////////////////
-			CONS.Canvas.currentObj = CONS.Canvas.ChosenObj.Rect_A;
-			
-			////////////////////////////////
-
-			// update: layer
-
-			////////////////////////////////
-			CONS.Canvas.list_Layer.remove(CONS.Canvas.Layer.Rect_A);
-			
-			CONS.Canvas.list_Layer.add(0, CONS.Canvas.Layer.Rect_A);
-			
-			// Log
-			for (int i = 0; i < CONS.Canvas.list_Layer.size(); i++) {
-				
-				msg_Log = String.format(
-						Locale.JAPAN,
-						"layer %d => %s", 
-						i,
-						CONS.Canvas.list_Layer.get(i).toString()
-					);
-				
-				Log.d("Methods.java" + "["
-						+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-						+ "]", msg_Log);
-				
-			}
+			_identify__Rect_A(actv);
 			
 			return 0;
 			
-		} else {
-			////////////////////////////////
-
-			// obj => not Rect_A
-
-			////////////////////////////////
+		} else if(dist_Cir_A < CONS.Canvas.Cir_A_Radius) {
 			
 			// Log
-			msg_Log = "not in => Rect A";
+			msg_Log = "is in => Cir A";
 			Log.i("Methods.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", msg_Log);
 			
-			////////////////////////////////
+//			_identify__Other(actv);
 			
-			// set: enum
+			Methods._identify__Cir_A(actv);
 			
-			////////////////////////////////
-			CONS.Canvas.currentObj = CONS.Canvas.ChosenObj.Others;
+			return 2;
 			
-			////////////////////////////////
-
-			// update: layer
-
-			////////////////////////////////
-			CONS.Canvas.list_Layer.remove(CONS.Canvas.Layer.Rect_A);
+		} else if(is_In_Rect_B(actv, x, y)){
 			
-			CONS.Canvas.list_Layer.add(1, CONS.Canvas.Layer.Rect_A);
-
 			// Log
-			for (int i = 0; i < CONS.Canvas.list_Layer.size(); i++) {
-				
-				msg_Log = String.format(
-						Locale.JAPAN,
-						"layer %d => %s", 
-						i,
-						CONS.Canvas.list_Layer.get(i).toString()
-					);
-				
-				Log.d("Methods.java" + "["
-						+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-						+ "]", msg_Log);
-				
-			}
-
+			msg_Log = "is in => Rect B";
+			Log.i("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			_identify__Rect_B(actv);
+			
+			return 1;
+			
+		} else {
+			
+			_identify__Other(actv);
+			
 			return -1;
 			
 		}
 		
 	}//identify
 
+
+	private static boolean 
+	is_In_Rect_B
+	(Activity actv, float x, float y) {
+		// TODO Auto-generated method stub
+		
+		boolean res = (x >= CONS.Canvas.Rect_B_X1
+				&& x <= CONS.Canvas.Rect_B_X1 + CONS.Canvas.Rect_B_W
+			&& y >= CONS.Canvas.Rect_B_Y1
+				&& y <= CONS.Canvas.Rect_B_Y1 + CONS.Canvas.Rect_B_H);
+		
+		
+		return res;
+		
+	}//is_In_Rect_B
+
+
+	private static float 
+	get_Distance_2D
+	(Activity actv, 
+		Point pnt_Target, Point pnt_Ref) {
+		// TODO Auto-generated method stub
+		
+		String msg_Log;
+		
+		int dif_X = pnt_Target.x - pnt_Ref.x;
+		int dif_Y = pnt_Target.y - pnt_Ref.y;
+		
+//		// Log
+//		msg_Log = String.format(
+//				Locale.JAPAN, 
+//				"pnt_Target.x = %d, pnt_Target.y = %d",
+//				pnt_Target.x, pnt_Target.y);
+//		
+//		Log.d("Methods.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
+//		
+//		// Log
+//		msg_Log = String.format(
+//				Locale.JAPAN, 
+//				"pnt_Ref.x = %d, pnt_Ref.y = %d",
+//				pnt_Ref.x, pnt_Ref.y);
+//		
+//		Log.d("Methods.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
+		
+//		msg_Log = String.format(
+//				Locale.JAPAN, 
+//				"dif_X = %d, dif_Y = %d",
+//				
+//				dif_X, dif_Y);
+//		
+//		Log.d("Methods.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
+		
+		float result = (float) Math.sqrt(
+				Math.pow(Math.abs(dif_X), 2)
+				+ Math.pow(Math.abs(dif_Y), 2));
+
+//		msg_Log = String.format(
+//				Locale.JAPAN, 
+//				"result = %f", result);
+//		
+//		Log.d("Methods.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
+
+		return result;
+//		return (float) Math.sqrt(Math.pow(dif_X, 2) + Math.pow(dif_Y, 2));
+		
+//		return 0;
+		
+	}//get_Distance_2D
+	
+
+
+	private static void
+	_identify__Other
+	(Activity actv) {
+		// TODO Auto-generated method stub
+	
+		String msg_Log;
+		
+		////////////////////////////////
+
+		// obj => not Rect_A
+
+		////////////////////////////////
+		
+		// Log
+		msg_Log = "not in => Rect A";
+		Log.i("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		////////////////////////////////
+		
+		// set: enum
+		
+		////////////////////////////////
+		CONS.Canvas.currentObj = CONS.Canvas.ChosenObj.Others;
+		
+		////////////////////////////////
+
+		// update: layer
+
+		////////////////////////////////
+		CONS.Canvas.list_Layer.remove(CONS.Canvas.Layer.Rect_A);
+		
+		CONS.Canvas.list_Layer.add(1, CONS.Canvas.Layer.Rect_A);
+
+		// Log
+		for (int i = 0; i < CONS.Canvas.list_Layer.size(); i++) {
+			
+			msg_Log = String.format(
+					Locale.JAPAN,
+					"layer %d => %s", 
+					i,
+					CONS.Canvas.list_Layer.get(i).toString()
+				);
+			
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		}
+
+	}//_identify__Other
+	
+	private static void
+	_identify__Cir_A
+	(Activity actv) {
+		// TODO Auto-generated method stub
+		
+		String msg_Log;
+		
+		////////////////////////////////
+		
+		// obj => not Rect_A
+		
+		////////////////////////////////
+		
+		// Log
+		msg_Log = "is in => Cir_A";
+		Log.i("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		////////////////////////////////
+		
+		// set: enum
+		
+		////////////////////////////////
+		CONS.Canvas.currentObj = CONS.Canvas.ChosenObj.Cir_A;
+		
+		////////////////////////////////
+		
+		// update: layer
+		
+		////////////////////////////////
+		CONS.Canvas.list_Layer.remove(CONS.Canvas.Layer.Cir_A);
+		
+		CONS.Canvas.list_Layer.add(0, CONS.Canvas.Layer.Cir_A);
+		
+		// Log
+		for (int i = 0; i < CONS.Canvas.list_Layer.size(); i++) {
+			
+			msg_Log = String.format(
+					Locale.JAPAN,
+					"layer %d => %s", 
+					i,
+					CONS.Canvas.list_Layer.get(i).toString()
+					);
+			
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		}
+		
+	}//_identify__Other__Cir_A
+	
+
+
+	private static void 
+	_identify__Rect_A
+	(Activity actv) {
+		// TODO Auto-generated method stub
+		
+		String msg_Log;
+		
+		////////////////////////////////
+
+		// set: enum
+
+		////////////////////////////////
+		CONS.Canvas.currentObj = CONS.Canvas.ChosenObj.Rect_A;
+		
+		////////////////////////////////
+
+		// update: layer
+
+		////////////////////////////////
+		CONS.Canvas.list_Layer.remove(CONS.Canvas.Layer.Rect_A);
+		
+		CONS.Canvas.list_Layer.add(0, CONS.Canvas.Layer.Rect_A);
+		
+		// Log
+		for (int i = 0; i < CONS.Canvas.list_Layer.size(); i++) {
+			
+			msg_Log = String.format(
+					Locale.JAPAN,
+					"layer %d => %s", 
+					i,
+					CONS.Canvas.list_Layer.get(i).toString()
+				);
+			
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		}
+		
+	}//_identify__Rect_A
+
+	private static void
+	_identify__Rect_B
+	(Activity actv) {
+		// TODO Auto-generated method stub
+		
+		String msg_Log;
+		
+		////////////////////////////////
+		
+		// set: enum
+		
+		////////////////////////////////
+		CONS.Canvas.currentObj = CONS.Canvas.ChosenObj.Rect_B;
+		
+		////////////////////////////////
+		
+		// update: layer
+		
+		////////////////////////////////
+		CONS.Canvas.list_Layer.remove(CONS.Canvas.Layer.Rect_B);
+		
+		CONS.Canvas.list_Layer.add(0, CONS.Canvas.Layer.Rect_B);
+		
+		// Log
+		for (int i = 0; i < CONS.Canvas.list_Layer.size(); i++) {
+			
+			msg_Log = String.format(
+					Locale.JAPAN,
+					"layer %d => %s", 
+					i,
+					CONS.Canvas.list_Layer.get(i).toString()
+					);
+			
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		}
+		
+	}//_identify__Rect_A
+	
 
 	public static void 
 	save_Canvas

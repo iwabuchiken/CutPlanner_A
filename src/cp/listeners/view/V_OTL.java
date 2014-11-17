@@ -296,6 +296,18 @@ public class V_OTL implements OnTouchListener {
 			
 			break;
 			
+		case Rect_B:
+			
+//			_case_ACTION_MOVE__Rect_A(x, y);
+			
+			break;
+			
+		case Cir_A:
+			
+			_case_ACTION_MOVE__Cir_A(x, y);
+			
+			break;
+			
 		default:
 			
 			_case_ACTION_MOVE__Cir_A(x, y);
@@ -406,9 +418,31 @@ public class V_OTL implements OnTouchListener {
 			
 			break;
 			
+		case Cir_A:
+			
+			this._case_ACTION_DOWN__CirA(x, y);
+			
+			break;
+			
+		case Rect_B:
+			
+			// Log
+			String msg_Log = "case => Rect_B";
+			Log.d("V_OTL.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+//			this._case_ACTION_DOWN__CirA(x, y);
+			
+			break;
+			
+		case Others:
+			
+			this._case_ACTION_DOWN__CirA(x, y);
+			
+			break;
+			
 		default:
 			
-			_case_ACTION_DOWN__CirA(x, y);
 			
 			break;
 		

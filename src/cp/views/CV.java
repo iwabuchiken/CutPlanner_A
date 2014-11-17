@@ -90,12 +90,6 @@ public class CV extends View {
 			
 		}
 		
-//		// Log
-//		String msg_Log = "onDraw";
-//		Log.d("CV.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", msg_Log);
-		
 //		////////////////////////////////
 //
 //		// draw: boxes
@@ -144,38 +138,6 @@ public class CV extends View {
 			}
 			
 		}
-		
-//		////////////////////////////////
-//
-//		// draw: Cicle: A
-//
-//		////////////////////////////////
-//		if (CONS.Canvas.Draw_Circle_A == true) {
-//			
-//			canvas.drawCircle(
-//						CONS.Canvas.Cir_A_X, 
-//						CONS.Canvas.Cir_A_Y, 
-//						CONS.Canvas.Cir_A_Radius, 
-//						CONS.Canvas.p_Cir_A);
-//			
-//		}
-		
-//		////////////////////////////////
-//		
-//		// draw: Rect: A
-//		
-//		////////////////////////////////
-//		if (CONS.Canvas.Draw_Rect_A == true) {
-//			
-//			canvas.drawRect(
-//					CONS.Canvas.Rect_A_X1, 
-//					CONS.Canvas.Rect_A_Y1, 
-//					CONS.Canvas.Rect_A_X1 + CONS.Canvas.Rect_A_W, 
-//					CONS.Canvas.Rect_A_Y1 + CONS.Canvas.Rect_A_H,
-//					CONS.Canvas.p_Rect_A
-//					);
-//			
-//		}
 		
 		////////////////////////////////
 		
@@ -482,8 +444,10 @@ public class CV extends View {
 		////////////////////////////////
 		CONS.Canvas.p_Cir_A = new Paint();
 		
-		CONS.Canvas.p_A.setColor(Color.BLUE);
-		CONS.Canvas.p_A.setStrokeWidth(CONS.Canvas.LineWidth_Cir_A);
+		CONS.Canvas.p_Cir_A.setColor(Color.BLACK);
+		CONS.Canvas.p_Cir_A.setStrokeWidth(CONS.Canvas.LineWidth_Cir_A);
+//		CONS.Canvas.p_A.setColor(Color.BLUE);
+//		CONS.Canvas.p_A.setStrokeWidth(CONS.Canvas.LineWidth_Cir_A);
 		
 		////////////////////////////////
 		

@@ -428,7 +428,7 @@ public class CONS {
 		
 		public static enum ChosenObj {
 			
-			Rect_A, Rect_B,
+			Rect_A, Rect_B, Cir_A,
 			
 			Others,
 			
@@ -440,7 +440,7 @@ public class CONS {
 		
 		public static enum Layer {
 			
-			Cir_A, Rect_A
+			Cir_A, Rect_A, Rect_B,
 			
 		}
 		
