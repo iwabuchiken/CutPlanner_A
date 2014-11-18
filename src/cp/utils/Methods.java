@@ -903,6 +903,7 @@ public class Methods {
 			1	=> Rect B<br>
 			2	=> Cir A<br>
 			-1	=> Other<br>
+			-2	=> Not identified<br>
 	 ******************************/
 	public static int 
 	identify
@@ -926,57 +927,142 @@ public class Methods {
 		
 		////////////////////////////////
 
-		// obj => Rect_A
+		// iteration
 
 		////////////////////////////////
-		if (x_i >= CONS.Canvas.Rect_A_X1
-				&& x_i <= CONS.Canvas.Rect_A_X1 + CONS.Canvas.Rect_A_W
-			&& y_i >= CONS.Canvas.Rect_A_Y1
-				&& y_i <= CONS.Canvas.Rect_A_Y1 + CONS.Canvas.Rect_A_H) {
+		CONS.Canvas.Layer tmp_Layer;
+		
+		boolean identified = false;
+		
+		for (int i = 0; i < CONS.Canvas.list_Layer.size(); i++) {
 			
-			// Log
-			msg_Log = "is in => Rect A";
-			Log.i("Methods.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", msg_Log);
+			tmp_Layer = CONS.Canvas.list_Layer.get(i);
 			
-			_identify__Rect_A(actv);
+			switch(tmp_Layer) {
 			
-			return 0;
+			case Rect_A:
+				
+				if (Methods.is_In_Rect_A(actv, x_i, y_i)) {
+					
+					_identify__Rect_A(actv);
+					
+					identified = true;
+					
+					return 0;
+					
+				}
+				
+				break;
+				
+			case Rect_B:
+				
+				if(is_In_Rect_B(actv, x, y)) {
+					
+					_identify__Rect_B(actv);
+					
+					identified = true;
+					
+					return 1;
+					
+				}
+				
+				break;
+				
+			case Cir_A:
+				
+				if(dist_Cir_A < CONS.Canvas.Cir_A_Radius) {
+					
+					Methods._identify__Cir_A(actv);
+					
+					identified = true;
+					
+					return 2;
+					
+				}
+				
+				break;
+				
+//			default:
+//				
+//				_case_ACTION_MOVE__Cir_A(x, y);
+//				
+//				break;
 			
-		} else if(dist_Cir_A < CONS.Canvas.Cir_A_Radius) {
+			}//switch(tmp_Layer)
 			
-			// Log
-			msg_Log = "is in => Cir A";
-			Log.i("Methods.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", msg_Log);
-			
-//			_identify__Other(actv);
-			
-			Methods._identify__Cir_A(actv);
-			
-			return 2;
-			
-		} else if(is_In_Rect_B(actv, x, y)){
-			
-			// Log
-			msg_Log = "is in => Rect B";
-			Log.i("Methods.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", msg_Log);
-			
-			_identify__Rect_B(actv);
-			
-			return 1;
-			
-		} else {
+		}//for (int i = 0; i < CONS.Canvas.list_Layer.size(); i++)
+		
+		/******************************
+			In case of no match
+		 ******************************/
+		if (identified == false) {
 			
 			_identify__Other(actv);
 			
 			return -1;
 			
+		} else {
+			
+			// Log
+			msg_Log = "identified => true; but, switch process passed";
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			return -2;
+			
 		}
+		
+//		////////////////////////////////
+//
+//		// obj => Rect_A
+//
+//		////////////////////////////////
+//		if (Methods.is_In_Rect_A(actv, x_i, y_i)) {
+//			
+//			// Log
+//			msg_Log = "is in => Rect A";
+//			Log.i("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", msg_Log);
+//			
+//			_identify__Rect_A(actv);
+//			
+//			return 0;
+//			
+//		} else if(dist_Cir_A < CONS.Canvas.Cir_A_Radius) {
+//			
+//			// Log
+//			msg_Log = "is in => Cir A";
+//			Log.i("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", msg_Log);
+//			
+////			_identify__Other(actv);
+//			
+//			Methods._identify__Cir_A(actv);
+//			
+//			return 2;
+//			
+//		} else if(is_In_Rect_B(actv, x, y)){
+//			
+//			// Log
+//			msg_Log = "is in => Rect B";
+//			Log.i("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", msg_Log);
+//			
+//			_identify__Rect_B(actv);
+//			
+//			return 1;
+//			
+//		} else {
+//			
+//			_identify__Other(actv);
+//			
+//			return -1;
+//			
+//		}
 		
 	}//identify
 
@@ -996,6 +1082,21 @@ public class Methods {
 		
 	}//is_In_Rect_B
 
+	private static boolean 
+	is_In_Rect_A
+	(Activity actv, float x, float y) {
+		// TODO Auto-generated method stub
+		
+		boolean res = (x >= CONS.Canvas.Rect_A_X1)
+				&& (x <= CONS.Canvas.Rect_A_X1 + CONS.Canvas.Rect_A_W)
+			&& (y >= CONS.Canvas.Rect_A_Y1)
+				&& (y <= CONS.Canvas.Rect_A_Y1 + CONS.Canvas.Rect_A_H);
+		
+		
+		return res;
+		
+	}//is_In_Rect_A
+	
 
 	private static float 
 	get_Distance_2D
