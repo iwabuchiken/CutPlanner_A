@@ -164,6 +164,7 @@ public class V_OTL implements OnTouchListener {
 		
 		case MotionEvent.ACTION_DOWN://--------------------
 
+//			_onTouch__DOWN(actv, v, event, x, y);
 			// Log
 			String msg_Log = "view => " + v.getClass().getName();
 			Log.d("V_OTL.java" + "["
@@ -231,6 +232,13 @@ public class V_OTL implements OnTouchListener {
 					
 				}//switch (tag_name)
 			
+			////////////////////////////////
+
+			// onClick-related
+
+			////////////////////////////////
+				this._case_ACTION_UP(x, y);
+				
 			break;//case MotionEvent.ACTION_UP:
 			
 		case MotionEvent.ACTION_MOVE://--------------------
@@ -238,15 +246,11 @@ public class V_OTL implements OnTouchListener {
 			x = event.getX();
 			y = event.getY();
 			
-//			// Log
-//			msg_Log = String.format(
-//					Locale.JAPAN,
-//					"[MOVE] x = %f / y = %f", x, y);
-//			
-//			Log.d("V_OTL.java"
-//					+ "["
-//					+ Thread.currentThread().getStackTrace()[2]
-//							.getLineNumber() + "]", msg_Log);
+			// Log
+			msg_Log = "moving...";
+			Log.d("V_OTL.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
 
 			////////////////////////////////
 
@@ -269,14 +273,81 @@ public class V_OTL implements OnTouchListener {
 				
 				}//switch (tag_name)
 //				
+//			return true;
+			
 			break;//case MotionEvent.ACTION_MOVE:
 			
 		}//switch (event.getActionMasked())
 		
-		return true;
-//		return false;	//=> if false, MOVE_DOWN only; no further cases logged out
+//		return true;
+		return false;	//=> if false, MOVE_DOWN only; no further cases logged out
 		
 	}//public boolean onTouch(View v, MotionEvent event)
+
+	private void 
+	_case_ACTION_UP
+	(float x, float y) {
+		// TODO Auto-generated method stub
+
+		////////////////////////////////
+
+		// onClick-related
+
+		////////////////////////////////
+		CONS.Canvas.x_Up = x;
+		CONS.Canvas.y_Up = y;
+		
+		////////////////////////////////
+
+		// report
+
+		////////////////////////////////
+		// Log
+		float diff_x = CONS.Canvas.x_Down - CONS.Canvas.x_Up;
+		float diff_y = CONS.Canvas.y_Down - CONS.Canvas.y_Up;
+		
+		
+		String msg_Log = String.format(Locale.JAPAN, 
+						"diff_x = %f, diff_y = %f", 
+						diff_x, diff_y);
+		
+		Log.d("V_OTL.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+
+	}
+	
+
+	private void 
+	_onTouch__DOWN
+	(Activity actv, View v, MotionEvent event, float x, float y) {
+		// TODO Auto-generated method stub
+		
+		// Log
+		String msg_Log = "view => " + v.getClass().getName();
+		Log.d("V_OTL.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		x = event.getX();
+		y = event.getY();
+
+		////////////////////////////////
+
+		// identify
+
+		////////////////////////////////
+		int res = Methods.identify(actv, x, y);
+		
+		////////////////////////////////
+
+		// draw: box
+
+		////////////////////////////////
+		this._case_ACTION_DOWN(x, y);
+		
+	}//_onTouch__DOWN
+	
 
 	private void 
 	_case_ACTION_MOVE
@@ -461,6 +532,14 @@ public class V_OTL implements OnTouchListener {
 			break;
 		
 		}
+		
+		////////////////////////////////
+
+		// onClick-related
+
+		////////////////////////////////
+		CONS.Canvas.x_Down = x;
+		CONS.Canvas.y_Down = y;
 		
 	}//_case_ACTION_DOWN
 

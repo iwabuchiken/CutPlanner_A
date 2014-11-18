@@ -444,6 +444,13 @@ public class CONS {
 			
 		}
 		
+		// onClick-related
+		public static float x_Down;
+		public static float y_Down;
+		
+		public static float x_Up;
+		public static float y_Up;
+		
 		////////////////////////////////
 
 		// box A

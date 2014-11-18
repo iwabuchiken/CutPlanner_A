@@ -41,6 +41,7 @@ import java.nio.channels.FileChannel;
 
 import cp.listeners.button.BO_CL;
 import cp.listeners.button.BO_TL;
+import cp.listeners.view.V_OCL;
 import cp.listeners.view.V_OTL;
 import cp.utils.CONS;
 import cp.utils.Methods;
@@ -268,31 +269,12 @@ public class MainActv extends Activity {
 		
 		cv.setTag(Tags.ViewTags.CANVAS_MAIN);
 		
+		// onTouch
 		cv.setOnTouchListener(new V_OTL(this, (CV) cv));
-//		cv.setOnTouchListener(new V_OTL(this));
 
-//		cv.setDrawingCacheEnabled(true);
-
-		//REF http://www.sherif.mobi/2013/01/how-to-get-widthheight-of-view.html
-//		cv.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-//
-//			@Override
-//			public void onGlobalLayout() {
-//				// TODO Auto-generated method stub
-//				
-//				int w = cv.getWidth();
-//				int h = cv.getHeight();
-//				
-//				// Log
-//				String msg_Log = String.format(Locale.JAPAN, "w = %d, h = %d", w, h);
-//				Log.d("MainActv.java"
-//						+ "["
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getLineNumber() + "]", msg_Log);
-//			}
-//			
-//		});
-
+		// onClick
+		cv.setOnClickListener(new V_OCL(this, (CV) cv));
+		
 		////////////////////////////////
 
 		// button: go
