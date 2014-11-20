@@ -303,13 +303,15 @@ public class V_OTL implements OnTouchListener {
 
 		////////////////////////////////
 		// Log
-		float diff_x = CONS.Canvas.x_Down - CONS.Canvas.x_Up;
-		float diff_y = CONS.Canvas.y_Down - CONS.Canvas.y_Up;
+		CONS.Canvas.diff_X = CONS.Canvas.x_Down - CONS.Canvas.x_Up;
+		CONS.Canvas.diff_Y = CONS.Canvas.y_Down - CONS.Canvas.y_Up;
+//		float diff_x = CONS.Canvas.x_Down - CONS.Canvas.x_Up;
+//		float diff_y = CONS.Canvas.y_Down - CONS.Canvas.y_Up;
 		
 		
 		String msg_Log = String.format(Locale.JAPAN, 
 						"diff_x = %f, diff_y = %f", 
-						diff_x, diff_y);
+						CONS.Canvas.diff_X, CONS.Canvas.diff_Y);
 		
 		Log.d("V_OTL.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
