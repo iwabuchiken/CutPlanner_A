@@ -628,4 +628,10 @@ public class CONS {
 		
 	}
 	
+	// bluetooth-related
+	public static class BT {
+		
+		public static final int REQUEST_ENABLE_BLUETOOTH = 0;
+		
+	}
 }//public class CONS

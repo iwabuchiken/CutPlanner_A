@@ -1764,17 +1764,19 @@ public class Methods {
 	    	
 			// Log
 			msg_Log = "bluetooth => on";
-			Log.e("Methods.java" + "["
+			Log.i("Methods.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", msg_Log);
 	    	
 	    } else {
 	    	
-	    	String msg = "bluetooth => please turn on";
-			Methods_dlg.dlg_ShowMessage(actv, msg);
+//	    	String msg = "bluetooth => please turn on";
+//			Methods_dlg.dlg_ShowMessage(actv, msg);
+	    	
+	    	Intent btOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+	        actv.startActivityForResult(btOn, CONS.BT.REQUEST_ENABLE_BLUETOOTH);
 	    	
 	    }
-		
 		
 	}//setup_Bluetooth
 	

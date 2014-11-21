@@ -1,44 +1,6 @@
 package cp.main;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.os.Bundle;
-import android.os.Vibrator;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.nio.channels.FileChannel;
 
 import cp.listeners.button.BO_CL;
 import cp.listeners.button.BO_TL;
@@ -49,12 +11,22 @@ import cp.utils.Methods;
 import cp.utils.Methods_dlg;
 import cp.utils.Tags;
 import cp.views.CV;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.os.Bundle;
+import android.os.Vibrator;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
-//import app.main.R;
+public class DeviceListActv extends Activity {
 
-
-public class MainActv extends Activity {
-	
 	public static Vibrator vib;
 
 	
@@ -212,13 +184,6 @@ public class MainActv extends Activity {
 		
 		////////////////////////////////
 
-		// setup: layer
-
-		////////////////////////////////
-		_Setup__Layer();
-		
-		////////////////////////////////
-
 		// listener
 
 		////////////////////////////////
@@ -273,208 +238,19 @@ public class MainActv extends Activity {
 	_Bluetooth() {
 		// TODO Auto-generated method stub
 		
-		Methods.setup_Bluetooth(this);
-		
-	}
-
-	private void 
-	_Setup__Layer() {
-		
-		if (CONS.Canvas.list_Layer == null) {
-			
-			CONS.Canvas.list_Layer = new ArrayList<CONS.Canvas.Layer>();
-			
-//			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Cir_A);
-			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Rect_A);
-			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Rect_B);
-			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Rect_C);
-			
-		}
-		
-//		CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Cir_A);
-//		CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Rect_A);
-		
-		// Log
-		String msg_Log = "layer setup => done";
-		Log.d("MainActv.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", msg_Log);
-		
 	}
 
 	private void 
 	_Setup__SetListener() {
 		// TODO Auto-generated method stub
 		
-		////////////////////////////////
-
-		// listener
-
-		////////////////////////////////
-		final View cv = (View) findViewById(R.id.actv_main_cv_canvas);
-		
-		cv.setTag(Tags.ViewTags.CANVAS_MAIN);
-		
-		// onTouch
-		cv.setOnTouchListener(new V_OTL(this, (CV) cv));
-
-		// onClick
-		cv.setOnClickListener(new V_OCL(this, (CV) cv));
-		
-		////////////////////////////////
-
-		// button: go
-
-		////////////////////////////////
-		Button bt_Go = (Button) findViewById(R.id.actv_main_cv_bt_go);
-		
-		bt_Go.setTag(Tags.ButtonTags.ACTV_MAIN_BT_GO);
-		
-		bt_Go.setOnTouchListener(new BO_TL(this));
-		bt_Go.setOnClickListener(new BO_CL(this));
-		
-		////////////////////////////////
-		
-		// button: clear
-		
-		////////////////////////////////
-		Button bt_Clear = (Button) findViewById(R.id.actv_main_cv_bt_clear);
-		
-		bt_Clear.setTag(Tags.ButtonTags.ACTV_MAIN_BT_CLEAR);
-		
-		bt_Clear.setOnTouchListener(new BO_TL(this));
-		bt_Clear.setOnClickListener(new BO_CL(this));
-		
 	}//_Setup__SetListener
-
-	private void 
-	_test_DrawLine() {
-		// TODO Auto-generated method stub
-		
-		////////////////////////////////
-
-		// paint
-
-		////////////////////////////////
-		Paint paint = new Paint();
-		paint.setColor(Color.BLUE);
-//		paint.setColor(0xFF4444FF);
-//		paint.setStyle(Paint.Style.FILL);
-		paint.setStrokeWidth(30);
-		
-		////////////////////////////////
-
-		// get: view
-
-		////////////////////////////////
-		cp.views.CV cv = (cp.views.CV) findViewById(R.id.actv_main_cv_canvas);
-//		
-//		cv.drawLine(10, 10, 100, 100, paint);
-//		
-		// box: A
-		CONS.Canvas.DrawA = true;
-		
-		cv.draw_Boxes_A(this);
-		
-//		CONS.Canvas.DrawA = false;
-		
-		// box: B
-		CONS.Canvas.DrawB = true;
-		cv.draw_Boxes_B(this);
-		
-	}
 
 	private void 
 	_Setup() {
 		// TODO Auto-generated method stub
 		
-		////////////////////////////////
-		
-		// paint
-		
-		////////////////////////////////
-		Paint paint = new Paint();
-		paint.setColor(Color.BLUE);
-//		paint.setColor(0xFF4444FF);
-//		paint.setStyle(Paint.Style.FILL);
-		paint.setStrokeWidth(30);
-		
-		////////////////////////////////
-		
-		// get: view
-		
-		////////////////////////////////
-		cp.views.CV cv = (cp.views.CV) findViewById(R.id.actv_main_cv_canvas);
-//		
-//		////////////////////////////////
-//
-//		// circle: A
-//
-//		////////////////////////////////
-//		CONS.Canvas.Draw_Circle_A = true;
-//		
-//		CONS.Canvas.Cir_A_X = 200;
-//		CONS.Canvas.Cir_A_Y = 400;
-//		
-//		CONS.Canvas.Cir_A_X_prev = 200;
-//		CONS.Canvas.Cir_A_Y_prev = 400;
-//		
-//		CONS.Canvas.Cir_A_Radius	= CONS.Canvas.Cir_A_Radius_dflt;
-//		
-//		cv.draw_Circle_A(
-//					this, 
-//					(int)CONS.Canvas.Cir_A_X, 
-//					(int)CONS.Canvas.Cir_A_Y);
-
-		////////////////////////////////
-
-		// rect: A
-
-		////////////////////////////////
-//		CONS.Canvas.Draw_Rect_A = true;
-		
-		CONS.Canvas.Rect_A_X1 = 200;
-		CONS.Canvas.Rect_A_Y1 = 400;
-		
-		CONS.Canvas.Rect_A_W = 200;
-		CONS.Canvas.Rect_A_H = 150;
-		
-		cv.draw_Rect_A(this);
-		
-		////////////////////////////////
-		
-		// rect: B
-		
-		////////////////////////////////
-//		CONS.Canvas.Draw_Rect_A = true;
-		
-		CONS.Canvas.Rect_B_W = 200;
-		CONS.Canvas.Rect_B_H = 150;
-		
-		CONS.Canvas.Rect_B_X1 = 200;
-		CONS.Canvas.Rect_B_Y1 = CONS.Canvas.Rect_A_Y1 - CONS.Canvas.Rect_B_H;
-//		CONS.Canvas.Rect_B_Y1 = 200;
-		
-		cv.draw_Rect_B(this);
-		
-		////////////////////////////////
-		
-		// rect: C
-		
-		////////////////////////////////
-//		CONS.Canvas.Draw_Rect_A = true;
-		
-		CONS.Canvas.Rect_C_W = 200;
-		CONS.Canvas.Rect_C_H = 150;
-		
-		CONS.Canvas.Rect_C_X1 = 200;
-		CONS.Canvas.Rect_C_Y1 = CONS.Canvas.Rect_B_Y1 - CONS.Canvas.Rect_B_H;
-//		CONS.Canvas.Rect_B_Y1 = 200;
-		
-		cv.draw_Rect_C(this);
-		
 	}//_Setup
 	
-	
 
-}//public class MainActv extends Activity
+}
