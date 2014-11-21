@@ -95,19 +95,49 @@ public class DeviceListActv extends Activity {
 	}//protected void onDestroy()
 
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	public void onBackPressed() {
+		/****************************
+		 * memo
+			****************************/
+//		Methods.stop_Player(this);
+
+		////////////////////////////////
+
+		// disable bt
+
+		////////////////////////////////
+		if (this.mBtAdapter.isEnabled()) {
+			
+			this.mBtAdapter.disable();
+			
+			// Log
+			String msg_Log = "BT adapter => disabled";
+			Log.d("DeviceListActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		}
 		
-		// Log
-		String msg_Log = "onKeyDown()";
-		Log.d("MainActv.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", msg_Log);
+		this.finish();
 		
+		overridePendingTransition(0, 0);
 		
-		Methods.confirm_quit(this, keyCode);
-		
-		return super.onKeyDown(keyCode, event);
-	}
+	}//public void onBackPressed()
+
+//	@Override
+//	public boolean onKeyDown(int keyCode, KeyEvent event) {
+//		
+//		// Log
+//		String msg_Log = "onKeyDown()";
+//		Log.d("MainActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
+//		
+//		
+//		Methods.confirm_quit(this, keyCode);
+//		
+//		return super.onKeyDown(keyCode, event);
+//	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
