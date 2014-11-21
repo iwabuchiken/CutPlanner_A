@@ -13,6 +13,7 @@ import java.util.Locale;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,6 +40,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
+
+
 
 import cp.listeners.button.BO_CL;
 import cp.listeners.button.BO_TL;
@@ -204,6 +207,9 @@ public class MainActv extends Activity {
 	@Override
 	protected void onStart() {
 		
+		boolean res;
+		String msg_Log;
+		
 		super.onStart();
 		
 //		_test_DrawLine();
@@ -230,7 +236,27 @@ public class MainActv extends Activity {
 		// LAB-1: bluetooth
 
 		////////////////////////////////
-		_Bluetooth();
+		res = _Bluetooth();
+		
+		if (res == true) {
+			
+			// Log
+			msg_Log = "setup: bluetooth => done";
+			Log.d("MainActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		} else {
+
+			// Log
+			msg_Log = "setup: bluetooth => not done";
+			Log.d("MainActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			return;
+
+		}
 		
 	}//protected void onStart()
 
@@ -256,7 +282,16 @@ public class MainActv extends Activity {
                 //BluetoothがONにされた場合の処理
             	
             	msg = "Bluetooth => turned on";
-				Methods_dlg.dlg_ShowMessage(this, msg);
+//				Methods_dlg.dlg_ShowMessage(this, msg);
+            	
+            	// Log
+				Log.d("MainActv.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg);
+            	
+            	Intent intent = new Intent(getApplicationContext(), DeviceListActv.class);
+        		startActivity(intent);
 				
             }else{
 
@@ -269,12 +304,29 @@ public class MainActv extends Activity {
 		
 	}//onActivityResult
 	
-	private void 
+	private boolean 
 	_Bluetooth() {
 		// TODO Auto-generated method stub
 		
 		Methods.setup_Bluetooth(this);
 		
+		////////////////////////////////
+
+		// adapter
+
+		////////////////////////////////
+        BluetoothAdapter Bt = BluetoothAdapter.getDefaultAdapter();
+        
+        if(Bt.equals(null)){
+        	
+        	return false;
+        	
+        }
+
+        CONS.BT.mBtAdapter = Bt;
+
+        return true;
+        
 	}
 
 	private void 

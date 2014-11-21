@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
@@ -632,6 +633,12 @@ public class CONS {
 	public static class BT {
 		
 		public static final int REQUEST_ENABLE_BLUETOOTH = 0;
+		
+		public static ArrayAdapter<String> pairedDeviceAdapter;
+		
+		public static BluetoothAdapter mBtAdapter;
+
+//		public static BluetoothAdapter mBtAdapter = CONS.BT.mBtAdapter;
 		
 	}
 }//public class CONS

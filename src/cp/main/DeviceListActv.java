@@ -1,17 +1,21 @@
 package cp.main;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import cp.listeners.button.BO_CL;
 import cp.listeners.button.BO_TL;
 import cp.listeners.view.V_OCL;
 import cp.listeners.view.V_OTL;
+import cp.utils.BluetoothClientThread;
 import cp.utils.CONS;
 import cp.utils.Methods;
 import cp.utils.Methods_dlg;
 import cp.utils.Tags;
 import cp.views.CV;
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,12 +27,21 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 public class DeviceListActv extends Activity {
 
 	public static Vibrator vib;
 
+	private BluetoothAdapter mBtAdapter = CONS.BT.mBtAdapter;
+	private ArrayList<BluetoothDevice> foundDeviceList = new ArrayList<BluetoothDevice>();
+	static int offSet = 0;
+	public static BluetoothClientThread BtClientThread;
+	public String myNumber;
+	public Context mContext;
 	
     /** Called when the activity is first created. */
     @Override
@@ -49,14 +62,16 @@ public class DeviceListActv extends Activity {
 			----------------------------*/
 		
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.actv_main_cv);
+        setContentView(R.layout.devicelist);
 //        setContentView(R.layout.actv_main);
         
         /*----------------------------
 		 * 2-2. Set title
 			----------------------------*/
 		this.setTitle(this.getClass().getName());
-        
+    
+		mContext = this;
+		
         vib = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
 
         
@@ -238,6 +253,56 @@ public class DeviceListActv extends Activity {
 	_Bluetooth() {
 		// TODO Auto-generated method stub
 		
+		String msg_Log;
+		
+		CONS.BT.pairedDeviceAdapter = new ArrayAdapter<String>(this, R.layout.rowdata);
+		
+		Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
+		
+        if(pairedDevices.size() > 0){
+
+        	// Log
+			msg_Log = "pairedDevices.size() > 0";
+			Log.i("DeviceListActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+
+        	for(BluetoothDevice device:pairedDevices){
+        		//�ڑ������̂���f�o�C�X�̏������Ɏ擾���ăA�_�v�^�ɋl�߂�
+        		//getName()�E�E�E�f�o�C�X���擾���\�b�h
+        		//getAddress()�E�E�E�f�o�C�X��MAC�A�h���X�擾���\�b�h
+        		
+        		CONS.BT.pairedDeviceAdapter.add(device.getName() + "\n" + device.getAddress());
+        		
+        		foundDeviceList.add(device);
+        		
+        		offSet++;
+        		
+        	}
+        	ListView deviceList = (ListView)findViewById(R.id.pairedDeviceList);
+        	deviceList.setAdapter(CONS.BT.pairedDeviceAdapter);
+        	deviceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        		//�f�o�C�X���X�g�I�����̏���
+				@Override
+				public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+					// TODO Auto-generated method stub
+					ListView listView = (ListView) parent;
+					BluetoothDevice device = foundDeviceList.get(position);
+					BtClientThread = new BluetoothClientThread(mContext, myNumber, device, mBtAdapter);
+					BtClientThread.start();
+				}
+        	});
+        	
+        } else {
+        	
+        	// Log
+			msg_Log = "pairedDevices.size() <= 0";
+			Log.i("DeviceListActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+        }
+
 	}
 
 	private void 
