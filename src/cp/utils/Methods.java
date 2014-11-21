@@ -35,6 +35,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.bluetooth.BluetoothAdapter;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -1717,6 +1718,65 @@ public class Methods {
 		});
 		
 	}
+
+
+	public static void 
+	setup_Bluetooth
+	(Activity actv) {
+		// TODO Auto-generated method stub
+		
+		String msg_Log;
+		
+		////////////////////////////////
+
+		// validate: bluetooth
+
+		////////////////////////////////
+		BluetoothAdapter Bt = BluetoothAdapter.getDefaultAdapter();
+
+		if(!Bt.equals(null)){
+		    //Bluetooth対応端末の場合の処理
+			// Log
+			msg_Log = "bluetooth => available";
+			Log.i("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+		    
+		}else{
+		    //Bluetooth非対応端末の場合の処理
+			
+			// Log
+			msg_Log = "bluetooth => not available";
+			Log.e("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		}
+		
+		////////////////////////////////
+
+		// validate: bt => on
+
+		////////////////////////////////
+		boolean btEnable = Bt.isEnabled();
+		
+	    if(btEnable == true) {
+	    	
+			// Log
+			msg_Log = "bluetooth => on";
+			Log.e("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+	    	
+	    } else {
+	    	
+	    	String msg = "bluetooth => please turn on";
+			Methods_dlg.dlg_ShowMessage(actv, msg);
+	    	
+	    }
+		
+		
+	}//setup_Bluetooth
 	
 }//public class Methods
 

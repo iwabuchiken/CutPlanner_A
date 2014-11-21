@@ -222,15 +222,23 @@ public class MainActv extends Activity {
 		////////////////////////////////
 		
 		_Setup__SetListener();
-		
-//		View cv = (View) findViewById(R.id.actv_main_cv_canvas);
-//		
-//		cv.setTag(Tags.ViewTags.CANVAS_MAIN);
-//		
-//		cv.setOnTouchListener(new V_OTL(this, (CV) cv));
-////		cv.setOnTouchListener(new V_OTL(this));
+
+		////////////////////////////////
+
+		// LAB-1: bluetooth
+
+		////////////////////////////////
+		_Bluetooth();
 		
 	}//protected void onStart()
+
+	private void 
+	_Bluetooth() {
+		// TODO Auto-generated method stub
+		
+		Methods.setup_Bluetooth(this);
+		
+	}
 
 	private void 
 	_Setup__Layer() {

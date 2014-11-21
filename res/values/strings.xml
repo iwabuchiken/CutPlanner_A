@@ -21,5 +21,10 @@
     	<string name="generic_Clear">Clear</string>
     	<string name="generic_Go">Go</string>
     
-    
+    <!-- labels for templates -->
+	    <string name="dlg_tmpl_confirm_simple_msg_delete_file">
+       									Delete file, too</string>
+       									
+    	<string name="commons_lbl_word">Word</string>
+    	
 </resources>
