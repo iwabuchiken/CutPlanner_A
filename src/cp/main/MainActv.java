@@ -239,9 +239,10 @@ public class MainActv extends Activity {
 			
 			CONS.Canvas.list_Layer = new ArrayList<CONS.Canvas.Layer>();
 			
-			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Cir_A);
+//			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Cir_A);
 			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Rect_A);
 			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Rect_B);
+			CONS.Canvas.list_Layer.add(CONS.Canvas.Layer.Rect_C);
 			
 		}
 		
@@ -360,38 +361,25 @@ public class MainActv extends Activity {
 		////////////////////////////////
 		cp.views.CV cv = (cp.views.CV) findViewById(R.id.actv_main_cv_canvas);
 //		
-//		cv.drawLine(10, 10, 100, 100, paint);
+//		////////////////////////////////
+//
+//		// circle: A
+//
+//		////////////////////////////////
+//		CONS.Canvas.Draw_Circle_A = true;
 //		
-//		// box: A
-//		CONS.Canvas.DrawA = true;
+//		CONS.Canvas.Cir_A_X = 200;
+//		CONS.Canvas.Cir_A_Y = 400;
 //		
-//		cv.draw_Boxes_A(this);
+//		CONS.Canvas.Cir_A_X_prev = 200;
+//		CONS.Canvas.Cir_A_Y_prev = 400;
 //		
-////		CONS.Canvas.DrawA = false;
+//		CONS.Canvas.Cir_A_Radius	= CONS.Canvas.Cir_A_Radius_dflt;
 //		
-//		// box: B
-//		CONS.Canvas.DrawB = true;
-//		cv.draw_Boxes_B(this);
-		
-		////////////////////////////////
-
-		// circle: A
-
-		////////////////////////////////
-		CONS.Canvas.Draw_Circle_A = true;
-		
-		CONS.Canvas.Cir_A_X = 200;
-		CONS.Canvas.Cir_A_Y = 400;
-		
-		CONS.Canvas.Cir_A_X_prev = 200;
-		CONS.Canvas.Cir_A_Y_prev = 400;
-		
-		CONS.Canvas.Cir_A_Radius	= CONS.Canvas.Cir_A_Radius_dflt;
-		
-		cv.draw_Circle_A(
-					this, 
-					(int)CONS.Canvas.Cir_A_X, 
-					(int)CONS.Canvas.Cir_A_Y);
+//		cv.draw_Circle_A(
+//					this, 
+//					(int)CONS.Canvas.Cir_A_X, 
+//					(int)CONS.Canvas.Cir_A_Y);
 
 		////////////////////////////////
 
@@ -423,6 +411,22 @@ public class MainActv extends Activity {
 //		CONS.Canvas.Rect_B_Y1 = 200;
 		
 		cv.draw_Rect_B(this);
+		
+		////////////////////////////////
+		
+		// rect: C
+		
+		////////////////////////////////
+//		CONS.Canvas.Draw_Rect_A = true;
+		
+		CONS.Canvas.Rect_C_W = 200;
+		CONS.Canvas.Rect_C_H = 150;
+		
+		CONS.Canvas.Rect_C_X1 = 200;
+		CONS.Canvas.Rect_C_Y1 = CONS.Canvas.Rect_B_Y1 - CONS.Canvas.Rect_B_H;
+//		CONS.Canvas.Rect_B_Y1 = 200;
+		
+		cv.draw_Rect_C(this);
 		
 	}//_Setup
 	

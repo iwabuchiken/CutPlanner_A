@@ -109,6 +109,12 @@ public class V_OCL implements OnClickListener {
 			
 			break;
 			
+		case Rect_C:
+			
+			_case_Rect_C(v);
+			
+			break;
+			
 		default:
 			
 			break;
@@ -147,6 +153,27 @@ public class V_OCL implements OnClickListener {
 		CONS.Canvas.Rect_B_H = CONS.Canvas.Rect_B_W;
 		
 		CONS.Canvas.Rect_B_W = tmp;
+		
+		((CV)v).invalidate();
+		
+		// Log
+		String msg_Log = "CV => invalidated";
+		Log.d("V_OCL.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		
+	}
+	
+	private void 
+	_case_Rect_C(View v) {
+		// TODO Auto-generated method stub
+		
+		float tmp = CONS.Canvas.Rect_C_H;
+		
+		CONS.Canvas.Rect_C_H = CONS.Canvas.Rect_C_W;
+		
+		CONS.Canvas.Rect_C_W = tmp;
 		
 		((CV)v).invalidate();
 		

@@ -375,11 +375,17 @@ public class V_OTL implements OnTouchListener {
 			
 			break;
 			
-		case Cir_A:
+		case Rect_C:
 			
-			_case_ACTION_MOVE__Cir_A(x, y);
+			_case_ACTION_MOVE__Rect_C(x, y);
 			
 			break;
+			
+//		case Cir_A:
+//			
+//			_case_ACTION_MOVE__Cir_A(x, y);
+//			
+//			break;
 			
 		default:
 			
@@ -484,6 +490,18 @@ public class V_OTL implements OnTouchListener {
 		
 	}//_case_ACTION_MOVE__Cir_B
 	
+	private void 
+	_case_ACTION_MOVE__Rect_C
+	(float x, float y) {
+		// TODO Auto-generated method stub
+		
+		CONS.Canvas.Rect_C_X1 = x - CONS.Canvas.Rect_C_X_dist_from_base;
+		CONS.Canvas.Rect_C_Y1 = y - CONS.Canvas.Rect_C_Y_dist_from_base;
+		
+		this.cv.draw_Rect_C(actv);
+		
+	}//_case_ACTION_MOVE__Cir_C
+	
 
 	private void 
 	_case_ACTION_DOWN
@@ -503,15 +521,19 @@ public class V_OTL implements OnTouchListener {
 			
 			break;
 			
-		case Cir_A:
-			
-			this._case_ACTION_DOWN__CirA(x, y);
-			
-			break;
+//		case Cir_A:
+//			
+//			this._case_ACTION_DOWN__CirA(x, y);
+//			
+//			break;
 			
 		case Rect_B:
 			
-			this._case_BCTION_DOWN__Rect_B(x, y);
+			this._case_ACTION_DOWN__Rect_B(x, y);
+			
+		case Rect_C:
+			
+			this._case_ACTION_DOWN__Rect_C(x, y);
 			
 //			// Log
 //			String msg_Log = "case => Rect_B";
@@ -626,7 +648,7 @@ public class V_OTL implements OnTouchListener {
 	}//_case_ACTION_DOWN__CirA
 	
 	private void 
-	_case_BCTION_DOWN__Rect_B
+	_case_ACTION_DOWN__Rect_B
 	(float x, float y) {
 		// TODO Auto-generated method stub
 		
@@ -650,5 +672,31 @@ public class V_OTL implements OnTouchListener {
 				y - CONS.Canvas.Rect_B_Y1;
 		
 	}//_case_ACTION_DOWN__CirA
+	
+	private void 
+	_case_ACTION_DOWN__Rect_C
+	(float x, float y) {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+		
+		// record: positon
+		
+		////////////////////////////////
+		CONS.Canvas.Rect_C_X1_prev = x;
+		CONS.Canvas.Rect_C_Y1_prev = y;
+		
+		////////////////////////////////
+		
+		// get: dist from base
+		
+		////////////////////////////////
+		CONS.Canvas.Rect_C_X_dist_from_base = 
+				x - CONS.Canvas.Rect_C_X1;
+		
+		CONS.Canvas.Rect_C_Y_dist_from_base = 
+				y - CONS.Canvas.Rect_C_Y1;
+		
+	}//_case_BCTION_DOWN__Rect_C
 	
 }//public class DB_OTL implements OnTouchListener

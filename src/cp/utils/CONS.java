@@ -428,7 +428,7 @@ public class CONS {
 		
 		public static enum ChosenObj {
 			
-			Rect_A, Rect_B, Cir_A,
+			Rect_A, Rect_B, Cir_A, Rect_C,
 			
 			Others,
 			
@@ -440,7 +440,7 @@ public class CONS {
 		
 		public static enum Layer {
 			
-			Cir_A, Rect_A, Rect_B,
+			Cir_A, Rect_A, Rect_B, Rect_C
 			
 		}
 		
@@ -569,6 +569,35 @@ public class CONS {
 		
 		// flag
 		public static boolean Draw_Rect_B		= false;
+		
+		////////////////////////////////
+		
+		// rect: C
+		
+		////////////////////////////////
+		public static float Rect_C_X1;
+		public static float Rect_C_Y1;
+		
+		public static float Rect_C_X2;
+		public static float Rect_C_Y2;
+		
+		public static float Rect_C_W;
+		public static float Rect_C_H;
+		
+		public static int LineWidth_Rect_C	= lineWidth;
+		
+		public static float Rect_C_X1_prev;
+		public static float Rect_C_Y1_prev;
+		
+		// distance to the base point
+		public static float Rect_C_X_dist_from_base;
+		public static float Rect_C_Y_dist_from_base;
+		
+		// paint
+		public static Paint p_Rect_C;
+		
+		// flag
+		public static boolean Draw_Rect_C		= false;
 		
 		////////////////////////////////
 

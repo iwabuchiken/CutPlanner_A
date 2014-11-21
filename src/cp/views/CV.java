@@ -123,11 +123,11 @@ public class CV extends View {
 			
 			switch(tmp_Layer) {
 			
-			case Cir_A:
-				
-				_onDraw__CirA(canvas);
-				
-				break;
+//			case Cir_A:
+//				
+//				_onDraw__CirA(canvas);
+//				
+//				break;
 			
 			case Rect_A:
 				
@@ -138,6 +138,12 @@ public class CV extends View {
 			case Rect_B:
 				
 				_onDraw__RectB(canvas);
+				
+				break;
+				
+			case Rect_C:
+				
+				_onDraw__RectC(canvas);
 				
 				break;
 				
@@ -215,6 +221,29 @@ public class CV extends View {
 					CONS.Canvas.Rect_B_X1 + CONS.Canvas.Rect_B_W, 
 					CONS.Canvas.Rect_B_Y1 + CONS.Canvas.Rect_B_H,
 					CONS.Canvas.p_Rect_B
+					);
+			
+		}
+		
+	}
+	
+	private void 
+	_onDraw__RectC(Canvas canvas) {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+		
+		// draw: Rect: C
+		
+		////////////////////////////////
+		if (CONS.Canvas.Draw_Rect_C == true) {
+			
+			canvas.drawRect(
+					CONS.Canvas.Rect_C_X1, 
+					CONS.Canvas.Rect_C_Y1, 
+					CONS.Canvas.Rect_C_X1 + CONS.Canvas.Rect_C_W, 
+					CONS.Canvas.Rect_C_Y1 + CONS.Canvas.Rect_C_H,
+					CONS.Canvas.p_Rect_C
 					);
 			
 		}
@@ -587,6 +616,45 @@ public class CV extends View {
 		this.invalidate();
 		
 	}//draw_Rect_B
+	
+	public void
+	draw_Rect_C
+	(Activity actv) {
+		////////////////////////////////
+		
+		// set: paint
+		
+		////////////////////////////////
+		CONS.Canvas.p_Rect_C = new Paint();
+		
+		CONS.Canvas.p_Rect_C.setColor(Color.YELLOW);
+		CONS.Canvas.p_Rect_C.setStrokeWidth(CONS.Canvas.LineWidth_Rect_C);
+		
+		////////////////////////////////
+		
+		// set: values: C
+		
+		////////////////////////////////
+//		CONS.Canvas.Cir_A_X	= x;
+//		CONS.Canvas.Cir_A_Y	= y;
+		
+//		CONS.Canvas.Cir_A_Radius	= CONS.Canvas.Cir_A_Radius_dflt;
+		
+		////////////////////////////////
+		
+		// flag
+		
+		////////////////////////////////
+		CONS.Canvas.Draw_Rect_C = true;
+		
+		////////////////////////////////
+		
+		// draw
+		
+		////////////////////////////////
+		this.invalidate();
+		
+	}//draw_Rect_C
 	
 	
 	public void

@@ -968,19 +968,33 @@ public class Methods {
 				
 				break;
 				
-			case Cir_A:
+			case Rect_C:
 				
-				if(dist_Cir_A < CONS.Canvas.Cir_A_Radius) {
+				if(is_In_Rect_C(actv, x, y)) {
 					
-					Methods._identify__Cir_A(actv);
+					_identify__Rect_C(actv);
 					
 					identified = true;
 					
-					return 2;
+					return 1;
 					
 				}
 				
 				break;
+				
+//			case Cir_A:
+//				
+//				if(dist_Cir_A < CONS.Canvas.Cir_A_Radius) {
+//					
+//					Methods._identify__Cir_A(actv);
+//					
+//					identified = true;
+//					
+//					return 2;
+//					
+//				}
+//				
+//				break;
 				
 //			default:
 //				
@@ -1082,6 +1096,21 @@ public class Methods {
 		
 	}//is_In_Rect_B
 
+	private static boolean 
+	is_In_Rect_C
+	(Activity actv, float x, float y) {
+		// TODO Auto-generated method stub
+		
+		boolean res = (x >= CONS.Canvas.Rect_C_X1
+				&& x <= CONS.Canvas.Rect_C_X1 + CONS.Canvas.Rect_C_W
+				&& y >= CONS.Canvas.Rect_C_Y1
+				&& y <= CONS.Canvas.Rect_C_Y1 + CONS.Canvas.Rect_C_H);
+		
+		
+		return res;
+		
+	}//is_In_Rect_C
+	
 	private static boolean 
 	is_In_Rect_A
 	(Activity actv, float x, float y) {
@@ -1331,6 +1360,47 @@ public class Methods {
 		CONS.Canvas.list_Layer.remove(CONS.Canvas.Layer.Rect_B);
 		
 		CONS.Canvas.list_Layer.add(0, CONS.Canvas.Layer.Rect_B);
+		
+		// Log
+		for (int i = 0; i < CONS.Canvas.list_Layer.size(); i++) {
+			
+			msg_Log = String.format(
+					Locale.JAPAN,
+					"layer %d => %s", 
+					i,
+					CONS.Canvas.list_Layer.get(i).toString()
+					);
+			
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		}
+		
+	}//_identify__Rect_A
+	
+	private static void
+	_identify__Rect_C
+	(Activity actv) {
+		// TODO Auto-generated method stub
+		
+		String msg_Log;
+		
+		////////////////////////////////
+		
+		// set: enum
+		
+		////////////////////////////////
+		CONS.Canvas.currentObj = CONS.Canvas.ChosenObj.Rect_C;
+		
+		////////////////////////////////
+		
+		// update: layer
+		
+		////////////////////////////////
+		CONS.Canvas.list_Layer.remove(CONS.Canvas.Layer.Rect_C);
+		
+		CONS.Canvas.list_Layer.add(0, CONS.Canvas.Layer.Rect_C);
 		
 		// Log
 		for (int i = 0; i < CONS.Canvas.list_Layer.size(); i++) {
