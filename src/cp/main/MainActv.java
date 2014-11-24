@@ -108,6 +108,23 @@ public class MainActv extends Activity {
 		
 		super.onDestroy();
 		
+		////////////////////////////////
+
+		// bt
+
+		////////////////////////////////
+		if (CONS.BT.mBtAdapter != null && CONS.BT.mBtAdapter.isEnabled()) {
+			
+			CONS.BT.mBtAdapter.disable();
+			
+			// Log
+			String msg_Log = "CONS.BT.mBtAdapter => disabled";
+			Log.d("MainActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		}
+		
 	}//protected void onDestroy()
 
 	@Override

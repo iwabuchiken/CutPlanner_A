@@ -3,6 +3,9 @@ package cp.main;
 import java.util.ArrayList;
 import java.util.Set;
 
+
+
+
 import cp.listeners.button.BO_CL;
 import cp.listeners.button.BO_TL;
 import cp.listeners.view.V_OCL;
@@ -16,8 +19,10 @@ import cp.views.CV;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -31,6 +36,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class DeviceListActv extends Activity {
 
@@ -42,10 +48,12 @@ public class DeviceListActv extends Activity {
 	public static BluetoothClientThread BtClientThread;
 	public String myNumber;
 	public Context mContext;
+
+	private final int REQUEST_CODE_DISCOEVERABLE = 1;
 	
     /** Called when the activity is first created. */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+     public void onCreate(Bundle savedInstanceState) {
     	/*----------------------------
 		 * 1. super
 		 * 2. Set content
@@ -86,11 +94,39 @@ public class DeviceListActv extends Activity {
 		 * 4. Clear => list_root_dir
 			----------------------------*/
 		// Log
-		Log.d("MainActv.java" + "["
+		Log.d("DeviceListActv.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "onDestroy()");
 		
 		super.onDestroy();
+		
+		////////////////////////////////
+
+		// unregister
+
+		////////////////////////////////
+		this.unregisterReceiver(this.DevieFoundReceiver);
+		
+		// Log
+		String msg_Log = "receiver => unregistered";
+		Log.d("DeviceListActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+		////////////////////////////////
+
+		// ACTION_REQUEST_DISCOVERABLE
+
+		////////////////////////////////
+//		this.finishActivity(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+		
+		this.finishActivity(this.REQUEST_CODE_DISCOEVERABLE);
+		
+		// Log
+		msg_Log = "discoverable => finished";
+		Log.d("DeviceListActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
 		
 	}//protected void onDestroy()
 
@@ -129,7 +165,7 @@ public class DeviceListActv extends Activity {
 //		
 //		// Log
 //		String msg_Log = "onKeyDown()";
-//		Log.d("MainActv.java" + "["
+//		Log.d("DeviceListActv.java" + "["
 //				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 //				+ "]", msg_Log);
 //		
@@ -140,41 +176,188 @@ public class DeviceListActv extends Activity {
 //	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean 
+	onCreateOptionsMenu
+	(Menu menu) {
 		// 
 //		MenuInflater mi = getMenuInflater();
 //		mi.inflate(R.menu.menu_main, menu);
-//		
-		return super.onCreateOptionsMenu(menu);
+
+		super.onCreateOptionsMenu(menu);
+		
+		menu.add(0, Menu.FIRST, Menu.NONE, "Detect new device");
+		return true;
+		
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
+//		switch (item.getItemId()) {
 
+        Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+        
+//        startActivity(discoverableIntent);
+        this.startActivityForResult(discoverableIntent, this.REQUEST_CODE_DISCOEVERABLE);
+        
+        // Log
+		String msg_Log = "ACTION_REQUEST_DISCOVERABLE => started";
+		Log.d("DeviceListActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+
+    	TextView nonPairedListTitle = (TextView)findViewById(R.id.nonPairedListTitle);
+    	nonPairedListTitle.setText("list of devices with no history");
+
+    	if(item.getItemId() == Menu.FIRST){
+    		//�C���e���g�t�B���^�[��BroadcastReceiver�̓o�^
+	        IntentFilter filter = new IntentFilter();
+	        filter.addAction(CONS.BT.ACTION_DISCOVERY_STARTED);
+	        filter.addAction(CONS.BT.ACTION_FOUND);
+	        filter.addAction(CONS.BT.ACTION_NAME_CHANGED);
+	        filter.addAction(CONS.BT.ACTION_DISCOVERY_FINISHED);
+	        registerReceiver(DevieFoundReceiver, filter);
+	        
+    		CONS.BT.nonPairedDeviceAdapter = new ArrayAdapter<String>(this, R.layout.rowdata);
+	        //�ڑ��\�ȃf�o�C�X�����o
+	        if(mBtAdapter.isDiscovering()){
+	        	//�������̏ꍇ�͌��o���L�����Z������
+	        	mBtAdapter.cancelDiscovery();
+	        }
+	        //�f�o�C�X����������
+	        //��莞�Ԃ̊Ԍ��o���s��
+	        mBtAdapter.startDiscovery();
+    	}
+
+		
 //		case R.id.opt_menu_main_db://----------------------------------
 //			
 //			Methods_dlg.dlg_Db_Activity(this);
 //			
 //			break;// case R.id.main_opt_menu_create_folder
 			
-		}//switch (item.getItemId())
+//		}//switch (item.getItemId())
 		
-		return super.onOptionsItemSelected(item);
+//		return super.onOptionsItemSelected(item);
+		
+		return false;
 		
 	}//public boolean onOptionsItemSelected(MenuItem item)
+
+    private final BroadcastReceiver DevieFoundReceiver = new BroadcastReceiver(){
+    	//���o���ꂽ�f�o�C�X����̃u���[�h�L���X�g���󂯂�
+    	@Override
+    	public void onReceive(Context context, Intent intent){
+    		String action = intent.getAction();
+    		String dName = null;
+    		BluetoothDevice foundDevice;
+
+    		ListView nonpairedList = (ListView)findViewById(R.id.nonPairedDeviceList);
+    		
+    		nonpairedList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        		//�f�o�C�X���X�g�I�����̏���
+    			@Override
+    			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+    				// TODO Auto-generated method stub
+    				ListView listView = (ListView) parent;
+    				
+    				BluetoothDevice device = CONS.BT.foundDeviceList.get(offSet + position);
+//    				BluetoothDevice device = foundDeviceList.get(offSet + position);
+    				
+    				BtClientThread = new BluetoothClientThread(mContext, myNumber, device, mBtAdapter);
+    				BtClientThread.start();
+    			}
+        	});
+    		
+    		if(CONS.BT.ACTION_DISCOVERY_STARTED.equals(action)){
+    			
+    			////////////////////////////////
+
+				// listview => reset
+
+				////////////////////////////////
+    			nonpairedList.setAdapter(CONS.BT.nonPairedDeviceAdapter);
+    			
+    			// Log
+				String msg_Log = "ACTION_DISCOVERY_STARTED";
+				Log.d("DeviceListActv.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg_Log);
+    			
+    		}
+    		
+    		if(CONS.BT.ACTION_FOUND.equals(action)){
+    			//�f�o�C�X�����o���ꂽ
+    			foundDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+    			if((dName = foundDevice.getName()) != null){
+		    		if(foundDevice.getBondState() != BluetoothDevice.BOND_BONDED){
+		    			//�ڑ��������Ƃ̂Ȃ��f�o�C�X�̂݃A�_�v�^�ɋl�߂�
+		    			CONS.BT.nonPairedDeviceAdapter.add(dName + "\n" + foundDevice.getAddress());  
+//	        			Log.d("ACTION_FOUND", dName);
+		    			
+		    			// Log
+						String msg_Log = "ACTION_FOUND => " + dName;
+						Log.d("DeviceListActv.java"
+								+ "["
+								+ Thread.currentThread().getStackTrace()[2]
+										.getLineNumber() + "]", msg_Log);
+		    			
+	        			//�������ꂽ�f�o�C�X�����X�g�Ɋi�[���Ă���
+	        			CONS.BT.foundDeviceList.add(foundDevice);
+//	        			foundDeviceList.add(foundDevice);
+		    		}
+    			}
+            	nonpairedList.setAdapter(CONS.BT.nonPairedDeviceAdapter);
+    		}    
+    		
+    		if(CONS.BT.ACTION_NAME_CHANGED.equals(action)){
+    			//���O�����o���ꂽ
+    			Log.d("ACTION_NAME_CHANGED", dName);
+    			foundDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+	    		if(foundDevice.getBondState() != BluetoothDevice.BOND_BONDED){
+	    			//�ڑ��������Ƃ̂Ȃ��f�o�C�X�̂݃A�_�v�^�ɋl�߂�
+	    			CONS.BT.nonPairedDeviceAdapter.add(dName + "\n" + foundDevice.getAddress());    				
+	    		}
+            	nonpairedList.setAdapter(CONS.BT.nonPairedDeviceAdapter);
+    		}
+
+    		if(CONS.BT.ACTION_DISCOVERY_FINISHED.equals(action)){
+    			
+    			if (CONS.BT.nonPairedDeviceAdapter == null) {
+					
+    				String msg = "adapter => null";
+					Methods_dlg.dlg_ShowMessage((Activity)mContext, msg, R.color.red);
+					
+				} else if (CONS.BT.nonPairedDeviceAdapter.getCount() < 1) {
+					
+					String msg = "devices => not found";
+					Methods_dlg.dlg_ShowMessage((Activity)mContext, msg, R.color.gold2);
+					
+				}
+    			
+    			// Log
+				String msg_Log = "ACTION_DISCOVERY_FINISHED";
+				Log.d("DeviceListActv.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg_Log);
+    			
+    		}
+    	}
+    };
 
 	@Override
 	protected void onPause() {
 		
 		super.onPause();
 
-		Log.d("MainActv.java" + "["
+		Log.d("DeviceListActv.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "onPause()");
 
 //		// Log
-//		Log.d("MainActv.java" + "["
+//		Log.d("DeviceListActv.java" + "["
 //				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 //				+ "]", "prefs_main: " + Methods.get_currentPath_from_prefs(this));
 		
@@ -189,7 +372,7 @@ public class DeviceListActv extends Activity {
 		 *********************************/
 		super.onResume();
 
-		Log.d("MainActv.java" + "["
+		Log.d("DeviceListActv.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "onResume()");
 
@@ -242,7 +425,39 @@ public class DeviceListActv extends Activity {
 		////////////////////////////////
 		_Bluetooth();
 		
+		////////////////////////////////
+
+		// list: nonpaired
+
+		////////////////////////////////
+		_Setup_List_Nonpaired();
+		
 	}//protected void onStart()
+
+	private void 
+	_Setup_List_Nonpaired() {
+		// TODO Auto-generated method stub
+		
+		CONS.BT.list_FoundDevices = new ArrayList<String>();
+		
+		CONS.BT.adp_FoundDeviceList = new ArrayAdapter<String>(
+				
+				this,
+				R.layout.rowdata,
+				CONS.BT.list_FoundDevices
+				
+				);
+		
+		ListView lv_NonPaired = (ListView) findViewById(R.id.nonPairedDeviceList);
+		
+		lv_NonPaired.setAdapter(CONS.BT.adp_FoundDeviceList);
+		
+		// Log
+		String msg_Log = "adapter => set";
+		Log.d("DeviceListActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+	}//_Setup_List_Nonpaired
 
 	@Override
 	protected void 
@@ -257,7 +472,7 @@ public class DeviceListActv extends Activity {
 //		Methods_dlg.dlg_ShowMessage(this, msg);
 		
 		// Log
-		Log.d("MainActv.java" + "["
+		Log.d("DeviceListActv.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", msg);
 		
@@ -285,6 +500,28 @@ public class DeviceListActv extends Activity {
 		
 		String msg_Log;
 		
+		////////////////////////////////
+
+		// validate: adapter
+
+		////////////////////////////////
+		if (mBtAdapter == null) {
+			
+	        BluetoothAdapter Bt = BluetoothAdapter.getDefaultAdapter();
+	        
+	        if(Bt.equals(null)){
+	        	
+	        	String msg = "can't create BT adapter";
+				Methods_dlg.dlg_ShowMessage(this, msg, R.color.red);
+	        	
+	        	return;
+	        	
+	        }
+
+	        CONS.BT.mBtAdapter = Bt;
+			
+		}
+		
 		CONS.BT.pairedDeviceAdapter = new ArrayAdapter<String>(this, R.layout.rowdata);
 		
 		Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
@@ -304,7 +541,7 @@ public class DeviceListActv extends Activity {
         		
         		CONS.BT.pairedDeviceAdapter.add(device.getName() + "\n" + device.getAddress());
         		
-        		foundDeviceList.add(device);
+        		CONS.BT.foundDeviceList.add(device);
         		
         		offSet++;
         		
@@ -317,7 +554,7 @@ public class DeviceListActv extends Activity {
 				public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 					// TODO Auto-generated method stub
 					ListView listView = (ListView) parent;
-					BluetoothDevice device = foundDeviceList.get(position);
+					BluetoothDevice device = CONS.BT.foundDeviceList.get(position);
 					BtClientThread = new BluetoothClientThread(mContext, myNumber, device, mBtAdapter);
 					BtClientThread.start();
 				}

@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
@@ -639,6 +641,26 @@ public class CONS {
 		public static BluetoothAdapter mBtAdapter;
 
 //		public static BluetoothAdapter mBtAdapter = CONS.BT.mBtAdapter;
+		
+		public static ArrayAdapter<String> nonPairedDeviceAdapter;
+
+		public static ArrayList<BluetoothDevice> foundDeviceList = 
+											new ArrayList<BluetoothDevice>();
+		
+		public static List<String> list_FoundDevices;
+		
+		public static ArrayAdapter<String> adp_FoundDeviceList;
+		
+		////////////////////////////////
+
+		// intent filter
+
+		////////////////////////////////
+		public static final String ACTION_DISCOVERY_STARTED = BluetoothAdapter.ACTION_DISCOVERY_STARTED;
+		public static final String ACTION_FOUND = BluetoothDevice.ACTION_FOUND;
+		public static final String ACTION_NAME_CHANGED = BluetoothDevice.ACTION_NAME_CHANGED;
+		public static final String ACTION_DISCOVERY_FINISHED = BluetoothAdapter.ACTION_DISCOVERY_FINISHED;
+
 		
 	}
 }//public class CONS
