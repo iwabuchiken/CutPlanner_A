@@ -1,4 +1,4 @@
-package cp.utils;
+package cp.main;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -9,7 +9,6 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 public class BluetoothClientThread extends Thread {
 	//�N���C�A���g���̏���
@@ -22,17 +21,7 @@ public class BluetoothClientThread extends Thread {
 	public String myNumber;
 	
 	//�R���X�g���N�^��`
-	public 
-	BluetoothClientThread
-	(Context context, String myNum , BluetoothDevice device, BluetoothAdapter btAdapter){
-		
-		// Log
-		String msg_Log = "BluetoothClientThread => instance created";
-		Log.d("BluetoothClientThread.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", msg_Log);
-		
-		
+	public BluetoothClientThread(Context context, String myNum , BluetoothDevice device, BluetoothAdapter btAdapter){
 		//�e�평��
 		mContext = context;
 		BluetoothSocket tmpSock = null;
@@ -50,73 +39,18 @@ public class BluetoothClientThread extends Thread {
 	}
 	
 	public void run(){
-		
-		// Log
-		String msg_Log = "run()";
-		Log.d("BluetoothClientThread.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", msg_Log);
-		
-		
 		//�ڑ��v�����o���O�ɁA���������𒆒f����B
 		if(myClientAdapter.isDiscovering()){
-			
-			// Log
-			msg_Log = "myClientAdapter.isDiscovering()";
-			Log.d("BluetoothClientThread.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", msg_Log);
-			
 			myClientAdapter.cancelDiscovery();			
 		}
 
 		try{
-			
-			// Log
-			msg_Log = "connecting...";
-			Log.d("BluetoothClientThread.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", msg_Log);
-			
 			//�T�[�o�[���ɐڑ��v��
 			clientSocket.connect();
-			
-			// Log
-			msg_Log = "connected";
-			Log.d("BluetoothClientThread.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", msg_Log);
-			
 		}catch(IOException e){
-			
-			// Log
-			msg_Log = "catch";
-			Log.e("BluetoothClientThread.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", msg_Log);
-			
-			e.printStackTrace();
-			
 	         try {
 	        	 clientSocket.close();
-	        	 
-	        	 // Log
-				msg_Log = "closed";
-				Log.d("BluetoothClientThread.java"
-						+ "["
-						+ Thread.currentThread().getStackTrace()[2]
-								.getLineNumber() + "]", msg_Log);
-				
-//				e.printStackTrace();
-				
 	         } catch (IOException closeException) {  
-	        	 
-	        	 // Log
-				msg_Log = "closeException";
-				Log.d("BluetoothClientThread.java"
-						+ "["
-						+ Thread.currentThread().getStackTrace()[2]
-								.getLineNumber() + "]", msg_Log);
 	        	 e.printStackTrace();
 	         }
 	         return;

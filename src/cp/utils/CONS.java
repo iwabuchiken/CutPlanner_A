@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import cp.main.BluetoothServerThread;
+
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -651,6 +653,10 @@ public class CONS {
 		
 		public static ArrayAdapter<String> adp_FoundDeviceList;
 		
+		public static String myNumber;
+		
+		public static BluetoothServerThread BtServerThread;
+			
 		////////////////////////////////
 
 		// intent filter
