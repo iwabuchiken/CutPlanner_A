@@ -36,9 +36,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -1779,6 +1781,49 @@ public class Methods {
 	    }
 		
 	}//setup_Bluetooth
+
+
+	public static void 
+	discover_Devices
+	(Activity actv,
+		BroadcastReceiver devieFoundReceiver) {
+		// TODO Auto-generated method stub
+		
+        Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+        
+//        startActivity(discoverableIntent);
+        actv.startActivityForResult(discoverableIntent, CONS.Intent.REQUEST_CODE_DISCOEVERABLE);
+        
+        // Log
+		String msg_Log = "ACTION_REQUEST_DISCOVERABLE => started";
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+
+    	TextView nonPairedListTitle = (TextView) actv.findViewById(R.id.nonPairedListTitle);
+    	nonPairedListTitle.setText("list of devices with no history");
+
+//    	if(item.getItemId() == Menu.FIRST){
+    		//�C���e���g�t�B���^�[��BroadcastReceiver�̓o�^
+	        IntentFilter filter = new IntentFilter();
+	        filter.addAction(CONS.BT.ACTION_DISCOVERY_STARTED);
+	        filter.addAction(CONS.BT.ACTION_FOUND);
+	        filter.addAction(CONS.BT.ACTION_NAME_CHANGED);
+	        filter.addAction(CONS.BT.ACTION_DISCOVERY_FINISHED);
+	        actv.registerReceiver(devieFoundReceiver, filter);
+	        
+    		CONS.BT.nonPairedDeviceAdapter = new ArrayAdapter<String>(actv, R.layout.rowdata);
+	        //�ڑ��\�ȃf�o�C�X�����o
+	        if(CONS.BT.mBtAdapter.isDiscovering()){
+	        	//�������̏ꍇ�͌��o���L�����Z������
+	        	CONS.BT.mBtAdapter.cancelDiscovery();
+	        }
+	        //�f�o�C�X����������
+	        //��莞�Ԃ̊Ԍ��o���s��
+	        CONS.BT.mBtAdapter.startDiscovery();
+		
+	}//discover_Devices
 	
 }//public class Methods
 

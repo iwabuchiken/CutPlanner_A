@@ -6,13 +6,20 @@ import cp.utils.Methods;
 import cp.utils.Tags;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class BO_CL implements OnClickListener {
 	/*----------------------------
@@ -26,6 +33,8 @@ public class BO_CL implements OnClickListener {
 	
 	//
 	int position;
+
+	private BroadcastReceiver devieFoundReceiver;
 	
 	public BO_CL(Activity actv, int position) {
 		//
@@ -48,6 +57,20 @@ public class BO_CL implements OnClickListener {
 
 	}
 
+	public 
+	BO_CL
+	(Activity actv, BroadcastReceiver devieFoundReceiver) {
+		// TODO Auto-generated constructor stub
+		
+		this.actv = actv;
+		
+		this.devieFoundReceiver	= devieFoundReceiver;
+		
+		//
+		CONS.Admin.vib = (Vibrator) actv.getSystemService(Context.VIBRATOR_SERVICE);
+
+	}
+
 	//	@Override
 	public void onClick(View v) {
 //		//
@@ -58,6 +81,12 @@ public class BO_CL implements OnClickListener {
 		//
 		switch (tag) {
 
+		case ACTV_DEVLIST_BT_OPTIONS://-----------------------------------------------------------------------------
+			
+			case_ACTV_DEVLIST_BT_OPTIONS();
+			
+			break;
+			
 		case ACTV_MAIN_BT_GO://-----------------------------------------------------------------------------
 			
 			case_ACTV_MAIN_BT_GO();
@@ -69,6 +98,50 @@ public class BO_CL implements OnClickListener {
 		}//switch (tag)
 		
 	}//public void onClick(View v)
+
+	private void 
+	case_ACTV_DEVLIST_BT_OPTIONS() {
+		// TODO Auto-generated method stub
+		
+		Methods.discover_Devices(actv, devieFoundReceiver);
+		
+//        Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+//        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+//        
+////        startActivity(discoverableIntent);
+//        actv.startActivityForResult(discoverableIntent, CONS.Intent.REQUEST_CODE_DISCOEVERABLE);
+//        
+//        // Log
+//		String msg_Log = "ACTION_REQUEST_DISCOVERABLE => started";
+//		Log.d("DeviceListActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
+//
+//    	TextView nonPairedListTitle = (TextView) actv.findViewById(R.id.nonPairedListTitle);
+//    	nonPairedListTitle.setText("list of devices with no history");
+//
+////    	if(item.getItemId() == Menu.FIRST){
+//    		//�C���e���g�t�B���^�[��BroadcastReceiver�̓o�^
+//	        IntentFilter filter = new IntentFilter();
+//	        filter.addAction(CONS.BT.ACTION_DISCOVERY_STARTED);
+//	        filter.addAction(CONS.BT.ACTION_FOUND);
+//	        filter.addAction(CONS.BT.ACTION_NAME_CHANGED);
+//	        filter.addAction(CONS.BT.ACTION_DISCOVERY_FINISHED);
+//	        actv.registerReceiver(this.devieFoundReceiver, filter);
+//	        
+//    		CONS.BT.nonPairedDeviceAdapter = new ArrayAdapter<String>(actv, R.layout.rowdata);
+//	        //�ڑ��\�ȃf�o�C�X�����o
+//	        if(CONS.BT.mBtAdapter.isDiscovering()){
+//	        	//�������̏ꍇ�͌��o���L�����Z������
+//	        	CONS.BT.mBtAdapter.cancelDiscovery();
+//	        }
+//	        //�f�o�C�X����������
+//	        //��莞�Ԃ̊Ԍ��o���s��
+//	        CONS.BT.mBtAdapter.startDiscovery();
+	        
+//    	}
+
+	}//case_ACTV_DEVLIST_BT_OPTIONS
 
 	private void 
 	case_ACTV_MAIN_BT_GO() {

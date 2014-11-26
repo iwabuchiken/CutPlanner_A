@@ -47,6 +47,7 @@ public class BO_TL implements OnTouchListener {
 
 			case ACTV_MAIN_BT_GO://-----------------------
 			case ACTV_MAIN_BT_CLEAR://-----------------------
+			case ACTV_DEVLIST_BT_OPTIONS://-----------------------
 
 				v.setBackgroundColor(Color.GRAY);
 				
@@ -62,6 +63,7 @@ public class BO_TL implements OnTouchListener {
 
 			case ACTV_MAIN_BT_GO://-----------------------
 			case ACTV_MAIN_BT_CLEAR://-----------------------
+			case ACTV_DEVLIST_BT_OPTIONS://-----------------------
 
 				v.setBackgroundColor(Color.WHITE);
 				

@@ -42,7 +42,7 @@ public class DeviceListActv extends Activity {
 
 	public static Vibrator vib;
 
-	private BluetoothAdapter mBtAdapter = CONS.BT.mBtAdapter;
+//	private BluetoothAdapter mBtAdapter = CONS.BT.mBtAdapter;
 	private ArrayList<BluetoothDevice> foundDeviceList = new ArrayList<BluetoothDevice>();
 	static int offSet = 0;
 	public static BluetoothClientThread BtClientThread;
@@ -120,7 +120,7 @@ public class DeviceListActv extends Activity {
 		////////////////////////////////
 //		this.finishActivity(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
 		
-		this.finishActivity(this.REQUEST_CODE_DISCOEVERABLE);
+		this.finishActivity(CONS.Intent.REQUEST_CODE_DISCOEVERABLE);
 		
 		// Log
 		msg_Log = "discoverable => finished";
@@ -142,9 +142,9 @@ public class DeviceListActv extends Activity {
 		// disable bt
 
 		////////////////////////////////
-		if (this.mBtAdapter.isEnabled()) {
+		if (CONS.BT.mBtAdapter.isEnabled()) {
 			
-			this.mBtAdapter.disable();
+			CONS.BT.mBtAdapter.disable();
 			
 			// Log
 			String msg_Log = "BT adapter => disabled";
@@ -198,7 +198,7 @@ public class DeviceListActv extends Activity {
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
         
 //        startActivity(discoverableIntent);
-        this.startActivityForResult(discoverableIntent, this.REQUEST_CODE_DISCOEVERABLE);
+        this.startActivityForResult(discoverableIntent, CONS.Intent.REQUEST_CODE_DISCOEVERABLE);
         
         // Log
 		String msg_Log = "ACTION_REQUEST_DISCOVERABLE => started";
@@ -220,13 +220,13 @@ public class DeviceListActv extends Activity {
 	        
     		CONS.BT.nonPairedDeviceAdapter = new ArrayAdapter<String>(this, R.layout.rowdata);
 	        //�ڑ��\�ȃf�o�C�X�����o
-	        if(mBtAdapter.isDiscovering()){
+	        if(CONS.BT.mBtAdapter.isDiscovering()){
 	        	//�������̏ꍇ�͌��o���L�����Z������
-	        	mBtAdapter.cancelDiscovery();
+	        	CONS.BT.mBtAdapter.cancelDiscovery();
 	        }
 	        //�f�o�C�X����������
 	        //��莞�Ԃ̊Ԍ��o���s��
-	        mBtAdapter.startDiscovery();
+	        CONS.BT.mBtAdapter.startDiscovery();
     	}
 
 		
@@ -264,7 +264,7 @@ public class DeviceListActv extends Activity {
     				BluetoothDevice device = CONS.BT.foundDeviceList.get(offSet + position);
 //    				BluetoothDevice device = foundDeviceList.get(offSet + position);
     				
-    				BtClientThread = new BluetoothClientThread(mContext, myNumber, device, mBtAdapter);
+    				BtClientThread = new BluetoothClientThread(mContext, myNumber, device, CONS.BT.mBtAdapter);
     				BtClientThread.start();
     			}
         	});
@@ -313,12 +313,39 @@ public class DeviceListActv extends Activity {
     		
     		if(CONS.BT.ACTION_NAME_CHANGED.equals(action)){
     			//���O�����o���ꂽ
-    			Log.d("ACTION_NAME_CHANGED", dName);
+    			if (dName != null) {
+					
+    				Log.d("ACTION_NAME_CHANGED", dName);
+    				
+				} else {
+					
+					// Log
+					String msg_Log = "ACTION_NAME_CHANGED: dName => null";
+					Log.d("DeviceListActv.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber() + "]", msg_Log);
+
+				}
+    			
     			foundDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 	    		if(foundDevice.getBondState() != BluetoothDevice.BOND_BONDED){
 	    			//�ڑ��������Ƃ̂Ȃ��f�o�C�X�̂݃A�_�v�^�ɋl�߂�
-	    			CONS.BT.nonPairedDeviceAdapter.add(dName + "\n" + foundDevice.getAddress());    				
+	    		
+	    			if (dName != null) {
+						
+	    				CONS.BT.nonPairedDeviceAdapter.add(dName + "\n" + foundDevice.getAddress());    				
+	    				
+	    				// Log
+						String msg_Log = "added => " + dName + "\n" + foundDevice.getAddress();
+						Log.d("DeviceListActv.java"
+								+ "["
+								+ Thread.currentThread().getStackTrace()[2]
+										.getLineNumber() + "]", msg_Log);
+					}
+	    			
 	    		}
+	    		
             	nonpairedList.setAdapter(CONS.BT.nonPairedDeviceAdapter);
     		}
 
@@ -343,6 +370,20 @@ public class DeviceListActv extends Activity {
 						+ Thread.currentThread().getStackTrace()[2]
 								.getLineNumber() + "]", msg_Log);
     			
+				////////////////////////////////
+
+				// update adapter
+
+				////////////////////////////////
+				// Log
+				msg_Log = "CONS.BT.nonPairedDeviceAdapter: size => "
+							+ CONS.BT.nonPairedDeviceAdapter.getCount();
+				Log.d("DeviceListActv.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg_Log);
+				
+				
     		}
     	}
     };
@@ -505,7 +546,7 @@ public class DeviceListActv extends Activity {
 		// validate: adapter
 
 		////////////////////////////////
-		if (mBtAdapter == null) {
+		if (CONS.BT.mBtAdapter == null) {
 			
 	        BluetoothAdapter Bt = BluetoothAdapter.getDefaultAdapter();
 	        
@@ -524,7 +565,7 @@ public class DeviceListActv extends Activity {
 		
 		CONS.BT.pairedDeviceAdapter = new ArrayAdapter<String>(this, R.layout.rowdata);
 		
-		Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
+		Set<BluetoothDevice> pairedDevices = CONS.BT.mBtAdapter.getBondedDevices();
 		
         if(pairedDevices.size() > 0){
 
@@ -555,7 +596,7 @@ public class DeviceListActv extends Activity {
 					// TODO Auto-generated method stub
 					ListView listView = (ListView) parent;
 					BluetoothDevice device = CONS.BT.foundDeviceList.get(position);
-					BtClientThread = new BluetoothClientThread(mContext, myNumber, device, mBtAdapter);
+					BtClientThread = new BluetoothClientThread(mContext, myNumber, device, CONS.BT.mBtAdapter);
 					BtClientThread.start();
 				}
         	});
@@ -575,6 +616,13 @@ public class DeviceListActv extends Activity {
 	private void 
 	_Setup__SetListener() {
 		// TODO Auto-generated method stub
+		
+		Button bt_Options = (Button) findViewById(R.id.devicelist_bt);
+		
+		bt_Options.setTag(Tags.ButtonTags.ACTV_DEVLIST_BT_OPTIONS);
+		
+		bt_Options.setOnTouchListener(new BO_TL(this));
+		bt_Options.setOnClickListener(new BO_CL(this, this.DevieFoundReceiver));
 		
 	}//_Setup__SetListener
 

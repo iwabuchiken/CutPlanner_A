@@ -9,6 +9,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 public class BluetoothClientThread extends Thread {
 	//�N���C�A���g���̏���
@@ -47,6 +48,13 @@ public class BluetoothClientThread extends Thread {
 		try{
 			//�T�[�o�[���ɐڑ��v��
 			clientSocket.connect();
+			
+			// Log
+			String msg_Log = "socket => connected";
+			Log.d("BluetoothClientThread.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
 		}catch(IOException e){
 	         try {
 	        	 clientSocket.close();
