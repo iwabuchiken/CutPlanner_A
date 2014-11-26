@@ -153,7 +153,7 @@ public class Tags {
 		actv_hist_ib_top, 
 		
 		ACTV_MAIN_BT_GO, 
-		ACTV_MAIN_BT_CLEAR,
+		ACTV_MAIN_BT_CLEAR, ACTV_DEVLIST_BT_OPTIONS,
 
 		
 		

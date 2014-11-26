@@ -82,7 +82,11 @@ public class BluetoothClientThread extends Thread {
 			clientSocket.connect();
 			
 			// Log
-			msg_Log = "connected";
+//<<<<<<< HEAD
+//			msg_Log = "connected";
+//=======
+			msg_Log = "socket => connected";
+//>>>>>>> D-6_LAB-1_bluetooth
 			Log.d("BluetoothClientThread.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", msg_Log);

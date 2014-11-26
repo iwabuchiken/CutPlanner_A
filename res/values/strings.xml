@@ -26,5 +26,11 @@
        									Delete file, too</string>
        									
     	<string name="commons_lbl_word">Word</string>
-    	
+
+    <!-- devicelist.xml -->	
+		<string name="devlist_list_connected">
+		    					List of devices with history</string>    
+		<string name="devlist_list_bt_option">
+		    					Options</string>    
+    
 </resources>

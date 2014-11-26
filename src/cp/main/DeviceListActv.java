@@ -41,7 +41,7 @@ public class DeviceListActv extends Activity {
 
 	public static Vibrator vib;
 
-	private BluetoothAdapter mBtAdapter = CONS.BT.mBtAdapter;
+//	private BluetoothAdapter mBtAdapter = CONS.BT.mBtAdapter;
 	private ArrayList<BluetoothDevice> foundDeviceList = new ArrayList<BluetoothDevice>();
 	static int offSet = 0;
 	public static BluetoothClientThread BtClientThread;
@@ -92,7 +92,7 @@ public class DeviceListActv extends Activity {
         //�ڑ������̂���f�o�C�X���擾
         CONS.BT.pairedDeviceAdapter = new ArrayAdapter<String>(this, R.layout.rowdata);
         //BluetoothAdapter����A�ڑ������̂���f�o�C�X�̏����擾
-        Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
+        Set<BluetoothDevice> pairedDevices = CONS.BT.mBtAdapter.getBondedDevices();
         if(pairedDevices.size() > 0) {
         	
         	// Log
@@ -126,8 +126,14 @@ public class DeviceListActv extends Activity {
 					// TODO Auto-generated method stub
 					ListView listView = (ListView) parent;
 					BluetoothDevice device = foundDeviceList.get(position);
-					BtClientThread = new BluetoothClientThread(mContext, CONS.BT.myNumber, device, mBtAdapter);
+					BtClientThread = new BluetoothClientThread(
+								mContext, 
+								CONS.BT.myNumber, 
+								device, 
+								CONS.BT.mBtAdapter);
+					
 					BtClientThread.start();
+					
 				}
 				
         	});
@@ -138,15 +144,34 @@ public class DeviceListActv extends Activity {
     @Override
     public void onStart() {
         super.onStart();
+        
+        ////////////////////////////////
+
+		// listener
+
+		////////////////////////////////
+		this._Setup__SetListener();
+		
     }
     
     @Override
     public void onResume() {
         super.onResume(); 
         //�T�[�o�[�X���b�h�N���A�N���C�A���g�̂���̗v���҂����J�n
-		CONS.BT.BtServerThread = new BluetoothServerThread(this, CONS.BT.myNumber , mBtAdapter); 
+		CONS.BT.BtServerThread = new BluetoothServerThread(this, CONS.BT.myNumber , CONS.BT.mBtAdapter); 
 		
+//<<<<<<< HEAD
 		CONS.BT.BtServerThread.start();
+//=======
+//		////////////////////////////////
+//
+//		// ACTION_REQUEST_DISCOVERABLE
+//
+//		////////////////////////////////
+////		this.finishActivity(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+//		
+//		this.finishActivity(CONS.Intent.REQUEST_CODE_DISCOEVERABLE);
+//>>>>>>> D-6_LAB-1_bluetooth
 		
 		// Log
 		String msg_Log = "server thread => started";
@@ -154,7 +179,8 @@ public class DeviceListActv extends Activity {
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", msg_Log);
 		
-    }
+//<<<<<<< HEAD
+//    }
    
 //    @Override
 //    public void onPause() {
@@ -164,10 +190,70 @@ public class DeviceListActv extends Activity {
 //        }
 //    }
     
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-    	super.onCreateOptionsMenu(menu);
-    	menu.add(0, Menu.FIRST, Menu.NONE, "Detect new devices");
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu){
+//    	super.onCreateOptionsMenu(menu);
+//    	menu.add(0, Menu.FIRST, Menu.NONE, "Detect new devices");
+////=======
+	}//protected void onDestroy()
+
+	@Override
+	public void onBackPressed() {
+		/****************************
+		 * memo
+			****************************/
+//		Methods.stop_Player(this);
+
+		////////////////////////////////
+
+		// disable bt
+
+		////////////////////////////////
+		if (CONS.BT.mBtAdapter.isEnabled()) {
+			
+			CONS.BT.mBtAdapter.disable();
+			
+			// Log
+			String msg_Log = "BT adapter => disabled";
+			Log.d("DeviceListActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+		}
+		
+		this.finish();
+		
+		overridePendingTransition(0, 0);
+		
+	}//public void onBackPressed()
+
+//	@Override
+//	public boolean onKeyDown(int keyCode, KeyEvent event) {
+//		
+//		// Log
+//		String msg_Log = "onKeyDown()";
+//		Log.d("DeviceListActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
+//		
+//		
+//		Methods.confirm_quit(this, keyCode);
+//		
+//		return super.onKeyDown(keyCode, event);
+//	}
+
+	@Override
+	public boolean 
+	onCreateOptionsMenu
+	(Menu menu) {
+		// 
+//		MenuInflater mi = getMenuInflater();
+//		mi.inflate(R.menu.menu_main, menu);
+
+		super.onCreateOptionsMenu(menu);
+		
+		menu.add(0, Menu.FIRST, Menu.NONE, "Detect new device");
+//>>>>>>> D-6_LAB-1_bluetooth
 		return true;
     }
     
@@ -178,8 +264,20 @@ public class DeviceListActv extends Activity {
         //���f�o�C�X�̌��o��L��ɂ���
         Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
-        startActivity(discoverableIntent);
+//        startActivity(discoverableIntent);
         
+//<<<<<<< HEAD
+//=======
+//        startActivity(discoverableIntent);
+        this.startActivityForResult(discoverableIntent, CONS.Intent.REQUEST_CODE_DISCOEVERABLE);
+        
+        // Log
+		String msg_Log = "ACTION_REQUEST_DISCOVERABLE => started";
+		Log.d("DeviceListActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+
+//>>>>>>> D-6_LAB-1_bluetooth
     	TextView nonPairedListTitle = (TextView)findViewById(R.id.nonPairedListTitle);
     	nonPairedListTitle.setText("list of devices with no history");
     	
@@ -196,13 +294,13 @@ public class DeviceListActv extends Activity {
 	        
     		CONS.BT.nonPairedDeviceAdapter = new ArrayAdapter<String>(this, R.layout.rowdata);
 	        //�ڑ��\�ȃf�o�C�X�����o
-	        if(mBtAdapter.isDiscovering()){
+	        if(CONS.BT.mBtAdapter.isDiscovering()){
 	        	//�������̏ꍇ�͌��o���L�����Z������
-	        	mBtAdapter.cancelDiscovery();
+	        	CONS.BT.mBtAdapter.cancelDiscovery();
 	        }
 	        //�f�o�C�X����������
 	        //��莞�Ԃ̊Ԍ��o���s��
-	        mBtAdapter.startDiscovery();
+	        CONS.BT.mBtAdapter.startDiscovery();
     	}
     	
 		return false;
@@ -222,14 +320,29 @@ public class DeviceListActv extends Activity {
     		nonpairedList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         		//�f�o�C�X���X�g�I�����̏���
     			@Override
-    			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+    			public void 
+    			onItemClick
+    			(AdapterView<?> parent, View v, int position, long id) {
     				// TODO Auto-generated method stub
     				ListView listView = (ListView) parent;
-    				BluetoothDevice device = foundDeviceList.get(offSet + position);
-    				BtClientThread = new BluetoothClientThread(mContext, CONS.BT.myNumber, device, mBtAdapter);
+//<<<<<<< HEAD
+//    				BluetoothDevice device = foundDeviceList.get(offSet + position);
+//    				BtClientThread = new BluetoothClientThread(mContext, CONS.BT.myNumber, device, mBtAdapter);
+//=======
+    				
+    				BluetoothDevice device = CONS.BT.foundDeviceList.get(offSet + position);
+//    				BluetoothDevice device = foundDeviceList.get(offSet + position);
+    				
+    				BtClientThread = new BluetoothClientThread(
+    							mContext, 
+    							CONS.BT.myNumber, 
+    							device, 
+    							CONS.BT.mBtAdapter);
+//>>>>>>> D-6_LAB-1_bluetooth
     				BtClientThread.start();
-    			}
-        	});
+    			}//onItemClick
+    			
+        	});//nonpairedList.setOnItemClickListener
     		
     		if(CONS.BT.ACTION_DISCOVERY_STARTED.equals(action)){
 //    			Log("ACTION_DISCOVERY_STARTED");
@@ -260,12 +373,43 @@ public class DeviceListActv extends Activity {
     		
     		if(CONS.BT.ACTION_NAME_CHANGED.equals(action)){
     			//���O�����o���ꂽ
-    			Log.d("ACTION_NAME_CHANGED", dName);
+    			if (dName != null) {
+					
+    				Log.d("ACTION_NAME_CHANGED", dName);
+    				
+				} else {
+					
+					// Log
+					String msg_Log = "ACTION_NAME_CHANGED: dName => null";
+					Log.d("DeviceListActv.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber() + "]", msg_Log);
+
+				}
+    			
     			foundDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 	    		if(foundDevice.getBondState() != BluetoothDevice.BOND_BONDED){
 	    			//�ڑ��������Ƃ̂Ȃ��f�o�C�X�̂݃A�_�v�^�ɋl�߂�
-	        		CONS.BT.nonPairedDeviceAdapter.add(dName + "\n" + foundDevice.getAddress());    				
+//<<<<<<< HEAD
+//	        		CONS.BT.nonPairedDeviceAdapter.add(dName + "\n" + foundDevice.getAddress());    				
+//=======
+	    		
+	    			if (dName != null) {
+						
+	    				CONS.BT.nonPairedDeviceAdapter.add(dName + "\n" + foundDevice.getAddress());    				
+	    				
+	    				// Log
+						String msg_Log = "added => " + dName + "\n" + foundDevice.getAddress();
+						Log.d("DeviceListActv.java"
+								+ "["
+								+ Thread.currentThread().getStackTrace()[2]
+										.getLineNumber() + "]", msg_Log);
+					}
+	    			
+//>>>>>>> D-6_LAB-1_bluetooth
 	    		}
+	    		
             	nonpairedList.setAdapter(CONS.BT.nonPairedDeviceAdapter);
     		}
 
@@ -277,6 +421,7 @@ public class DeviceListActv extends Activity {
 						+ "["
 						+ Thread.currentThread().getStackTrace()[2]
 								.getLineNumber() + "]", msg_Log);
+//<<<<<<< HEAD
 				
 				if (CONS.BT.nonPairedDeviceAdapter.getCount() < 1) {
 					
@@ -284,6 +429,23 @@ public class DeviceListActv extends Activity {
 					Methods_dlg.dlg_ShowMessage((Activity) mContext, msg, R.color.gold2);
 					
 				}
+//=======
+    			
+				////////////////////////////////
+
+				// update adapter
+
+				////////////////////////////////
+				// Log
+				msg_Log = "CONS.BT.nonPairedDeviceAdapter: size => "
+							+ CONS.BT.nonPairedDeviceAdapter.getCount();
+				Log.d("DeviceListActv.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg_Log);
+				
+				
+//>>>>>>> D-6_LAB-1_bluetooth
     		}
     		
     	}//public void onReceive(Context context, Intent intent)
@@ -395,18 +557,98 @@ public class DeviceListActv extends Activity {
 		// server thread
 
 		////////////////////////////////
+//<<<<<<< HEAD
 		if (CONS.BT.BtServerThread != null) {
 //				&& CONS.BT.BtServerThread.isAlive()) {
+//=======
+//		if (CONS.BT.mBtAdapter == null) {
+//>>>>>>> D-6_LAB-1_bluetooth
 			
 			CONS.BT.BtServerThread.cancel();
 			
+//<<<<<<< HEAD
 			// Log
 			msg_Log = "CONS.BT.BtServerThread => cancelled";
 			Log.d("DeviceListActv.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", msg_Log);
 			
+//		}
+//=======
 		}
+		
+		CONS.BT.pairedDeviceAdapter = new ArrayAdapter<String>(this, R.layout.rowdata);
+		
+		Set<BluetoothDevice> pairedDevices = CONS.BT.mBtAdapter.getBondedDevices();
+		
+        if(pairedDevices.size() > 0){
+
+        	// Log
+			msg_Log = "pairedDevices.size() > 0";
+			Log.i("DeviceListActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+
+        	for(BluetoothDevice device:pairedDevices){
+        		//�ڑ������̂���f�o�C�X�̏������Ɏ擾���ăA�_�v�^�ɋl�߂�
+        		//getName()�E�E�E�f�o�C�X���擾���\�b�h
+        		//getAddress()�E�E�E�f�o�C�X��MAC�A�h���X�擾���\�b�h
+        		
+        		CONS.BT.pairedDeviceAdapter.add(device.getName() + "\n" + device.getAddress());
+        		
+        		CONS.BT.foundDeviceList.add(device);
+        		
+        		offSet++;
+        		
+        	}
+        	ListView deviceList = (ListView)findViewById(R.id.pairedDeviceList);
+        	deviceList.setAdapter(CONS.BT.pairedDeviceAdapter);
+        	deviceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        		//�f�o�C�X���X�g�I�����̏���
+				@Override
+				public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+					// TODO Auto-generated method stub
+					ListView listView = (ListView) parent;
+					BluetoothDevice device = CONS.BT.foundDeviceList.get(position);
+					BtClientThread = new BluetoothClientThread(
+								mContext, 
+								CONS.BT.myNumber, 
+								device, 
+								CONS.BT.mBtAdapter);
+					
+					BtClientThread.start();
+				}
+        	});
+        	
+        } else {
+        	
+        	// Log
+			msg_Log = "pairedDevices.size() <= 0";
+			Log.i("DeviceListActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+        }
+
+	}
+
+	private void 
+	_Setup__SetListener() {
+		// TODO Auto-generated method stub
+		
+		Button bt_Options = (Button) findViewById(R.id.devicelist_bt);
+		
+		bt_Options.setTag(Tags.ButtonTags.ACTV_DEVLIST_BT_OPTIONS);
+		
+		bt_Options.setOnTouchListener(new BO_TL(this));
+		bt_Options.setOnClickListener(new BO_CL(this, this.DevieFoundReceiver));
+		
+	}//_Setup__SetListener
+
+	private void 
+	_Setup() {
+		// TODO Auto-generated method stub
+//>>>>>>> D-6_LAB-1_bluetooth
 		
 	}//protected void onDestroy()
 //
