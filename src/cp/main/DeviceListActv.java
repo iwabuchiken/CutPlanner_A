@@ -105,7 +105,13 @@ public class DeviceListActv extends Activity {
 		// unregister
 
 		////////////////////////////////
-		this.unregisterReceiver(this.DevieFoundReceiver);
+		if (CONS.BT.registered == true) {
+			
+			this.unregisterReceiver(this.DevieFoundReceiver);
+			
+			CONS.BT.registered = false;
+			
+		}
 		
 		// Log
 		String msg_Log = "receiver => unregistered";
@@ -217,6 +223,8 @@ public class DeviceListActv extends Activity {
 	        filter.addAction(CONS.BT.ACTION_NAME_CHANGED);
 	        filter.addAction(CONS.BT.ACTION_DISCOVERY_FINISHED);
 	        registerReceiver(DevieFoundReceiver, filter);
+	        
+	        CONS.BT.registered = true;
 	        
     		CONS.BT.nonPairedDeviceAdapter = new ArrayAdapter<String>(this, R.layout.rowdata);
 	        //�ڑ��\�ȃf�o�C�X�����o
@@ -593,6 +601,14 @@ public class DeviceListActv extends Activity {
         		//�f�o�C�X���X�g�I�����̏���
 				@Override
 				public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+					
+					// Log
+					String msg_Log = "deviceList => starting a client thread";
+					Log.d("DeviceListActv.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber() + "]", msg_Log);
+					
 					// TODO Auto-generated method stub
 					ListView listView = (ListView) parent;
 					BluetoothDevice device = CONS.BT.foundDeviceList.get(position);

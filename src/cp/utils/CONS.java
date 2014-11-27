@@ -616,6 +616,8 @@ public class CONS {
 		public static String myNumber;
 		
 		public static BluetoothServerThread BtServerThread;
+
+		public static boolean registered = false;
 			
 		////////////////////////////////
 

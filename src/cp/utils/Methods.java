@@ -1813,6 +1813,8 @@ public class Methods {
 	        filter.addAction(CONS.BT.ACTION_DISCOVERY_FINISHED);
 	        actv.registerReceiver(devieFoundReceiver, filter);
 	        
+	        CONS.BT.registered = true;
+	        
 	        // Log
 			msg_Log = "receiver => registered";
 			Log.d("Methods.java" + "["

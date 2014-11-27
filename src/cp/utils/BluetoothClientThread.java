@@ -40,17 +40,27 @@ public class BluetoothClientThread extends Thread {
 	}
 	
 	public void run(){
+		
+		String msg_Log;
+		
 		//�ڑ��v�����o���O�ɁA���������𒆒f����B
 		if(myClientAdapter.isDiscovering()){
 			myClientAdapter.cancelDiscovery();			
 		}
 
 		try{
+			
+			// Log
+			msg_Log = "connecting...";
+			Log.d("BluetoothClientThread.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
 			//�T�[�o�[���ɐڑ��v��
 			clientSocket.connect();
 			
 			// Log
-			String msg_Log = "socket => connected";
+			msg_Log = "socket => connected";
 			Log.d("BluetoothClientThread.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", msg_Log);
