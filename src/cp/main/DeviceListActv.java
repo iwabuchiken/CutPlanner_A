@@ -123,6 +123,14 @@ public class DeviceListActv extends Activity {
         		//�f�o�C�X���X�g�I�����̏���
 				@Override
 				public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+					
+					// Log
+					String msg_Log = "position => " + id;
+					Log.d("DeviceListActv.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber() + "]", msg_Log);
+					
 					// TODO Auto-generated method stub
 					ListView listView = (ListView) parent;
 					BluetoothDevice device = foundDeviceList.get(position);
@@ -131,6 +139,13 @@ public class DeviceListActv extends Activity {
 								CONS.BT.myNumber, 
 								device, 
 								CONS.BT.mBtAdapter);
+					
+					// Log
+					msg_Log = "starting a client thread...";
+					Log.d("DeviceListActv.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber() + "]", msg_Log);
 					
 					BtClientThread.start();
 					
@@ -329,8 +344,20 @@ public class DeviceListActv extends Activity {
 //    				BluetoothDevice device = foundDeviceList.get(offSet + position);
 //    				BtClientThread = new BluetoothClientThread(mContext, CONS.BT.myNumber, device, mBtAdapter);
 //=======
+
+    				// Log
+    				String msg_Log;
     				
-    				BluetoothDevice device = CONS.BT.foundDeviceList.get(offSet + position);
+					msg_Log = "position => " + position;
+					Log.d("DeviceListActv.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber() + "]", msg_Log);
+    				
+					
+					
+    				BluetoothDevice device = CONS.BT.foundDeviceList.get(position);
+//    				BluetoothDevice device = CONS.BT.foundDeviceList.get(offSet + position);
 //    				BluetoothDevice device = foundDeviceList.get(offSet + position);
     				
     				BtClientThread = new BluetoothClientThread(
@@ -446,7 +473,7 @@ public class DeviceListActv extends Activity {
 				
 				
 //>>>>>>> D-6_LAB-1_bluetooth
-    		}
+    		}//if(CONS.BT.ACTION_DISCOVERY_FINISHED.equals(action))
     		
     	}//public void onReceive(Context context, Intent intent)
     };
@@ -575,7 +602,7 @@ public class DeviceListActv extends Activity {
 			
 //		}
 //=======
-		}
+		}//if (CONS.BT.BtServerThread != null)
 		
 		CONS.BT.pairedDeviceAdapter = new ArrayAdapter<String>(this, R.layout.rowdata);
 		
@@ -630,7 +657,7 @@ public class DeviceListActv extends Activity {
 			
         }
 
-	}
+	}//onDestroy
 
 	private void 
 	_Setup__SetListener() {

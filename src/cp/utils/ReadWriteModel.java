@@ -12,6 +12,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class ReadWriteModel extends Thread {
 	//�\�P�b�g�ɑ΂���I/O����
@@ -73,6 +74,12 @@ public class ReadWriteModel extends Thread {
 					e.printStackTrace();
 				}
 			}
+			
+			// Log
+			String msg_Log = "intent starting => StreamActivity";
+			Log.d("ReadWriteModel.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
 			
 			Intent i = new Intent(mContext, StreamActivity.class);
 			i.putExtra("NUMBER", rcvNum);
