@@ -3,9 +3,6 @@ package cp.main;
 import java.util.ArrayList;
 import java.util.Set;
 
-
-
-
 import cp.listeners.button.BO_CL;
 import cp.listeners.button.BO_TL;
 import cp.listeners.view.V_OCL;
@@ -425,28 +422,11 @@ public class DeviceListActv extends Activity {
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "onResume()");
 
+		BluetoothServerThread BtServerThread = 
+						new BluetoothServerThread(this, myNumber , CONS.BT.mBtAdapter); 
 		
-		/*********************************
-		 * 2. Set enables
-		 *********************************/
-//		ImageButton ib_up = (ImageButton) findViewById(R.id.v1_bt_up);
-//		
-//		String curDirPath = Methods.get_currentPath_from_prefs(this);
-//		
-//		if (curDirPath.equals(dname_base)) {
-//			
-//			ib_up.setEnabled(false);
-//			
-//			ib_up.setImageResource(R.drawable.ifm8_up_disenabled);
-//			
-//		} else {//if (this.currentDirPath == this.dpath_base)
-//		
-//			ib_up.setEnabled(true);
-//
-//			
-//			ib_up.setImageResource(R.drawable.ifm8_up);
-//		
-//		}//if (this.currentDirPath == this.dpath_base)
+		BtServerThread.start();
+
 		
 	}//protected void onResume()
 

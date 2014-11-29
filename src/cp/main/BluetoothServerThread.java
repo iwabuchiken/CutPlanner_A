@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 public class BluetoothServerThread extends Thread {
 	//�T�[�o�[���̏���
@@ -36,24 +37,98 @@ public class BluetoothServerThread extends Thread {
 			e.printStackTrace();
 		}
 		servSock = tmpServSock;
+		
+		// Log
+		String msg_Log = "BluetoothServerThread => instantiated";
+		Log.i("BluetoothServerThread.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
 	}
 	
 	public void run(){
+		
+		String msg_Log;
+		
+		// Log
+		msg_Log = "BluetoothServerThread => running...";
+		Log.d("BluetoothServerThread.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
 		BluetoothSocket receivedSocket = null;		
+		
 		while(true){
+			
+			// Log
+			msg_Log = "while loop => starting...";
+			Log.d("BluetoothServerThread.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
 			try{
 				//�N���C�A���g������̐ڑ��v���҂��B�\�P�b�g���Ԃ����B
-				receivedSocket = servSock.accept();
+				
+				if (servSock != null) {
+					
+					// Log
+					msg_Log = "servSock != null";
+					Log.d("BluetoothServerThread.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber() + "]", msg_Log);
+					
+					receivedSocket = servSock.accept();
+					
+					// Log
+					msg_Log = "servSock => accepted";
+					Log.d("BluetoothServerThread.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber() + "]", msg_Log);
+					
+				} else {
+
+					// Log
+					msg_Log = "servSock => null";
+					Log.e("BluetoothServerThread.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber() + "]", msg_Log);
+				}
+				
 			}catch(IOException e){
+				
+				// Log
+				msg_Log = "IOException";
+				Log.e("BluetoothServerThread.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg_Log);
+				
+				e.printStackTrace();
+				
 				break;
 			}
 		
+			// Log
+			msg_Log = "try~catch => done";
+			Log.d("BluetoothServerThread.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
 			if(receivedSocket != null){
 				//�\�P�b�g���󂯎��Ă���(�ڑ�������)�̏���
 				//RwClass��manageSocket���ڂ�
 				ReadWriteModel rw = new ReadWriteModel(mContext, receivedSocket, myNumber);
 				rw.start();
-			
+
+	            // Log
+				msg_Log = "ReadWriteModel => started";
+				Log.d("BluetoothServerThread.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg_Log);
+
 				try {
 					//���������������\�P�b�g�͕���B
 					servSock.close();
@@ -61,7 +136,18 @@ public class BluetoothServerThread extends Thread {
 					e.printStackTrace();
 				}
 	            break;
-			}		
+	            
+			} else {
+				
+				// Log
+				msg_Log = "receivedSocket => null";
+				Log.d("BluetoothServerThread.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", msg_Log);
+				
+			}
+			
 		}
 	}
 
