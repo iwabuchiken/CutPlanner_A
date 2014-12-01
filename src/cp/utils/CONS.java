@@ -4,6 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+import cp.adapters.Adp_LogFileList;
+import cp.adapters.Adp_ShowLogFile_List;
+import cp.items.LogItem;
 import cp.main.BluetoothServerThread;
 
 
@@ -66,6 +71,14 @@ public class CONS {
 		
 		public final static int RESULT_CODE_SEE_BOOKMARKS_CANCEL = 0;
 		
+		////////////////////////////////
+
+		// ShowLogActv
+
+		////////////////////////////////
+		public static final String iKey_LogActv_LogFileName =
+													"iKey_LogActv_LogFileName";
+
 	}//public static class Intent
 	
 	public static class DB {
@@ -296,6 +309,14 @@ public class CONS {
 		public static String pkey_LastVisiblePosition_BMActv
 							= "pkey_LastVisiblePosition_BMActv";
 		
+		////////////////////////////////
+		
+		// LogActv
+		
+		////////////////////////////////
+		public static String pkey_CurrentPosition_LogActv = 
+						"pkey_CurrentPosition_LogActv";
+
 	}
 
 	public static class MainActv {
@@ -330,6 +351,10 @@ public class CONS {
 		
 		public static final String format_Clock = "%02d:%02d";
 		
+		// X out of 100
+		// Usage => e.g. width = screen_width * 100 / ratio_Dialog_to_Screen_W
+		public static final int ratio_Dialog_to_Screen_W = 70;
+
 	}//public static class Admin
 
 	public static class Paths {
@@ -631,4 +656,29 @@ public class CONS {
 
 		
 	}
+	
+	public static class ShowLogActv {
+		
+		public static List<LogItem> list_ShowLog_Files = null;
+		
+//		public static ArrayAdapter<String> adp_LogFile_List = null;
+		
+		public static Adp_ShowLogFile_List adp_ShowLog_File_List;
+		
+		public static String fname_Target_LogFile = null;
+		
+		public static List<String> list_RawLines = null;
+		
+	}
+
+	public static class LogActv {
+		
+		public static List<String> list_LogFiles = null;
+		
+//		public static ArrayAdapter<String> adp_LogFile_List = null;
+		
+		public static Adp_LogFileList adp_LogFile_List;
+		
+	}
+	
 }//public class CONS

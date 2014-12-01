@@ -145,9 +145,9 @@ public class MainActv extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// 
-//		MenuInflater mi = getMenuInflater();
-//		mi.inflate(R.menu.menu_main, menu);
-//		
+		MenuInflater mi = getMenuInflater();
+		mi.inflate(R.menu.menu_actv_main, menu);
+		
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -155,11 +155,11 @@ public class MainActv extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 
-//		case R.id.opt_menu_main_db://----------------------------------
-//			
-//			Methods_dlg.dlg_Db_Activity(this);
-//			
-//			break;// case R.id.main_opt_menu_create_folder
+		case R.id.menu_main_admin://----------------------------------
+			
+			Methods_dlg.dlg_ACTV_MAIN_Admin(this);
+			
+			break;// case R.id.main_opt_menu_create_folder
 			
 		}//switch (item.getItemId())
 		

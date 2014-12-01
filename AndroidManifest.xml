@@ -29,6 +29,8 @@
         </activity>
         <activity android:name=".DeviceListActv" android:screenOrientation="portrait"></activity>
         <activity android:name=".StreamActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".LogActv" android:screenOrientation="portrait"></activity>
+        <activity android:name=".ShowLogActv" android:screenOrientation="portrait"></activity>
         
         
         

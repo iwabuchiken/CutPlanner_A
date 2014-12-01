@@ -20,7 +20,17 @@
 	
 	<color name="gray1">#424242</color>
 	<color name="gray_pale">#DFDFDF</color>
+
+<!-- REF color names http://www.workwithcolor.com/color-chart-full-01.htm -->
+	<color name="Arsenic">#3B444B</color>
+
+<!-- TwtActv::Timeline::background -->
+	<color name="yellow_bright">#ecf42a</color>
+	<color name="yellow_dark">#c2c166</color>
+	<color name="yellow_pale_dark">#E9E779</color>
+	<color name="yellow_pale_bright">#ffffb0</color>
 	
+		
 <!-- /main.xml -->
 	
 </resources>

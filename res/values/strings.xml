@@ -32,5 +32,12 @@
 		    					List of devices with history</string>    
 		<string name="devlist_list_bt_option">
 		    					Options</string>    
-    
+
+	<!-- Menu: main -->
+		<string name="menu_main_admin">Admin</string>
+		
+	<!-- dlg_actvmain_admin.xml -->
+		<string name="dlg_actvmain_admin_title">Admin</string>
+		<string name="dlg_actvmain_admin_item_see_log">See log</string>
+		
 </resources>
