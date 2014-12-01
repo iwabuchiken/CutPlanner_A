@@ -1,6 +1,7 @@
 <resources>
 
     <string name="app_name">CutPlanner_A</string>
+	<string name="action_settings">Settings</string>
 
     <!-- Generic items -->
 	    <string name="generic_bt_ok">OK</string>
@@ -39,5 +40,9 @@
 	<!-- dlg_actvmain_admin.xml -->
 		<string name="dlg_actvmain_admin_title">Admin</string>
 		<string name="dlg_actvmain_admin_item_see_log">See log</string>
-		
+
+    <!-- Menu: showlist -->
+    	<string name="menu_showlist_filter">Filter</string>
+    	<string name="menu_showlist_filter_history">Filter history</string>
+				
 </resources>

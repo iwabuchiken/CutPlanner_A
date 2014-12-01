@@ -144,6 +144,8 @@ public final class R {
         public static final int list_row_slimple_iv_1_tv=0x7f080045;
         public static final int ll_main=0x7f080007;
         public static final int menu_main_admin=0x7f080047;
+        public static final int menu_showlog_filter=0x7f080048;
+        public static final int menu_showlog_filter_history=0x7f080049;
         public static final int nonPairedDeviceList=0x7f080014;
         public static final int nonPairedListTitle=0x7f080013;
         public static final int pairedDeviceList=0x7f080012;
@@ -175,41 +177,47 @@ public final class R {
     }
     public static final class menu {
         public static final int menu_actv_main=0x7f070000;
+        public static final int menu_actv_showlog=0x7f070001;
     }
     public static final class string {
+        public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
-        public static final int commons_lbl_word=0x7f050011;
-        public static final int devlist_list_bt_option=0x7f050013;
+        public static final int commons_lbl_word=0x7f050012;
+        public static final int devlist_list_bt_option=0x7f050014;
         /**  devicelist.xml 
          */
-        public static final int devlist_list_connected=0x7f050012;
-        public static final int dlg_actvmain_admin_item_see_log=0x7f050016;
+        public static final int devlist_list_connected=0x7f050013;
+        public static final int dlg_actvmain_admin_item_see_log=0x7f050017;
         /**  dlg_actvmain_admin.xml 
          */
-        public static final int dlg_actvmain_admin_title=0x7f050015;
+        public static final int dlg_actvmain_admin_title=0x7f050016;
         /**  labels for templates 
          */
-        public static final int dlg_tmpl_confirm_simple_msg_delete_file=0x7f050010;
-        public static final int generic_Clear=0x7f05000e;
-        public static final int generic_Go=0x7f05000f;
-        public static final int generic_bt_back=0x7f050003;
-        public static final int generic_bt_cancel=0x7f050002;
+        public static final int dlg_tmpl_confirm_simple_msg_delete_file=0x7f050011;
+        public static final int generic_Clear=0x7f05000f;
+        public static final int generic_Go=0x7f050010;
+        public static final int generic_bt_back=0x7f050004;
+        public static final int generic_bt_cancel=0x7f050003;
         /**  Generic items 
          */
-        public static final int generic_bt_ok=0x7f050001;
-        public static final int generic_bt_quit=0x7f05000a;
-        public static final int generic_confirm_delete_file=0x7f05000d;
-        public static final int generic_message_quit=0x7f05000b;
-        public static final int generic_notice=0x7f05000c;
-        public static final int generic_tv_confirm=0x7f050004;
-        public static final int generic_tv_delete=0x7f050008;
-        public static final int generic_tv_edit=0x7f050007;
-        public static final int generic_tv_menu=0x7f050005;
-        public static final int generic_tv_no_data=0x7f050009;
-        public static final int generic_tv_register=0x7f050006;
+        public static final int generic_bt_ok=0x7f050002;
+        public static final int generic_bt_quit=0x7f05000b;
+        public static final int generic_confirm_delete_file=0x7f05000e;
+        public static final int generic_message_quit=0x7f05000c;
+        public static final int generic_notice=0x7f05000d;
+        public static final int generic_tv_confirm=0x7f050005;
+        public static final int generic_tv_delete=0x7f050009;
+        public static final int generic_tv_edit=0x7f050008;
+        public static final int generic_tv_menu=0x7f050006;
+        public static final int generic_tv_no_data=0x7f05000a;
+        public static final int generic_tv_register=0x7f050007;
         /**  Menu: main 
          */
-        public static final int menu_main_admin=0x7f050014;
+        public static final int menu_main_admin=0x7f050015;
+        /**  Menu: showlist 
+         */
+        public static final int menu_showlist_filter=0x7f050018;
+        public static final int menu_showlist_filter_history=0x7f050019;
     }
     public static final class style {
         /** 

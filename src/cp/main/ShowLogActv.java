@@ -154,8 +154,8 @@ public class ShowLogActv extends ListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// 
-//		MenuInflater mi = getMenuInflater();
-//		mi.inflate(R.menu.menu_main, menu);
+		MenuInflater mi = getMenuInflater();
+		mi.inflate(R.menu.menu_actv_showlog, menu);
 		
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -164,12 +164,16 @@ public class ShowLogActv extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		
-//		case R.id.opt_menu_main_db://------------------------
-//			
-//			Methods_dlg.dlg_Db_Actv(this);
-//			
-//			break;
+		case R.id.menu_showlog_filter://------------------------
+			
+			
+			break;
 		
+		case R.id.menu_showlog_filter_history://------------------------
+			
+			
+			break;
+			
 		default://------------------------
 			break;
 
