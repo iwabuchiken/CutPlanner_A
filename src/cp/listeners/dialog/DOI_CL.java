@@ -5,6 +5,7 @@ import cp.items.ListItem;
 import cp.main.R;
 import cp.utils.CONS;
 import cp.utils.Methods;
+import cp.utils.Methods_dlg;
 import cp.utils.Tags;
 import android.app.Activity;
 import android.app.Dialog;
@@ -99,7 +100,7 @@ public class DOI_CL implements OnItemClickListener {
 			
 			li = (ListItem) parent.getItemAtPosition(position);
 			
-//			case_Admin_LV(li);
+			case_ACTV_MAIN_ADMIN_LV(li);
 			
 			break;// case dlg_add_memos_gv
 			
@@ -108,5 +109,25 @@ public class DOI_CL implements OnItemClickListener {
 		}//switch (tag)
 		
 	}//public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+
+	private void 
+	case_ACTV_MAIN_ADMIN_LV
+	(ListItem li) {
+		// TODO Auto-generated method stub
+		
+		if (li.getText().equals(actv.getString(
+				R.string.dlg_actvmain_admin_item_see_log))) {
+
+			Methods.start_Activity_LogActv(actv, d1);
+			
+		} else {
+			
+			String msg = "Unknown choice => " + li.getText();
+			Methods_dlg.dlg_ShowMessage_SecondDialog(actv, msg, d1);
+			
+		}
+
+		
+	}//case_ACTV_MAIN_ADMIN_LV
 
 }//public class DialogOnItemClickListener implements OnItemClickListener

@@ -275,6 +275,28 @@ public class MainActv extends Activity {
 
 		}
 		
+//		String log_msg = "MainActv => starts";
+//		Methods.write_Log(this, log_msg,
+//				Thread.currentThread().getStackTrace()[2].getFileName(), Thread
+//						.currentThread().getStackTrace()[2].getLineNumber());
+		
+//		//debug
+//		// Log
+//		msg_Log = "this.getFilesDir().getPath() => "
+//						+ this.getFilesDir().getPath();
+//		
+//		Log.d("MainActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
+//		
+//		File f = new File(this.getFilesDir().getPath());
+//		
+//		// Log
+//		msg_Log = "f.isDirectory() => " + f.isDirectory();
+//		Log.d("MainActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", msg_Log);
+		
 	}//protected void onStart()
 
 	@Override

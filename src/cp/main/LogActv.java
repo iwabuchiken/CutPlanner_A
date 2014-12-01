@@ -426,6 +426,28 @@ public class LogActv extends ListActivity {
 		
 		CONS.LogActv.list_LogFiles = new ArrayList<String>();
 		
+		////////////////////////////////
+
+		// log file path
+
+		////////////////////////////////
+		File f1 = new File(CONS.DB.dPath_Data_Root);
+		File f2 = new File(CONS.DB.dPath_Data_Root_tablet);
+		
+		if (f1.exists()) {
+			
+		} else if (!f1.exists() && f2.exists()) {
+			
+			CONS.DB.dPath_Data_Root = CONS.DB.dPath_Data_Root_tablet;
+			
+		} else if (!f1.exists() && !f2.exists()) {
+			
+			CONS.DB.dPath_Data_Root = this.getFilesDir().getPath();
+			
+		}
+		
+//		CONS.DB.dPath_Data_Root = "/storage/sdcard0/apps/cp_data";
+		
 	}//_Setup_InitVars
 
 	@Override

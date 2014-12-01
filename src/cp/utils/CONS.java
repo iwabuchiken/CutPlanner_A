@@ -92,7 +92,8 @@ public class CONS {
 		public static String dPath_dbFile;
 //		public static String dPath_dbFile = "/data/data/cm7.main/databases";
 		
-		public final static String dPath_Data_Root = "/mnt/sdcard-ext/cp_data";
+		public static String dPath_Data_Root = "/mnt/sdcard-ext/cp_data";
+		public static String dPath_Data_Root_tablet = "/storage/sdcard0/apps/cp_data";
 		
 		public static String dPath_dbFile_Backup = dPath_Data_Root + "/cp_backup";
 		
@@ -230,6 +231,14 @@ public class CONS {
 		public static String jointString_TableName = "__";
 		
 		public static int pastXDays		= -10;
+
+		public final static String fname_Log = "log.txt";
+		
+		public final static String fname_Log_Trunk = "log";
+		
+		public final static String fname_Log_ext = ".txt";
+
+		public static final long logFile_MaxSize = 40000;
 
 		////////////////////////////////
 
