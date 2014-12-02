@@ -159,7 +159,13 @@ public class DB_OCL implements OnClickListener {
 		
 		//
 		switch (tag_name) {
-		
+
+		case DLG_FILTER_SHOWLIST_CLEAR://------------------------------------------------
+			
+			case_DLG_FILTER_SHOWLIST_CLEAR();
+			
+			break;
+
 		case DLG_FILTER_SHOWLIST_RESET://------------------------------------------------
 			
 			case_DLG_FILTER_SHOWLIST_RESET();
@@ -207,6 +213,25 @@ public class DB_OCL implements OnClickListener {
 			break;
 		}//switch (tag_name)
 	}//public void onClick(View v)
+
+	private void 
+	case_DLG_FILTER_SHOWLIST_CLEAR() {
+		// TODO Auto-generated method stub
+		////////////////////////////////
+	
+		// view
+	
+		////////////////////////////////
+		EditText et = (EditText) d1.findViewById(R.id.dlg_filter_showlist_et_content);
+		
+		////////////////////////////////
+
+		// clear
+
+		////////////////////////////////
+		et.setText("");
+		
+	}
 
 	private void 
 	case_DLG_FILTER_SHOWLIST_RESET() {
