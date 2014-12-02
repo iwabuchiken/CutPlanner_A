@@ -1,13 +1,17 @@
 package cp.listeners.dialog;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import cp.items.LogItem;
 import cp.main.R;
 import cp.utils.CONS;
 import cp.utils.Methods;
+import cp.utils.Methods_dlg;
 import cp.utils.Tags;
 
 import android.app.Activity;
@@ -156,6 +160,19 @@ public class DB_OCL implements OnClickListener {
 		//
 		switch (tag_name) {
 		
+		case DLG_FILTER_SHOWLIST_RESET://------------------------------------------------
+			
+			case_DLG_FILTER_SHOWLIST_RESET();
+			
+			break;
+
+		case DLG_FILTER_SHOWLIST_OK://------------------------------------------------
+			
+			case_DLG_FILTER_SHOWLIST_OK();
+//			case_DLG_FILTER_SHOWLIST_OK();
+			
+			break;
+
 		case GENERIC_DISMISS://------------------------------------------------
 			
 			d1.dismiss();
@@ -191,6 +208,199 @@ public class DB_OCL implements OnClickListener {
 		}//switch (tag_name)
 	}//public void onClick(View v)
 
+	private void 
+	case_DLG_FILTER_SHOWLIST_RESET() {
+		// TODO Auto-generated method stub
+		////////////////////////////////
+
+		// validate: raw lines list
+
+		////////////////////////////////
+		if (CONS.ShowLogActv.list_RawLines == null
+				|| CONS.ShowLogActv.list_RawLines.size() < 1) {
+			
+			File fpath_Log = new File(
+					CONS.DB.dPath_Log,
+					CONS.ShowLogActv.fname_Target_LogFile);
+			
+			List<String> list = 
+					Methods.get_LogLines(actv, fpath_Log.getAbsolutePath());
+			
+			////////////////////////////////
+			
+			// list => reverse
+			
+			////////////////////////////////
+			Collections.reverse(list);
+			
+			////////////////////////////////
+
+			// add all
+
+			////////////////////////////////
+			CONS.ShowLogActv.list_RawLines.addAll(list);
+			
+		}
+
+		////////////////////////////////
+
+		// build: LogItem list
+
+		////////////////////////////////
+		List<LogItem> list_LogItem = 
+				Methods.conv_LogLinesList_to_LogItemList(
+									actv, CONS.ShowLogActv.list_RawLines);
+		
+		////////////////////////////////
+
+		// reset
+
+		////////////////////////////////
+		CONS.ShowLogActv.list_ShowLog_Files.clear();
+		
+		CONS.ShowLogActv.list_ShowLog_Files.addAll(list_LogItem);
+
+		CONS.ShowLogActv.adp_ShowLog_File_List.notifyDataSetChanged();
+		
+		////////////////////////////////
+
+		// dismiss
+
+		////////////////////////////////
+		d1.dismiss();
+		
+	}//case_DLG_FILTER_SHOWLIST_RESET
+
+	@SuppressWarnings("unused")
+	private void 
+	case_DLG_FILTER_SHOWLIST_OK() {
+		// TODO Auto-generated method stub
+		
+		String msg_Log;
+		
+		String msg;
+		
+		int res_i;
+		
+		////////////////////////////////
+		
+		// get view
+		
+		////////////////////////////////
+		EditText et = (EditText) d1.findViewById(R.id.dlg_filter_showlist_et_content);
+		
+		////////////////////////////////
+
+		// validate: any input
+
+		////////////////////////////////
+		String input = et.getText().toString();
+		
+		if (input == null || input.equals("")) {
+			
+			msg = "no input";
+			Methods_dlg.dlg_ShowMessage_SecondDialog(actv, msg, d1, R.color.red);
+			
+			return;
+			
+		}
+		
+		////////////////////////////////
+		
+		// validate: multiple keywords
+		
+		////////////////////////////////
+		input = input.trim();
+		
+		input = input.replaceAll("　", " ");
+		
+		input = input.replaceAll(" +", " ");
+		
+		// Log
+		msg_Log = "input is now => " + input;
+		Log.d("DB_OCL.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+//		String[] tokens = input.split(" +");
+		String[] tokens = input.split(" ");
+		
+		if (tokens == null) {
+			
+			msg = "Split the input => null";
+			Methods_dlg.dlg_ShowMessage_SecondDialog(actv, msg, d1, R.color.gold2);
+			
+			return;
+			
+		}
+		
+		// Log
+		msg_Log = "tokens.length => " + tokens.length;
+		Log.d("DB_OCL.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+
+		////////////////////////////////
+
+		// filter: OR
+
+		////////////////////////////////
+		List<LogItem> list_LogItem = new ArrayList<LogItem>();
+		
+		String main_Line;
+		
+		boolean is_In;
+		
+		for (LogItem logItem : CONS.ShowLogActv.list_ShowLog_Files) {
+			
+			is_In = false;
+			
+			main_Line = logItem.getText();
+			
+			for (String token : tokens) {
+				
+				if (main_Line.contains(token)) {
+					
+					is_In = true;
+					
+					break;
+					
+				}
+				
+			}//for (String token : tokens)
+			
+			if (is_In == true) {
+				
+				list_LogItem.add(logItem);
+				
+			}
+			
+		}
+		
+		// Log
+		msg_Log = "list_LogItem.size() => " + list_LogItem.size();
+		Log.d("DB_OCL.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+
+		////////////////////////////////
+
+		// update list
+
+		////////////////////////////////
+		CONS.ShowLogActv.list_ShowLog_Files.clear();
+		
+		CONS.ShowLogActv.list_ShowLog_Files.addAll(list_LogItem);
+		
+		CONS.ShowLogActv.adp_ShowLog_File_List.notifyDataSetChanged();
+		
+		////////////////////////////////
+
+		// dismiss
+
+		////////////////////////////////
+		d1.dismiss();
+	}//case_DLG_FILTER_SHOWLIST_OK
 	
 	
 

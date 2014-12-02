@@ -189,7 +189,7 @@ public class ShowLogActv extends ListActivity {
 	case_OPT_Filter() {
 		// TODO Auto-generated method stub
 		
-		Methods_dlg.dlg_filter_ShowList(this);
+		Methods_dlg.dlg_filter_ShowLogList(this);
 		
 	}
 
@@ -275,8 +275,23 @@ public class ShowLogActv extends ListActivity {
 	do_Special() {
 		// TODO Auto-generated method stub
 		
+//		_special_D_7_V_3_2();
 //		_special_D_7_V_3_1();
 		
+	}
+
+	private void _special_D_7_V_3_2() {
+		// TODO Auto-generated method stub
+		
+		String log_msg = "_special_D_7_V_3_2";
+		Methods.write_Log(this, log_msg,
+				Thread.currentThread().getStackTrace()[2].getFileName(), Thread
+						.currentThread().getStackTrace()[2].getLineNumber());
+		
+		log_msg = "time=" + Methods.get_TimeLabel(Methods.getMillSeconds_now());
+		Methods.write_Log(this, log_msg,
+				Thread.currentThread().getStackTrace()[2].getFileName(), Thread
+						.currentThread().getStackTrace()[2].getLineNumber());
 	}
 
 	private void 

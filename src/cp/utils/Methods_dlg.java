@@ -1043,7 +1043,7 @@ public class Methods_dlg {
 	}//dlg_ACTV_MAIN_Admin
 
 	public static void 
-	dlg_filter_ShowList
+	dlg_filter_ShowLogList
 	(Activity actv) {
 		// TODO Auto-generated method stub
 		boolean res;
