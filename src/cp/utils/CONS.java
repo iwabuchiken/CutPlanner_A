@@ -222,6 +222,48 @@ public class CONS {
 //			"INTEGER", 			"INTEGER"
 		};
 		
+		////////////////////////////////
+		
+		// table: filter_history
+		
+		////////////////////////////////
+		public static String tname_FilterHistory = "filter_history";
+		
+		public static String[] col_names_FilterHistory = {
+			
+			"keywords",							// 0
+			"operator",							// 1
+			"op_label",							// 1
+			
+		};
+		
+		public static String[] col_names_FilterHistory_full = {
+			
+			android.provider.BaseColumns._ID,		// 0
+			"created_at", "modified_at",			// 1,2
+			"keywords",									// 3
+			"operator",									// 4
+			"op_label",									// 5
+			
+		};
+		
+		public static String[] col_types_FilterHistory = {
+			
+			"TEXT", 			// 0
+			"INTEGER", 			// 1
+			"TEXT", 			// 2
+			
+		};
+		
+		public static String[] col_types_FilterHistory_full = {
+			
+			"INTEGER", "TEXT", "TEXT",	// 0,1,2
+			"TEXT", 					// 3
+			"INTEGER", 					// 4
+			"TEXT", 					// 5
+			
+		};
+		
 
 		////////////////////////////////
 
@@ -325,6 +367,23 @@ public class CONS {
 		////////////////////////////////
 		public static String pkey_CurrentPosition_LogActv = 
 						"pkey_CurrentPosition_LogActv";
+
+		////////////////////////////////
+
+		// ShowListActv
+
+		////////////////////////////////
+		public static String pname_ShowListActv = "pname_ShowListActv"; 
+		
+		
+		public static final String 
+		pkey_ShowListActv_Filter_String = 
+							"pkey_ShowListActv_Filter_String";
+
+		public static final String 
+		pkey_ShowListActv_Current_Position = 
+							"pkey_ShowListActv_Current_Position";
+		
 
 	}
 

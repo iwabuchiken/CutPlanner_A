@@ -21,7 +21,12 @@
     	
     	<string name="generic_Clear">Clear</string>
     	<string name="generic_Go">Go</string>
-    
+
+    <!-- commmons　-->    	
+   		<string name="commons_lbl_rb_and">AND</string>
+    	<string name="commons_lbl_rb_or">OR</string>
+    	<string name="commons_lbl_rb_not">NOT</string>
+    	
     <!-- labels for templates -->
 	    <string name="dlg_tmpl_confirm_simple_msg_delete_file">
        									Delete file, too</string>

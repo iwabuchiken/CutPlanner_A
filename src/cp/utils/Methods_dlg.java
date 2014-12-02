@@ -18,9 +18,9 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
-
 import cp.adapters.Adp_ListItems;
 import cp.items.ListItem;
+import cp.items.WordPattern;
 import cp.listeners.dialog.DB_OCL;
 import cp.listeners.dialog.DB_OTL;
 import cp.listeners.dialog.DOI_CL;
@@ -1041,5 +1041,262 @@ public class Methods_dlg {
 		
 		
 	}//dlg_ACTV_MAIN_Admin
+
+	public static void 
+	dlg_filter_ShowList
+	(Activity actv) {
+		// TODO Auto-generated method stub
+		boolean res;
+		
+		////////////////////////////////
+
+		// get dialog
+
+		////////////////////////////////
+		Dialog d = _filter_ShowList__GetDialog(actv);
+
+		////////////////////////////////
+
+		// gridview
+
+		////////////////////////////////
+//		res = _filter_ShowList__GridView(actv, d);
+
+		////////////////////////////////
+
+		// set previous string
+
+		////////////////////////////////
+		res = _filter_ShowList__SetString(actv, d);
+		
+		////////////////////////////////
+
+		// show
+
+		////////////////////////////////
+		d.show();
+		
+	}//filter_ShowList
+
+	/******************************
+		@return
+			false => pref val is null<br>
+	 ******************************/
+	private static boolean 
+	_filter_ShowList__SetString
+	(Activity actv, Dialog d) {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+
+		// get pref
+
+		////////////////////////////////
+		String pref_FilterString = Methods.get_Pref_String(
+						actv, 
+						CONS.Pref.pname_MainActv, 
+						CONS.Pref.pkey_ShowListActv_Filter_String, 
+						null);
+		
+		if (pref_FilterString == null) {
+			
+			// Log
+			String msg_Log = "pref_FilterString => null";
+			Log.d("Methods_dlg.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			return false;
+			
+		}
+		
+		////////////////////////////////
+
+		// set: text
+
+		////////////////////////////////
+		EditText et = (EditText) d.findViewById(R.id.dlg_filter_showlist_et_content);
+		
+		et.setText(pref_FilterString);
+		
+		////////////////////////////////
+
+		// selection
+
+		////////////////////////////////
+		et.setSelection(pref_FilterString.length());
+		
+		return true;
+		
+	}//_filter_ShowList__SetString
+
+	/******************************
+		@return
+			false 1. Can't get list<br>
+				2. Can't build adapter<br>
+	 ******************************/
+//	private static boolean 
+//	_filter_ShowList__GridView
+//	(Activity actv, Dialog d) {
+//		// TODO Auto-generated method stub
+//		
+//		////////////////////////////////
+//
+//		// Get: GV
+//
+//		////////////////////////////////
+//		GridView gv_Patterns =
+//				(GridView) d.findViewById(R.id.dlg_filter_showlist_gv);
+//
+//		////////////////////////////////
+//
+//		// get list
+//
+//		////////////////////////////////
+//		List<WordPattern> list_WPs = DBUtils.find_All_WP(actv);
+//		
+//		if (list_WPs == null) {
+//			
+//			String msg = "Can't get list";
+//			Methods_dlg.dlg_ShowMessage(actv, msg, R.color.red);
+//			
+//			return false;
+//			
+//		}
+//		
+//		////////////////////////////////
+//
+//		// sort
+//
+//		////////////////////////////////
+//		Collections.sort(
+//				list_WPs, 
+//				new Comp_WP(
+//						
+//						CONS.Enums.SortType.WORD,
+//						CONS.Enums.SortOrder.ASC
+//				));
+//
+//		Collections.sort(
+//				list_WPs, 
+//				new Comp_WP(
+//						
+//						CONS.Enums.SortType.USED,
+//						CONS.Enums.SortOrder.DESC
+//						));
+//		
+//		
+//		////////////////////////////////
+//
+//		// Adapter
+//
+//		////////////////////////////////
+//		CONS.ShowListActv.adp_List_WPs = new Adp_WordPatterns(
+//				actv,
+//				R.layout.list_row_gv,
+//				list_WPs
+//				);
+//
+//		if (CONS.ShowListActv.adp_List_WPs == null) {
+//			
+//			String msg = "Can't build adapter";
+//			Methods_dlg.dlg_ShowMessage(actv, msg, R.color.red);
+//			
+//			return false;
+//			
+//		}
+//
+//		////////////////////////////////
+//
+//		// set: adapter
+//
+//		////////////////////////////////
+//		gv_Patterns.setAdapter(CONS.ShowListActv.adp_List_WPs);
+////		gv.setAdapter(adapter);
+//		
+//		////////////////////////////////
+//
+//		// Listener
+//
+//		////////////////////////////////
+//		gv_Patterns.setTag(Tags.DialogItemTags.GV_FILTER_SHOWLIST);
+//		
+//		// OnClick
+//		gv_Patterns.setOnItemClickListener(new DOI_CL(actv, d));
+//		
+//		////////////////////////////////
+//
+//		// return
+//
+//		////////////////////////////////
+//		return true;
+//		
+//	}//_filter_ShowList__GridView
 	
+
+	private static Dialog 
+	_filter_ShowList__GetDialog
+	(Activity actv) {
+		// TODO Auto-generated method stub
+
+		////////////////////////////////
+
+		// setup dialog
+
+		////////////////////////////////
+		Dialog dlg = new Dialog(actv);
+		
+		//
+		dlg.setContentView(R.layout.dlg_filter_showlog);
+		
+		// Title
+		dlg.setTitle(actv.getString(R.string.menu_showlist_filter));
+		
+		////////////////////////////////
+
+		// Buttons
+
+		////////////////////////////////
+		ImageButton bt_OK	= (ImageButton) dlg.findViewById(R.id.dlg_filter_showlist_bt_ok);
+//		Button bt_OK	= (Button) dlg.findViewById(R.id.dlg_filter_showlist_bt_ok);
+		ImageButton bt_Cancel =
+				(ImageButton) dlg.findViewById(R.id.dlg_filter_showlist_bt_cancel);
+//		Button bt_Cancel =
+//				(Button) dlg.findViewById(R.id.dlg_filter_showlist_bt_cancel);
+		ImageButton bt_Clear	=
+				(ImageButton) dlg.findViewById(R.id.dlg_filter_showlist_bt_clear);
+		ImageButton bt_Reset =
+				(ImageButton) dlg.findViewById(R.id.dlg_filter_showlist_bt_reset);
+		
+		
+		////////////////////////////////
+
+		// Listeners
+
+		////////////////////////////////
+//		bt_OK.setTag(Tags.DialogTags.dlg_Filter_Timeline_OK);
+		bt_OK.setTag(Tags.DialogTags.DLG_FILTER_SHOWLIST_OK);
+		bt_Clear.setTag(Tags.DialogTags.DLG_FILTER_SHOWLIST_CLEAR);
+		bt_Reset.setTag(Tags.DialogTags.DLG_FILTER_SHOWLIST_RESET);
+		
+		bt_Cancel.setTag(Tags.DialogTags.GENERIC_DISMISS);
+		
+		// On touch
+		bt_OK.setOnTouchListener(new DB_OTL(actv));
+		bt_Clear.setOnTouchListener(new DB_OTL(actv));
+		bt_Reset.setOnTouchListener(new DB_OTL(actv));
+		
+		bt_Cancel.setOnTouchListener(new DB_OTL(actv));
+		
+		// On click
+		bt_OK.setOnClickListener(new DB_OCL(actv, dlg));
+		bt_Clear.setOnClickListener(new DB_OCL(actv, dlg));
+		bt_Reset.setOnClickListener(new DB_OCL(actv, dlg));
+		
+		bt_Cancel.setOnClickListener(new DB_OCL(actv, dlg));
+		
+		return dlg;
+		
+	}//_filter_ShowList__GetDialog
+
 }//public class Methods_dialog

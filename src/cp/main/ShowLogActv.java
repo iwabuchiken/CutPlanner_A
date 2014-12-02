@@ -16,6 +16,7 @@ import cp.items.LogItem;
 import cp.listeners.button.BO_CL;
 import cp.listeners.button.BO_TL;
 import cp.utils.CONS;
+import cp.utils.DBUtils;
 import cp.utils.Methods;
 import cp.utils.Methods_dlg;
 import cp.utils.Tags;
@@ -166,6 +167,7 @@ public class ShowLogActv extends ListActivity {
 		
 		case R.id.menu_showlog_filter://------------------------
 			
+			case_OPT_Filter();
 			
 			break;
 		
@@ -182,6 +184,14 @@ public class ShowLogActv extends ListActivity {
 		return super.onOptionsItemSelected(item);
 		
 	}//public boolean onOptionsItemSelected(MenuItem item)
+
+	private void 
+	case_OPT_Filter() {
+		// TODO Auto-generated method stub
+		
+		Methods_dlg.dlg_filter_ShowList(this);
+		
+	}
 
 	@Override
 	protected void onPause() {
@@ -252,7 +262,58 @@ public class ShowLogActv extends ListActivity {
 		
 		if (res == false) return;
 		
+		////////////////////////////////
+
+		// special ops
+
+		////////////////////////////////
+		do_Special();
+		
 	}//protected void onStart()
+
+	private void 
+	do_Special() {
+		// TODO Auto-generated method stub
+		
+//		_special_D_7_V_3_1();
+		
+	}
+
+	private void 
+	_special_D_7_V_3_1() {
+		// TODO Auto-generated method stub
+		
+		String msg_Log;
+		int res_i;
+		
+		boolean res = DBUtils.tableExists(this, CONS.DB.dbName, CONS.DB.tname_FilterHistory);
+		
+		if (res == true) {
+			
+			// Log
+			msg_Log = "table exists => " + CONS.DB.tname_FilterHistory;
+			Log.d("ShowLogActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			return;
+			
+		}
+		
+		res_i = DBUtils.createTable_static(
+					this, 
+					CONS.DB.tname_FilterHistory, 
+					CONS.DB.col_names_FilterHistory, 
+					CONS.DB.col_types_FilterHistory);
+		
+		// Log
+		msg_Log = "res_i => " + res_i;
+		
+		Log.d("ShowLogActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+	}//_special_D_7_V_3_1
 
 	private boolean
 	_Setup_SetListeners_Navigation() {

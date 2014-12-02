@@ -81,5 +81,10 @@
 	    <item name="android:textSize">25dp</item>
 	    <item name="android:padding">1dp</item>
     </style>
+
+    <style name="ib_basic_1">
+	    <item name="android:layout_margin">2dp</item>
+	    
+    </style>
     
 </resources>

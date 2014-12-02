@@ -6,7 +6,12 @@ public class Tags {
 		// Generics
 		DLG_GENERIC_DISMISS, dlg_generic_dismiss_second_dialog,
 		dlg_generic_dismiss_third_dialog,
-		
+
+		GENERIC_DISMISS, 
+		GENERIC_DISMISS_4TH_DIALOG, 
+		GENERIC_DISMISS_THIRD_DIALOG, 
+		GENERIC_DISMISS_SECOND_DIALOG, 
+		GENERIC_CLEAR_SECOND_DIALOG, 
 		
 		// dlg_create_folder.xml
 		dlg_create_folder_ok, dlg_create_folder_cancel,
@@ -76,7 +81,11 @@ public class Tags {
 		DLG_CONF_DELETE_AI_OK,
 		
 		// dlg_edit_item.xml
-		DLG_EDIT_AI_BT_OK, GENERIC_DISMISS, GENERIC_DISMISS_4TH_DIALOG, GENERIC_DISMISS_THIRD_DIALOG, GENERIC_DISMISS_SECOND_DIALOG, GENERIC_CLEAR_SECOND_DIALOG,
+		DLG_EDIT_AI_BT_OK, 
+		
+		DLG_FILTER_SHOWLIST_OK, 
+		DLG_FILTER_SHOWLIST_CLEAR, 
+		DLG_FILTER_SHOWLIST_RESET,
 		
 		
 	}//public static enum DialogTags
