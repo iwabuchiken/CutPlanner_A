@@ -80,13 +80,36 @@ public class CV2 extends View {
 
 	// onDraw���\�b�h(�`�揈��)
 	@Override
-	protected void onDraw(Canvas canvas) {
+	protected void 
+	onDraw(Canvas canvas) {
 		
 		String msg_Log;
 		
 		if (CV2.can == null) {
 			
 			CV2.can = canvas;
+			
+		}
+		
+		////////////////////////////////
+
+		// draw: Rect A
+
+		////////////////////////////////
+		if (CONS.Canvas2.f_Draw_Rect_A == true) {
+			
+			_onDraw__Rect_A(canvas);
+			
+		}
+		
+		////////////////////////////////
+		
+		// draw: Rect B
+		
+		////////////////////////////////
+		if (CONS.Canvas2.f_Draw_Rect_B == true) {
+			
+			_onDraw__Rect_B(canvas);
 			
 		}
 		
@@ -140,6 +163,74 @@ public class CV2 extends View {
 		
 	}
 
+	private void 
+	_onDraw__Rect_A(Canvas canvas) {
+		// TODO Auto-generated method stub
+		////////////////////////////////
+
+		// paint
+
+		////////////////////////////////
+		CONS.Canvas2.p_Rect_A = new Paint();
+		
+		CONS.Canvas2.p_Rect_A.setColor(CONS.Canvas2.col_Rect_A);
+		CONS.Canvas2.p_Rect_A.setStrokeWidth(CONS.Canvas2.LineWidth_Rect_A);
+
+		////////////////////////////////
+
+		// draw
+
+		////////////////////////////////
+		canvas.drawRect(
+				CONS.Canvas2.Rect_A_X1, 
+				CONS.Canvas2.Rect_A_Y1, 
+				CONS.Canvas2.Rect_A_X1 + CONS.Canvas2.Rect_A_W, 
+				CONS.Canvas2.Rect_A_Y1 + CONS.Canvas2.Rect_A_H,
+				CONS.Canvas2.p_Rect_A
+				);
+		
+		// Log
+		String msg_Log = "Rect A => drawn";
+		Log.d("CV2.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+	}//_onDraw__Rect_A
+
+	private void 
+	_onDraw__Rect_B(Canvas canvas) {
+		// TODO Auto-generated method stub
+		////////////////////////////////
+		
+		// paint
+		
+		////////////////////////////////
+		CONS.Canvas2.p_Rect_B = new Paint();
+		
+		CONS.Canvas2.p_Rect_B.setColor(CONS.Canvas2.col_Rect_B);
+		CONS.Canvas2.p_Rect_B.setStrokeWidth(CONS.Canvas2.LineWidth_Rect_B);
+		
+		////////////////////////////////
+		
+		// draw
+		
+		////////////////////////////////
+		canvas.drawRect(
+				CONS.Canvas2.Rect_B_X1, 
+				CONS.Canvas2.Rect_B_Y1, 
+				CONS.Canvas2.Rect_B_X1 + CONS.Canvas2.Rect_B_W, 
+				CONS.Canvas2.Rect_B_Y1 + CONS.Canvas2.Rect_B_H,
+				CONS.Canvas2.p_Rect_B
+				);
+		
+		// Log
+		String msg_Log = "Rect B => drawn";
+		Log.d("CV2.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+	}//_onDraw__Rect_B
+	
 	public void _go() {
 		
 		// Log
@@ -182,6 +273,49 @@ public class CV2 extends View {
 		this.invalidate();
 	}
 
+	public void 
+	draw_A
+	(Activity actv) {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+
+		// flag
+
+		////////////////////////////////
+		CONS.Canvas2.f_Draw_Rect_A = true;
+
+		////////////////////////////////
+
+		// invalidate
+
+		////////////////////////////////
+		this.invalidate();
+		
+	}//draw_A
+
+	public void 
+	draw_B
+	(Activity actv) {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+
+		// flag
+
+		////////////////////////////////
+		CONS.Canvas2.f_Draw_Rect_B = true;
+
+		////////////////////////////////
+
+		// invalidate
+
+		////////////////////////////////
+		this.invalidate();
+		
+		
+	}//draw_B
+	
 
 	////////////////////////////////
 

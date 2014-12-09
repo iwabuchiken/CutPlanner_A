@@ -185,7 +185,60 @@ public class TopolActv extends Activity {
 		
 		_Setup__SetListener();
 
+		////////////////////////////////
+
+		// draw: initial
+
+		////////////////////////////////
+		_Setup_Draw_Initial();
+		
 	}//protected void onStart()
+
+	private void 
+	_Setup_Draw_Initial() {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+
+		// init: values
+
+		////////////////////////////////
+		////////////////////////////////
+
+		// rect: A
+
+		////////////////////////////////
+		CONS.Canvas2.Rect_A_X1 = 100;
+		CONS.Canvas2.Rect_A_Y1 = 300;
+
+		CONS.Canvas2.Rect_A_W = 300;
+		CONS.Canvas2.Rect_A_H = 150;
+	
+		////////////////////////////////
+		
+		// rect: B
+		
+		////////////////////////////////
+		CONS.Canvas2.Rect_B_X1 = 100;
+		CONS.Canvas2.Rect_B_Y1 = 100;
+		
+		CONS.Canvas2.Rect_B_W = 100;
+		CONS.Canvas2.Rect_B_H = 200;
+		
+		
+		////////////////////////////////
+
+		// get: view
+
+		////////////////////////////////
+		cp.views.CV2 cv = (cp.views.CV2) findViewById(R.id.actv_topol_cv_canvas);
+		
+		cv.draw_A(this);
+		
+		cv.draw_B(this);
+		
+		
+	}//_Setup_Draw_Initial
 
 	@Override
 	protected void 

@@ -15,6 +15,7 @@ import cp.main.BluetoothServerThread;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.os.Vibrator;
@@ -685,6 +686,84 @@ public class CONS {
 //		public static boolean Draw_Rect_A		= false;
 		
 	}
+	
+	public static class 
+	Canvas2 {
+
+		////////////////////////////////
+
+		// commons
+
+		////////////////////////////////
+		public static int lineWidth		= 10;
+
+		////////////////////////////////
+		
+		// rect: A
+		
+		////////////////////////////////
+		public static float Rect_A_X1;
+		public static float Rect_A_Y1;
+		
+		public static float Rect_A_X2;
+		public static float Rect_A_Y2;
+		
+		public static float Rect_A_W;
+		public static float Rect_A_H;
+		
+		public static int LineWidth_Rect_A	= lineWidth;
+		
+//		public static float Rect_A_X1_prev;
+//		public static float Rect_A_Y1_prev;
+		
+		// paint
+		public static Paint p_Rect_A;
+		
+		public static int col_Rect_A = Color.RED;
+		
+		// flag
+		public static boolean f_Draw_Rect_A		= false;
+
+//		// prev position
+//		public static float Rect_A_X_prev;
+//		public static float Rect_A_Y_prev;
+//
+//		// distance to the base point
+//		public static float Rect_A_X_dist_from_base;
+//		public static float Rect_A_Y_dist_from_base;
+		
+		////////////////////////////////
+		
+		// rect: B
+		
+		////////////////////////////////
+		public static float Rect_B_X1;
+		public static float Rect_B_Y1;
+		
+		public static float Rect_B_X2;
+		public static float Rect_B_Y2;
+		
+		public static float Rect_B_W;
+		public static float Rect_B_H;
+		
+		public static int LineWidth_Rect_B	= lineWidth;
+		
+//		public static float Rect_B_X1_prev;
+//		public static float Rect_B_Y1_prev;
+//
+//		// distance to the base point
+//		public static float Rect_B_X_dist_from_base;
+//		public static float Rect_B_Y_dist_from_base;
+
+		// paint
+		public static Paint p_Rect_B;
+		
+		public static int col_Rect_B = Color.BLUE;
+		
+		// flag
+		public static boolean f_Draw_Rect_B		= false;
+
+	}//Canvas2
 	
 	// bluetooth-related
 	public static class BT {
