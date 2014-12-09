@@ -45,6 +45,7 @@
 	<!-- dlg_actvmain_admin.xml -->
 		<string name="dlg_actvmain_admin_title">Admin</string>
 		<string name="dlg_actvmain_admin_item_see_log">See log</string>
+		<string name="dlg_actvmain_admin_item_Topol">Topol</string>
 
     <!-- Menu: showlist -->
     	<string name="menu_showlist_filter">Filter</string>

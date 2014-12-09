@@ -6,6 +6,7 @@ import cp.utils.CONS;
 import cp.utils.Methods;
 import cp.utils.Tags;
 import cp.views.CV;
+import cp.views.CV2;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
@@ -27,6 +28,7 @@ public class V_OTL implements OnTouchListener {
 	private Dialog d3;
 	private Dialog d4;
 	private CV cv;
+	private CV2 cv2;
 	
 	public V_OTL(Activity actv) {
 		//
@@ -38,6 +40,14 @@ public class V_OTL implements OnTouchListener {
 		
 		this.actv	= actv;
 		this.cv		= cv;
+		
+	}
+
+	public V_OTL(Activity actv, CV2 cv2) {
+		// TODO Auto-generated constructor stub
+		
+		this.actv	= actv;
+		this.cv2	= cv2;
 		
 	}
 
@@ -154,6 +164,23 @@ public class V_OTL implements OnTouchListener {
 	onTouch(View v, MotionEvent event) {
 		
 		Tags.ViewTags tag_name = (Tags.ViewTags) v.getTag();
+		
+		////////////////////////////////
+
+		// TopolActv
+
+		////////////////////////////////
+		if (tag_name == Tags.ViewTags.CANVAS_TOPOL) {
+			
+			// Log
+			String msg_Log = "onTouch => Topol";
+			Log.d("V_OTL.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			return false;
+			
+		}
 		
 		ImageButton ib;
 		

@@ -904,11 +904,16 @@ public class Methods_dlg {
 		list.add(new ListItem.Builder()
 						.setText(actv.getString(
 								R.string.dlg_actvmain_admin_item_see_log))
-								.setIconID(R.drawable.menu_icon_admin_32x32_yellow)
-								.setTextColor_ID(R.color.yellow_dark)
+								.setIconID(R.drawable.menu_icon_admin_32x32_blue)
+								.setTextColor_ID(R.color.blue1)
 								.build());
-//		list.add(actv.getString(R.string.dlg_actvmain_admin_item_restore_db));
-//		list.add(actv.getString(R.string.dlg_actvmain_admin_item_operations));
+		
+		list.add(new ListItem.Builder()
+					.setText(actv.getString(
+							R.string.dlg_actvmain_admin_item_Topol))
+							.setIconID(R.drawable.menu_icon_admin_32x32_brown)
+							.setTextColor_ID(R.color.black)
+							.build());
 		
 		/****************************
 		* 3. Adapter

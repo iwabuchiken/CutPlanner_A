@@ -120,6 +120,11 @@ public class DOI_CL implements OnItemClickListener {
 
 			Methods.start_Activity_LogActv(actv, d1);
 			
+		} else if (li.getText().equals(actv.getString(
+				R.string.dlg_actvmain_admin_item_Topol))) {
+			
+			Methods.start_Activity_TopolActv(actv, d1);
+			
 		} else {
 			
 			String msg = "Unknown choice => " + li.getText();

@@ -248,32 +248,32 @@ public class MainActv extends Activity {
 		
 		_Setup__SetListener();
 
-		////////////////////////////////
-
-		// LAB-1: bluetooth
-
-		////////////////////////////////
-		res = _Bluetooth();
-		
-		if (res == true) {
-			
-			// Log
-			msg_Log = "setup: bluetooth => done";
-			Log.d("MainActv.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", msg_Log);
-			
-		} else {
-
-			// Log
-			msg_Log = "setup: bluetooth => not done";
-			Log.d("MainActv.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", msg_Log);
-			
-			return;
-
-		}
+//		////////////////////////////////
+//
+//		// LAB-1: bluetooth
+//
+//		////////////////////////////////
+//		res = _Bluetooth();
+//		
+//		if (res == true) {
+//			
+//			// Log
+//			msg_Log = "setup: bluetooth => done";
+//			Log.d("MainActv.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", msg_Log);
+//			
+//		} else {
+//
+//			// Log
+//			msg_Log = "setup: bluetooth => not done";
+//			Log.d("MainActv.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", msg_Log);
+//			
+//			return;
+//
+//		}
 		
 //		String log_msg = "MainActv => starts";
 //		Methods.write_Log(this, log_msg,

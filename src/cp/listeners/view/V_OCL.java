@@ -3,7 +3,9 @@ package cp.listeners.view;
 import java.util.Locale;
 
 import cp.utils.CONS;
+import cp.utils.Tags;
 import cp.views.CV;
+import cp.views.CV2;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Vibrator;
@@ -16,6 +18,8 @@ public class V_OCL implements OnClickListener {
 	Activity actv;
 	
 	CV cv;
+
+	private CV2 cv2;
 	
 	public V_OCL(Activity actv, CV cv) {
 		// TODO Auto-generated constructor stub
@@ -24,6 +28,14 @@ public class V_OCL implements OnClickListener {
 		this.cv		= cv;
 		
 		CONS.Admin.vib = (Vibrator) actv.getSystemService(Context.VIBRATOR_SERVICE);
+		
+	}
+
+	public V_OCL(Activity actv, CV2 cv2) {
+		// TODO Auto-generated constructor stub
+		
+		this.actv	= actv;
+		this.cv2	= cv2;
 		
 	}
 
@@ -40,6 +52,30 @@ public class V_OCL implements OnClickListener {
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", msg_Log);
 
+		////////////////////////////////
+
+		// get: tag
+
+		////////////////////////////////
+		Tags.ViewTags tag_name = (Tags.ViewTags) v.getTag();
+		
+		////////////////////////////////
+
+		// TopolActv
+
+		////////////////////////////////
+		if (tag_name == Tags.ViewTags.CANVAS_TOPOL) {
+			
+			// Log
+			msg_Log = "onClick => Topol";
+			Log.d("V_OTL.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", msg_Log);
+			
+			return;
+			
+		}
+		
 		////////////////////////////////
 
 		// identify

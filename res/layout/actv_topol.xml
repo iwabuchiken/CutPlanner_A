@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/ll_main"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+        <ImageButton
+            android:id="@+id/actv_topol_IB_Prev"
+            style="@style/v1_ib"
+            android:background="@color/gold2"
+            android:src="@drawable/actv_tn_bt_top_45x45" />
+        
+        <ImageButton
+            android:id="@+id/actv_topol_IB_Back"
+            style="@style/v1_ib"
+            android:src="@drawable/ifm8_thumb_back_50x50" />
+        
+        
+        <ImageButton
+            android:id="@+id/actv_topol_IB_Next"
+            style="@style/v1_ib"
+            android:background="@color/gold2"
+            android:src="@drawable/actv_tn_bt_bottom_45x45" />
+        
+
+    </LinearLayout>
+
+  <cp.views.CV2
+    android:id="@+id/actv_topol_cv_canvas"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+</LinearLayout>

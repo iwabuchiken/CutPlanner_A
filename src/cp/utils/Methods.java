@@ -35,6 +35,7 @@ import cp.listeners.dialog.DL;
 import cp.main.LogActv;
 import cp.main.R;
 import cp.main.ShowLogActv;
+import cp.main.TopolActv;
 import cp.views.CV;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -2066,6 +2067,27 @@ public class Methods {
 		
 	}//start_Activity_LogActv
 
+	public static void 
+	start_Activity_TopolActv
+	(Activity actv, Dialog d1) {
+		// TODO Auto-generated method stub
+		Intent i = new Intent();
+		
+		i.setClass(actv, TopolActv.class);
+		
+		i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+		
+		actv.startActivity(i);
+		
+		////////////////////////////////
+		
+		// dismiss
+		
+		////////////////////////////////
+		d1.dismiss();
+		
+	}//start_Activity_TopolActv
+	
 	public static void 
 	write_Log
 	(Activity actv, String message,
