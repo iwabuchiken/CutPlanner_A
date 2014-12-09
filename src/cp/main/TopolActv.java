@@ -211,8 +211,10 @@ public class TopolActv extends Activity {
 		CONS.Canvas2.Rect_A_X1 = 100;
 		CONS.Canvas2.Rect_A_Y1 = 300;
 
-		CONS.Canvas2.Rect_A_W = 300;
-		CONS.Canvas2.Rect_A_H = 150;
+		CONS.Canvas2.Rect_A_W = CONS.Canvas2.Rect_A_W_orig;
+		CONS.Canvas2.Rect_A_H = CONS.Canvas2.Rect_A_H_orig;
+//		CONS.Canvas2.Rect_A_W = 300;
+//		CONS.Canvas2.Rect_A_H = 150;
 	
 		////////////////////////////////
 		
@@ -222,8 +224,10 @@ public class TopolActv extends Activity {
 		CONS.Canvas2.Rect_B_X1 = 100;
 		CONS.Canvas2.Rect_B_Y1 = 100;
 		
-		CONS.Canvas2.Rect_B_W = 100;
-		CONS.Canvas2.Rect_B_H = 200;
+		CONS.Canvas2.Rect_B_W = CONS.Canvas2.Rect_B_W_orig;
+		CONS.Canvas2.Rect_B_H = CONS.Canvas2.Rect_B_H_orig;
+//		CONS.Canvas2.Rect_B_W = 100;
+//		CONS.Canvas2.Rect_B_H = 200;
 		
 		
 		////////////////////////////////

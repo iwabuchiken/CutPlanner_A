@@ -711,7 +711,14 @@ public class CONS {
 		public static float Rect_A_W;
 		public static float Rect_A_H;
 		
+		public static float Rect_A_W_orig = 300;
+		public static float Rect_A_H_orig = 150;
+		
+		
+		
 		public static int LineWidth_Rect_A	= lineWidth;
+		
+		public static int stat_Rect_A = 0;
 		
 //		public static float Rect_A_X1_prev;
 //		public static float Rect_A_Y1_prev;
@@ -745,8 +752,13 @@ public class CONS {
 		
 		public static float Rect_B_W;
 		public static float Rect_B_H;
-		
+
+		public static float Rect_B_W_orig = 100;
+		public static float Rect_B_H_orig = 200;
+
 		public static int LineWidth_Rect_B	= lineWidth;
+		
+		public static int stat_Rect_B = 0;
 		
 //		public static float Rect_B_X1_prev;
 //		public static float Rect_B_Y1_prev;
