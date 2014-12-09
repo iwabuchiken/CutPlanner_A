@@ -93,11 +93,56 @@ public class BO_CL implements OnClickListener {
 			
 			break;
 			
+		case ACTV_TOPOL_IB_NEXT://-----------------------------------------------------------------------------
+			
+			case_ACTV_TOPOL_IB_NEXT();
+			
+			break;
+			
 		default:
 			break;
 		}//switch (tag)
 		
 	}//public void onClick(View v)
+
+	private void 
+	case_ACTV_TOPOL_IB_NEXT() {
+		// TODO Auto-generated method stub
+		
+		////////////////////////////////
+
+		// update: params
+
+		////////////////////////////////
+//		CONS.Canvas2.Rect_B_X1 = CONS.Canvas2.Rect_B_X1;
+		
+		// Y1
+		CONS.Canvas2.Rect_B_Y1 = CONS.Canvas2.Rect_A_Y1 - CONS.Canvas2.Rect_B_W;
+		
+		// W
+		float temp = CONS.Canvas2.Rect_B_W;
+		
+		CONS.Canvas2.Rect_B_W = CONS.Canvas2.Rect_B_H;
+		
+		// H
+		CONS.Canvas2.Rect_B_H = temp;
+		
+		////////////////////////////////
+
+		// view
+
+		////////////////////////////////
+		final View cv = (View) actv.findViewById(R.id.actv_topol_cv_canvas);
+		
+		cv.invalidate();
+		
+		// Log
+		String msg_Log = "view => NEXT done";
+		Log.d("BO_CL.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", msg_Log);
+		
+	}//ACTV_TOPOL_IB_NEXT
 
 	private void 
 	case_ACTV_DEVLIST_BT_OPTIONS() {
